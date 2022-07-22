@@ -1,8 +1,8 @@
-# post-covid-pre-vaccinated-cardiovascular
+# post-covid-unvaccinated
 
-This is the code and configuration for post-covid-pre-vaccinated-cardiovascular.
+This is the code and configuration for post-covid-unvaccinated.
 
-You can run this project via [Gitpod](https://gitpod.io) in a web browser by clicking on this badge: [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/opensafely/post-covid-pre-vaccinated-cardiovascular)
+You can run this project via [Gitpod](https://gitpod.io) in a web browser by clicking on this badge: [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/opensafely/post-covid-unvaccinated)
 
 * The paper is [here]()
 * Raw model outputs, including charts, crosstabs, etc, are in `released_outputs/`

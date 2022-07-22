@@ -1,12 +1,120 @@
 version: '3.0'
 
 expectations:
-  population_size: 1000
+
+  population_size: 100000
 
 actions:
 
-  generate_study_population:
-    run: cohortextractor:latest generate_cohort --study-definition study_definition
+  ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+  ## DO NOT EDIT project.yaml DIRECTLY 
+  ## This file is created by create_project_actions.R 
+  ## Edit and run create_project_actions.R to update the project.yaml 
+  ## # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+  vax_eligibility_inputs:
+    run: r:latest analysis/vax_eligibility_inputs.R
     outputs:
       highly_sensitive:
-        cohort: output/input.csv
+        vax_study_dates_json: output/vax_study_dates.json
+        vax_jcvi_groups: output/vax_jcvi_groups.csv
+        vax_eligible_dates: output/vax_eligible_dates.csv
+
+  generate_study_population:
+    run: cohortextractor:latest generate_cohort --study-definition study_definition
+      --output-format feather
+    needs:
+    - vax_eligibility_inputs
+    outputs:
+      highly_sensitive:
+        cohort: output/input.feather
+
+  preprocess_data:
+    run: r:latest analysis/preprocess/preprocess_data.R
+    needs:
+    - generate_study_population
+    outputs:
+      moderately_sensitive:
+        describe: output/not-for-review/describe_input_stage0.txt
+      highly_sensitive:
+        cohort: output/input.rds
+        venn: output/venn.rds
+
+  stage1_data_cleaning:
+    run: r:latest analysis/preprocess/Stage1_data_cleaning.R
+    needs:
+    - preprocess_data
+    outputs:
+      moderately_sensitive:
+        QA_rules: output/review/descriptives/QA_summary.csv
+        refactoring: output/not-for-review/meta_data_factors.csv
+        IE_criteria: output/review/descriptives/cohort_flow*.csv
+        histograms: output/not-for-review/numeric_histograms_*.svg
+      highly_sensitive:
+        cohort: output/input_stage1*.rds
+
+  stage1_end_date_table:
+    run: r:latest analysis/preprocess/create_follow_up_end_date.R
+    needs:
+    - preprocess_data
+    - stage1_data_cleaning
+    outputs:
+      highly_sensitive:
+        end_date_table: output/follow_up_end_dates*.rds
+
+  stage2_missing_table1:
+    run: r:latest analysis/descriptives/Stage2_Missing_Table1.R
+    needs:
+    - stage1_data_cleaning
+    outputs:
+      moderately_sensitive:
+        Missing_RangeChecks: output/not-for-review/Check_missing_range*.csv
+        DateChecks: output/not-for-review/Check_dates_range*.csv
+        Descriptive_Table: output/review/descriptives/Table1*.csv
+
+  stage3_diabetes_flow:
+    run: r:latest analysis/descriptives/diabetes_flowchart.R
+    needs:
+    - stage1_data_cleaning
+    outputs:
+      moderately_sensitive:
+        flow_df: output/review/figure-data/diabetes_flow_values*.csv
+
+  ## Stage 4 - Table 2 
+
+  stage4_table_2:
+    run: 'r:latest analysis/descriptives/table_2.R '
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        input_table_2: output/review/descriptives/table2*.csv
+
+  stage4_venn_diagram:
+    run: r:latest analysis/descriptives/venn_diagram.R
+    needs:
+    - preprocess_data
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        venn_diagram: output/review/venn-diagrams/venn_diagram_*
+
+  ## Apply cox model for t2dm 
+
+  Analysis_cox_t2dm:
+    run: r:latest analysis/model/01_cox_pipeline.R t2dm
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_t2dm.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_t2dm.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_t2dm_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_t2dm.csv
+      highly_sensitive:
+        compiled_hrs: output/review/model/compiled_HR_results_t2dm.csv
+        compiled_event_counts: output/review/model/compiled_event_counts_t2dm.csv
+
