@@ -1,11 +1,21 @@
 from cohortextractor import codelist_from_csv, combine_codelists, codelist
 
-# COVID RELATED CODELISTS ---------------------------------------------------------------------------------
-
 covid_codes = codelist_from_csv(
     "codelists/user-RochelleKnight-confirmed-hospitalised-covid-19.csv",
     system="icd10",
     column="code",
+)
+
+covid_primary_care_positive_test = codelist_from_csv(
+    "codelists/opensafely-covid-identification-in-primary-care-probable-covid-positive-test.csv",
+    system="ctv3",
+    column="CTV3ID",
+)
+
+covid_primary_care_code = codelist_from_csv(
+    "codelists/opensafely-covid-identification-in-primary-care-probable-covid-clinical-code.csv",
+    system="ctv3",
+    column="CTV3ID",
 )
 
 covid_primary_care_positive_test = codelist_from_csv(
@@ -25,366 +35,6 @@ covid_primary_care_sequalae = codelist_from_csv(
     system="ctv3",
     column="CTV3ID",
 )
-
-# DIABETES OUTCOMES CODELISTS ---------------------------------------------------------------------------------
-
-# Type 1 diabetes
-diabetes_type1_snomed = codelist_from_csv(
-    "codelists/user-hjforbes-type-1-diabetes.csv",
-    system="ctv3",
-    column="code",
-)
-
-# Type 1 diabetes secondary care
-diabetes_type1_icd10 = codelist_from_csv(
-    "codelists/opensafely-type-1-diabetes-secondary-care.csv",
-    system="icd10",
-    column="icd10_code",
-)
-
-# Type 2 diabetes
-diabetes_type2_snomed = codelist_from_csv(
-    "codelists/user-hjforbes-type-2-diabetes.csv",
-    system="ctv3",
-    column="code",
-)
-
-# Type 2 diabetes secondary care
-diabetes_type2_icd10 = codelist_from_csv(
-    "codelists/user-r_denholm-type-2-diabetes-secondary-care-bristol.csv",
-    system="icd10",
-    column="code",
-)
-
-# Non-diagnostic diabetes codes
-diabetes_diagnostic_snomed = codelist_from_csv(
-    "codelists/user-hjforbes-nondiagnostic-diabetes-codes.csv",
-    system="ctv3",
-    column="code",
-)
-
-# Other or non-specific diabetes
-diabetes_other_snomed = codelist_from_csv(
-    "codelists/user-hjforbes-other-or-nonspecific-diabetes.csv",
-    system="ctv3",
-    column="code",
-)
-
-# Gestational diabetes
-diabetes_gestational_snomed = codelist_from_csv(
-    "codelists/user-hjforbes-gestational-diabetes.csv",
-    system="ctv3",
-    column="code",
-)
-
-# Insulin medication 
-insulin_snomed = codelist_from_csv(
-     "codelists/opensafely-insulin-medication.csv",
-     system="snomed",
-     column="id",
-)
-
-# Antidiabetic drugs
-antidiabetic_drugs_snomed = codelist_from_csv(
-     "codelists/opensafely-antidiabetic-drugs.csv",
-     system="snomed",
-     column="id",
-)
-
-# Antidiabetic drugs - non metformin
-non_metformin_dmd = codelist_from_csv(
-    "codelists/user-r_denholm-non-metformin-antidiabetic-drugs_bristol.csv", 
-    system="snomed", 
-    column="id",
-)
-
-# HbA1c
-hba1c_new_codes = codelist(
-    ["XaPbt", "Xaeze", "Xaezd"], system="ctv3"
-)
-
-# ALL MENTAL HEALTH CODELISTS ---------------------------------------------------------------------------------
-
-# Depression 
-depression_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-depression-symptoms-and-diagnoses.csv",
-    system="snomed",
-    column="code",
-)
-
-# Anxiety - general
-anxiety_general_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-anxiety-symptoms-and-diagnoses.csv",
-    system="snomed",
-    column="code",
-)
-
-# Anxiety - obsessive compulsive disorder
-anxiety_ocd_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-obsessive-compulsive-disorder-ocd.csv",
-    system="snomed",
-    column="code",
-)
-
-# Anxiety - post traumatic stress disorder
-anxiety_ptsd_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-post-traumatic-stress-disorder.csv",
-    system="snomed",
-    column="code",
-)
-
-# Eating disorders
-eating_disorders_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-diagnoses-eating-disorder.csv",
-    system="snomed",
-    column="code",
-)
-
-# Serious mental illness
-serious_mental_illness_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-severe-mental-illness.csv",
-    system="snomed",
-    column="code",
-)
-
-# Self harm - aged >= 10 years
-self_harm_10plus_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-intentional-self-harm-aged10-years.csv",
-    system="snomed",
-    column="code",
-)
-
-# Self harm - aged >= 15 years
-self_harm_15plus_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-undetermined-intent-self-harm-aged15-years.csv",
-    system="snomed",
-    column="code",
-)
-
-# Suicide
-suicide_icd10 = codelist_from_csv(
-    "codelists/user-hjforbes-suicide-icd-10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Addiction
-addiction_snomed_clinical = codelist_from_csv(
-    "codelists/user-hjforbes-opioid-dependency-clinical-diagnosis.csv",
-    system="snomed",
-    column="code",
-)
-
-# Opioid misuse ICD10
-
-opioid_misuse_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-opioid_misuse_icd10.csv",
-    system = "icd10", 
-    column = "code",
-)
-
-# Alcohol misuse ICD10
-alcohol_misuse_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-alcohol_misuse_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Anxiety ICD10
-anxiety_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-anxiety_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Bipolar and other mood disorders ICD10
-bipolar_other_mood_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-bipolar_and_mood_disorders_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Depression ICD10
-depression_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-depression_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Drug misuse ICD10
-drug_misuse_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-drug_misuse_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Other mental health ICD10
-mental_health_other_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-other_mental_health_conditions_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Mixed depression and anxiety ICD10
-mixed_depression_anxiety_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-mixed_depression_and_anxiety_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Other Psychotic disorders ICD10
-psychotic_disorders_other_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-other-psychotic_disorders_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# PTSD ICD10
-ptsd_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-ptsd_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Schizophrenia ICD10
-schizophrenia_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-schizophrenia_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Self harm intentional 10 years ICD10
-self_harm_intent_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-self_harm_intentional_10_years_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Self harm undetermined intent 15 years 
-self_harm_undet_intent_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-self_harm_undetermined_intent_15_years_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Self harm undetermined intent 15 years - combined
-
-self_harm_15_10_combined_icd = combine_codelists(
-    self_harm_intent_icd10,
-    self_harm_undet_intent_icd10
-)
-
-# OCD ICD10
-ocd_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-ocd_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Eating Disorder ICD10
-eating_disorder_icd10 = codelist_from_csv(
-    "codelists/user-kurttaylor-eating_disorder_icd10.csv",
-    system="icd10",
-    column="code",
-)
-
-# Combined serious mental illness HES
-
-serious_mental_illness_icd10 = combine_codelists(
-    bipolar_other_mood_icd10,
-    psychotic_disorders_other_icd10,
-    schizophrenia_icd10
-)
-
-# SSRI prescription 
-ssri_depression_prescription = codelist_from_csv(
-    "codelists/opensafely-selective-serotonin-reuptake-inhibitors.csv",
-    system="snomed",
-    column="code",
-)
-
-# Depression prescriptions - SNRI 
-# These are in Other
-
-# Depression prescriptions - NASSAs
-# These are in Other
-
-# Depression prescriptions - TCA 
-tca_depression_prescription = codelist_from_csv(
-    "codelists/opensafely-tricyclic-and-related-antidepressants-dmd.csv",
-    system="snomed",
-    column="dmd_id",
-)
-
-# Depression prescriptions - SARIs 
-# These are in Other
-
-# Depression prescriptions - MAOIs 
-maoi_depression_prescription = codelist_from_csv(
-    "codelists/opensafely-monoamine-oxidase-inhibitors-dmd.csv",
-    system="snomed",
-    column="dmd_id",
-)
-# Depression prescriptions - Others  
-other_depression_prescription = codelist_from_csv(
-    "codelists/opensafely-other-antidepressants-dmd.csv",
-    system="snomed",
-    column="dmd_id",
-)
-
-# Combined depression prescriptions: SSRI, TCA, MAOI, Other
-all_depression_prescriptions = combine_codelists(
-    ssri_depression_prescription,
-    tca_depression_prescription,
-    maoi_depression_prescription,
-    other_depression_prescription,
-)
-
-# Anxiolytics 
-anxiolytic_prescription = codelist_from_csv(
-    "local_codelists/uom-anxiolytics-snomed.csv", 
-    system="snomed", 
-    column="SNOMEDID"
-)
-
-# 2nd gen antipsychotics prescription
-second_gen_antipsychotics = codelist_from_csv(
-    "codelists/opensafely-second-generation-antipsychotics-excluding-long-acting-injections.csv",
-    system="snomed",
-    column="dmd_id",
-)
-
-# Prochlorperazine prescription
-prochlorperazine = codelist_from_csv(
-    "codelists/opensafely-prochlorperazine-dmd.csv",
-    system="snomed",
-    column="dmd_id",
-)
-
-# Combined serious mental illness prescriptions
-all_mental_illness_prescriptions = combine_codelists(
-    second_gen_antipsychotics,
-    prochlorperazine
-)
-
-# Combined anxiety covariate primary care
-
-anxiety_combined_snomed_cov = combine_codelists(
-    anxiety_general_snomed_clinical,
-    anxiety_ocd_snomed_clinical,
-    anxiety_ptsd_snomed_clinical
-)
-
-# Combined anxiety covariate HES
-
-anxiety_combined_hes_cov = combine_codelists(
-    anxiety_icd10,
-    ocd_icd10,
-    ptsd_icd10
-)
-
-# COVARIATE CODELISTS ---------------------------------------------------------------------------------
-# Note: mental health covariates included above.
 
 opensafely_ethnicity_codes_6 = codelist_from_csv(
     "codelists/opensafely-ethnicity.csv",
@@ -421,7 +71,7 @@ ami_snomed_clinical = codelist_from_csv(
 )
 
 ami_icd10 = codelist_from_csv(
-    "codelists/user-elsie_horne-ami_icd10.csv",
+    "codelists/user-RochelleKnight-ami_icd10.csv",
     system="icd10",
     column="code",
 )
@@ -516,7 +166,7 @@ dic_icd10 = codelist_from_csv(
 )
 
 dvt_dvt_icd10 = codelist_from_csv(
-    "codelists/user-elsie_horne-dvt_dvt_icd10.csv",
+    "codelists/user-RochelleKnight-dvt_dvt_icd10.csv",
     system="icd10",
     column="code",
 )
@@ -546,13 +196,13 @@ hf_snomed_clinical = codelist_from_csv(
 )
 
 hf_icd10 = codelist_from_csv(
-    "codelists/user-elsie_horne-hf_icd10.csv",
+    "codelists/user-RochelleKnight-hf_icd10.csv",
     system="icd10",
     column="code",
 )
 
 stroke_isch_icd10 = codelist_from_csv(
-    "codelists/user-elsie_horne-stroke_isch_icd10.csv",
+    "codelists/user-RochelleKnight-stroke_isch_icd10.csv",
     system="icd10",
     column="code",
 )
@@ -564,7 +214,7 @@ stroke_isch_snomed_clinical = codelist_from_csv(
 )
 
 stroke_sah_hs_icd10 = codelist_from_csv(
-    "codelists/user-elsie_horne-stroke_sah_hs_icd10.csv",
+    "codelists/user-RochelleKnight-stroke_sah_hs_icd10.csv",
     system="icd10",
     column="code",
 )
@@ -576,7 +226,7 @@ stroke_sah_hs_snomed_clinical = codelist_from_csv(
 )
 
 pe_icd10 = codelist_from_csv(
-    "codelists/user-elsie_horne-pe_icd10.csv",
+    "codelists/user-RochelleKnight-pe_icd10.csv",
     system="icd10",
     column="code",
 )
@@ -750,7 +400,7 @@ tia_snomed_clinical = codelist_from_csv(
 )
 
 tia_icd10 = codelist_from_csv(
-    "codelists/user-hjforbes-tia_icd10.csv",
+    "codelists/user-RochelleKnight-tia_icd10.csv",
     system="icd10",
     column="code",
 )
@@ -762,7 +412,7 @@ angina_snomed_clinical = codelist_from_csv(
 )
 
 angina_icd10 = codelist_from_csv(
-    "codelists/user-hjforbes-angina_hf_icd10.csv",
+    "codelists/user-RochelleKnight-angina_icd10.csv",
     system="icd10",
     column="code",
 )
@@ -785,97 +435,7 @@ pregnancy_snomed_clinical = codelist_from_csv(
     column="code",
 )
 
-# Other arterial embolism
-other_arterial_embolism_snomed_clinical = codelist_from_csv(
-    "codelists/user-tomsrenin-other_art_embol.csv",
-    system="snomed",
-    column="code",
-)
-
-# DVT
-dvt_dvt_snomed_clinical = codelist_from_csv(
-    "codelists/user-tomsrenin-dvt_main.csv",
-    system="snomed",
-    column="code",
-)
-
-# ICVT
-dvt_icvt_snomed_clinical = codelist_from_csv(
-    "codelists/user-tomsrenin-dvt_icvt.csv",
-    system="snomed",
-    column="code",
-)
-
-# Portal vein thrombosis
-portal_vein_thrombosis_snomed_clinical = codelist_from_csv(
-    "codelists/user-tomsrenin-pvt.csv",
-    system="snomed",
-    column="code",
-)
-
-# DVT in pregnancy
-dvt_pregnancy_snomed_clinical = codelist_from_csv(
-    "codelists/user-tomsrenin-dvt-preg.csv",
-    system="snomed",
-    column="code",
-)
-
-# Other DVT
-other_dvt_snomed_clinical = codelist_from_csv(
-    "codelists/user-tomsrenin-dvt-other.csv",
-    system="snomed",
-    column="code",
-)
-
-# All DVT in SNOMED
-all_dvt_codes_snomed_clinical = combine_codelists(
-    dvt_dvt_snomed_clinical, 
-    dvt_pregnancy_snomed_clinical
-)
-
-# All DVT in ICD10
-all_dvt_codes_icd10 = combine_codelists(
-    dvt_dvt_icd10, 
-    dvt_pregnancy_icd10
-)
-
-# All VTE in SNOMED
-all_vte_codes_snomed_clinical = combine_codelists(
-    portal_vein_thrombosis_snomed_clinical, 
-    dvt_dvt_snomed_clinical, 
-    dvt_icvt_snomed_clinical, 
-    dvt_pregnancy_snomed_clinical, 
-    other_dvt_snomed_clinical, 
-    pe_snomed_clinical
-)
-
-# All VTE in ICD10
-all_vte_codes_icd10 = combine_codelists(
-    portal_vein_thrombosis_icd10, 
-    dvt_dvt_icd10, 
-    dvt_icvt_icd10, 
-    dvt_pregnancy_icd10, 
-    other_dvt_icd10, 
-    icvt_pregnancy_icd10, 
-    pe_icd10
-)
-
-# All ATE in SNOMED
-all_ate_codes_snomed_clinical = combine_codelists(
-    ami_snomed_clinical, 
-    other_arterial_embolism_snomed_clinical, 
-    stroke_isch_snomed_clinical
-)
-
-# All ATE in ICD10
-all_ate_codes_icd10 = combine_codelists(
-    ami_icd10, 
-    other_arterial_embolism_icd10, 
-    stroke_isch_icd10
-)
-
-# FOR JCVI GROUPS ---------------------------------------------------------------------------------
-
+#For JCVI groups
 # Pregnancy codes 
 preg_primis = codelist_from_csv(
     "codelists/primis-covid19-vacc-uptake-preg.csv",
@@ -886,6 +446,20 @@ preg_primis = codelist_from_csv(
 # Pregnancy or Delivery codes
 pregdel_primis = codelist_from_csv(
     "codelists/primis-covid19-vacc-uptake-pregdel.csv",
+    system="snomed",
+    column="code",
+)
+
+# High Risk from COVID-19 code
+shield_primis = codelist_from_csv(
+    "codelists/primis-covid19-vacc-uptake-shield.csv",
+    system="snomed",
+    column="code",
+)
+
+# Lower Risk from COVID-19 codes
+nonshield_primis = codelist_from_csv(
+    "codelists/primis-covid19-vacc-uptake-nonshield.csv",
     system="snomed",
     column="code",
 )
@@ -1100,6 +674,464 @@ longres_primis = codelist_from_csv(
     column="code",
 )
 
+# Pregnancy codes 
+preg_primis = codelist_from_csv(
+    "codelists/primis-covid19-vacc-uptake-preg.csv",
+    system="snomed",
+    column="code",
+)
+
+# Pregnancy or Delivery codes
+pregdel_primis = codelist_from_csv(
+    "codelists/primis-covid19-vacc-uptake-pregdel.csv",
+    system="snomed",
+    column="code",
+)
+
+# Type 1 diabetes
+diabetes_type1_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-type-1-diabetes.csv",
+    system="ctv3",
+    column="code",
+)
+
+# Type 1 diabetes secondary care
+diabetes_type1_icd10 = codelist_from_csv(
+    "codelists/opensafely-type-1-diabetes-secondary-care.csv",
+    system="icd10",
+    column="icd10_code",
+)
+
+# Type 2 diabetes
+diabetes_type2_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-type-2-diabetes.csv",
+    system="ctv3",
+    column="code",
+)
+
+# Type 2 diabetes secondary care
+diabetes_type2_icd10 = codelist_from_csv(
+    "codelists/user-r_denholm-type-2-diabetes-secondary-care-bristol.csv",
+    system="icd10",
+    column="code",
+)
+
+# Non-diagnostic diabetes codes
+diabetes_diagnostic_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-nondiagnostic-diabetes-codes.csv",
+    system="ctv3",
+    column="code",
+)
+
+# Other or non-specific diabetes
+diabetes_other_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-other-or-nonspecific-diabetes.csv",
+    system="ctv3",
+    column="code",
+)
+
+# Gestational diabetes
+diabetes_gestational_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-gestational-diabetes.csv",
+    system="ctv3",
+    column="code",
+)
+
+# Insulin medication 
+insulin_snomed_clinical = codelist_from_csv(
+     "codelists/opensafely-insulin-medication.csv",
+     system="snomed",
+     column="id",
+)
+
+# Antidiabetic drugs
+antidiabetic_drugs_snomed_clinical = codelist_from_csv(
+     "codelists/opensafely-antidiabetic-drugs.csv",
+     system="snomed",
+     column="id",
+)
+
+# Antidiabetic drugs - non metformin
+non_metformin_dmd = codelist_from_csv(
+    "codelists/user-r_denholm-non-metformin-antidiabetic-drugs_bristol.csv", 
+    system="snomed", 
+    column="id",
+)
+
+# HbA1c
+hba1c_new_codes = codelist(
+    ["XaPbt", "Xaeze", "Xaezd"], system="ctv3"
+)
+
+# Other arterial embolism
+other_arterial_embolism_snomed_clinical = codelist_from_csv(
+    "codelists/user-tomsrenin-other_art_embol.csv",
+    system="snomed",
+    column="code",
+)
+
+# DVT
+dvt_dvt_snomed_clinical = codelist_from_csv(
+    "codelists/user-tomsrenin-dvt_main.csv",
+    system="snomed",
+    column="code",
+)
+
+# ICVT
+dvt_icvt_snomed_clinical = codelist_from_csv(
+    "codelists/user-tomsrenin-dvt_icvt.csv",
+    system="snomed",
+    column="code",
+)
+
+# Portal vein thrombosis
+portal_vein_thrombosis_snomed_clinical = codelist_from_csv(
+    "codelists/user-tomsrenin-pvt.csv",
+    system="snomed",
+    column="code",
+)
+
+# DVT in pregnancy
+dvt_pregnancy_snomed_clinical = codelist_from_csv(
+    "codelists/user-tomsrenin-dvt-preg.csv",
+    system="snomed",
+    column="code",
+)
+
+# Other DVT
+other_dvt_snomed_clinical = codelist_from_csv(
+    "codelists/user-tomsrenin-dvt-other.csv",
+    system="snomed",
+    column="code",
+)
+
+# All DVT in SNOMED
+all_dvt_codes_snomed_clinical = combine_codelists(
+    dvt_dvt_snomed_clinical, 
+    dvt_pregnancy_snomed_clinical
+)
+
+# All DVT in ICD10
+all_dvt_codes_icd10 = combine_codelists(
+    dvt_dvt_icd10, 
+    dvt_pregnancy_icd10
+)
+
+# All VTE in SNOMED
+all_vte_codes_snomed_clinical = combine_codelists(
+    portal_vein_thrombosis_snomed_clinical, 
+    dvt_dvt_snomed_clinical, 
+    dvt_icvt_snomed_clinical, 
+    dvt_pregnancy_snomed_clinical, 
+    other_dvt_snomed_clinical, 
+    pe_snomed_clinical
+)
+
+# All VTE in ICD10
+all_vte_codes_icd10 = combine_codelists(
+    portal_vein_thrombosis_icd10, 
+    dvt_dvt_icd10, 
+    dvt_icvt_icd10, 
+    dvt_pregnancy_icd10, 
+    other_dvt_icd10, 
+    icvt_pregnancy_icd10, 
+    pe_icd10
+)
+
+# All ATE in SNOMED
+all_ate_codes_snomed_clinical = combine_codelists(
+    ami_snomed_clinical, 
+    other_arterial_embolism_snomed_clinical, 
+    stroke_isch_snomed_clinical
+)
+
+# All ATE in ICD10
+all_ate_codes_icd10 = combine_codelists(
+    ami_icd10, 
+    other_arterial_embolism_icd10, 
+    stroke_isch_icd10
+)
+
+# MENTAL HEALTH RELATED CODE LISTS ------------------------------------------
+
+# Depression 
+depression_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-depression-symptoms-and-diagnoses.csv",
+    system="snomed",
+    column="code",
+)
+
+# Anxiety - general
+anxiety_general_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-anxiety-symptoms-and-diagnoses.csv",
+    system="snomed",
+    column="code",
+)
+
+# Anxiety - obsessive compulsive disorder
+anxiety_ocd_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-obsessive-compulsive-disorder-ocd.csv",
+    system="snomed",
+    column="code",
+)
+
+# Anxiety - post traumatic stress disorder
+anxiety_ptsd_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-post-traumatic-stress-disorder.csv",
+    system="snomed",
+    column="code",
+)
+
+# Eating disorders
+eating_disorders_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-diagnoses-eating-disorder.csv",
+    system="snomed",
+    column="code",
+)
+
+# Serious mental illness
+serious_mental_illness_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-severe-mental-illness.csv",
+    system="snomed",
+    column="code",
+)
+
+# Self harm - aged >= 10 years
+self_harm_10plus_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-intentional-self-harm-aged10-years.csv",
+    system="snomed",
+    column="code",
+)
+
+# Self harm - aged >= 15 years
+self_harm_15plus_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-undetermined-intent-self-harm-aged15-years.csv",
+    system="snomed",
+    column="code",
+)
+
+# Suicide
+suicide_icd10 = codelist_from_csv(
+    "codelists/user-hjforbes-suicide-icd-10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Addiction
+addiction_snomed_clinical = codelist_from_csv(
+    "codelists/user-hjforbes-opioid-dependency-clinical-diagnosis.csv",
+    system="snomed",
+    column="code",
+)
+
+# Opioid misuse ICD10
+
+opioid_misuse_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-opioid_misuse_icd10.csv",
+    system = "icd10", 
+    column = "code",
+)
+
+# Alcohol misuse ICD10
+alcohol_misuse_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-alcohol_misuse_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Anxiety ICD10
+anxiety_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-anxiety_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Bipolar and other mood disorders ICD10
+bipolar_other_mood_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-bipolar_and_mood_disorders_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Depression ICD10
+depression_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-depression_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Drug misuse ICD10
+drug_misuse_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-drug_misuse_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Other mental health ICD10
+mental_health_other_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-other_mental_health_conditions_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Mixed depression and anxiety ICD10
+mixed_depression_anxiety_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-mixed_depression_and_anxiety_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Other Psychotic disorders ICD10
+psychotic_disorders_other_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-other-psychotic_disorders_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# PTSD ICD10
+ptsd_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-ptsd_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Schizophrenia ICD10
+schizophrenia_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-schizophrenia_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Self harm intentional 10 years ICD10
+self_harm_intent_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-self_harm_intentional_10_years_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Self harm undetermined intent 15 years 
+self_harm_undet_intent_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-self_harm_undetermined_intent_15_years_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Self harm undetermined intent 15 years - combined
+
+self_harm_15_10_combined_icd = combine_codelists(
+    self_harm_intent_icd10,
+    self_harm_undet_intent_icd10
+)
+
+# OCD ICD10
+ocd_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-ocd_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Eating Disorder ICD10
+eating_disorder_icd10 = codelist_from_csv(
+    "codelists/user-kurttaylor-eating_disorder_icd10.csv",
+    system="icd10",
+    column="code",
+)
+
+# Combined serious mental illness HES
+
+serious_mental_illness_icd10 = combine_codelists(
+    bipolar_other_mood_icd10,
+    psychotic_disorders_other_icd10,
+    schizophrenia_icd10
+)
+
+# SSRI prescription 
+ssri_depression_prescription = codelist_from_csv(
+    "codelists/opensafely-selective-serotonin-reuptake-inhibitors.csv",
+    system="snomed",
+    column="code",
+)
+
+# Depression prescriptions - SNRI 
+# These can be found in Others
+
+# Depression prescriptions - NASSAs
+# These can be found in Others
+
+# Depression prescriptions - TCA 
+tca_depression_prescription = codelist_from_csv(
+    "codelists/opensafely-tricyclic-and-related-antidepressants-dmd.csv",
+    system="snomed",
+    column="dmd_id",
+)
+
+# Depression prescriptions - SARIs 
+# These can be found in Others
+
+# Depression prescriptions - MAOIs 
+maoi_depression_prescription = codelist_from_csv(
+    "codelists/opensafely-monoamine-oxidase-inhibitors-dmd.csv",
+    system="snomed",
+    column="dmd_id",
+)
+# Depression prescriptions - Others  
+other_depression_prescription = codelist_from_csv(
+    "codelists/opensafely-other-antidepressants-dmd.csv",
+    system="snomed",
+    column="dmd_id",
+)
+
+# Combined depression prescriptions: SSRI, TCA, MAOI and others 
+all_depression_prescriptions = combine_codelists(
+    ssri_depression_prescription,
+    tca_depression_prescription,
+    maoi_depression_prescription,
+    other_depression_prescription
+)
+
+# Anxiolytics 
+anxiolytic_prescription = codelist_from_csv(
+    "local_codelists/uom-anxiolytics-snomed.csv", 
+    system="snomed", 
+    column="SNOMEDID"
+)
+
+# 2nd gen antipsychotics prescription
+second_gen_antipsychotics = codelist_from_csv(
+    "codelists/opensafely-second-generation-antipsychotics-excluding-long-acting-injections.csv",
+    system="snomed",
+    column="dmd_id",
+)
+
+# Prochlorperazine prescription
+prochlorperazine = codelist_from_csv(
+    "codelists/opensafely-prochlorperazine-dmd.csv",
+    system="snomed",
+    column="dmd_id",
+)
+
+# Combined serious mental illness prescriptions
+all_mental_illness_prescriptions = combine_codelists(
+    second_gen_antipsychotics,
+    prochlorperazine
+)
+
+# Combined anxiety covariate primary care
+
+anxiety_combined_snomed_cov = combine_codelists(
+    anxiety_general_snomed_clinical,
+    anxiety_ocd_snomed_clinical,
+    anxiety_ptsd_snomed_clinical
+)
+
+# Combined anxiety covariate HES
+
+anxiety_combined_hes_cov = combine_codelists(
+    anxiety_icd10,
+    ocd_icd10,
+    ptsd_icd10
+)
+
 # Total Cholesterol
 cholesterol_snomed = codelist_from_csv(
     "codelists/opensafely-cholesterol-tests-numerical-value.csv",
@@ -1118,5 +1150,23 @@ hdl_cholesterol_snomed = codelist_from_csv(
 prediabetes_snomed = codelist_from_csv(
     "codelists/opensafely-prediabetes-snomed.csv",
     system="snomed",
+    column="code",
+)
+
+pe_i26_icd10 = codelist_from_csv(
+    "codelists/bristol-pe_i26.csv",
+    system="icd10",
+    column="code",
+)
+
+pe_i260_icd10 = codelist_from_csv(
+    "codelists/bristol-pe_i260.csv",
+    system="icd10",
+    column="code",
+)
+
+pe_i269_icd10 = codelist_from_csv(
+    "codelists/bristol-pe_i269.csv",
+    system="icd10",
     column="code",
 )
