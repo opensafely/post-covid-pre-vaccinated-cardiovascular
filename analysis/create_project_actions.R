@@ -154,8 +154,8 @@ actions_list <- splice(
     moderately_sensitive = list(
       QA_rules = glue("output/review/descriptives/QA_summary.csv"),
       refactoring = glue("output/not-for-review/meta_data_factors.csv"),
-      IE_criteria = glue("output/review/descriptives/cohort_flow*.csv"),
-      histograms = glue("output/not-for-review/numeric_histograms_*.svg")
+      IE_criteria = glue("output/review/descriptives/cohort_flow.csv"),
+      histograms = glue("output/not-for-review/numeric_histograms.svg")
     ),
     highly_sensitive = list(
       cohort = glue("output/input_stage1.rds")
@@ -202,7 +202,6 @@ actions_list <- splice(
     run = "r:latest analysis/descriptives/table_2.R",
     needs = list("stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
-      counts_by_covariate_level = "output/not-for-review/event_counts_by_covariate_level_*.csv",
       table_2 = "output/review/descriptives/table2_pre_vaccination_cvd.csv"
       
     )

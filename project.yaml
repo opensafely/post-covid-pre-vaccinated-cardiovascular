@@ -48,8 +48,8 @@ actions:
       moderately_sensitive:
         QA_rules: output/review/descriptives/QA_summary.csv
         refactoring: output/not-for-review/meta_data_factors.csv
-        IE_criteria: output/review/descriptives/cohort_flow*.csv
-        histograms: output/not-for-review/numeric_histograms_*.svg
+        IE_criteria: output/review/descriptives/cohort_flow.csv
+        histograms: output/not-for-review/numeric_histograms.svg
       highly_sensitive:
         cohort: output/input_stage1.rds
 
