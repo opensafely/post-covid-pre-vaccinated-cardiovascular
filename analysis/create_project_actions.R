@@ -20,7 +20,6 @@ defaults_list <- list(
 active_analyses <- read_rds("lib/active_analyses.rds")
 active_analyses_table <- subset(active_analyses, active_analyses$active =="TRUE")
 outcomes_model <- active_analyses_table$outcome_variable %>% str_replace("out_date_", "")
-cohort_to_run <- c("")
 
 # create action functions ----
 
@@ -87,31 +86,14 @@ apply_model_function <- function(outcome){
       name = glue("Analysis_cox_{outcome}"),
       run = "r:latest analysis/model/01_cox_pipeline.R",
       arguments = c(outcome),
-      needs = list("stage1_data_cleaning", glue("stage1_end_date_table")),
+      needs = list("stage1_data_cleaning", "stage1_end_date_table","stage_2_events_split_by_covariate_level"),
       moderately_sensitive = list(
-        analyses_not_run = glue("output/review/model/analyses_not_run_{outcome}.csv"),
-        compiled_hrs_csv = glue("output/review/model/suppressed_compiled_HR_results_{outcome}.csv"),
-        compiled_hrs_csv_to_release = glue("output/review/model/suppressed_compiled_HR_results_{outcome}_to_release.csv"),
-        compiled_event_counts_csv = glue("output/review/model/suppressed_compiled_event_counts_{outcome}.csv")
-      ),
-      highly_sensitive = list(
-        compiled_hrs = glue("output/review/model/compiled_HR_results_{outcome}.csv"),
-        compiled_event_counts = glue("output/review/model/compiled_event_counts_{outcome}.csv")
-      )
-    )
-  )
-}
-
-table2 <- function(cohort){
-  splice(
-    comment(glue("Stage 4 - Table 2")),
-    action(
-      name = glue("stage4_table_2"),
-      run = "r:latest analysis/descriptives/table_2.R",
-      arguments = c(cohort),
-      needs = list("stage1_data_cleaning",glue("stage1_end_date_table")),
-      moderately_sensitive = list(
-        input_table_2 = glue("output/review/descriptives/table2*.csv")
+        analyses_not_run = glue("output/review/model/analyses_not_run_{outcome}_pre_vaccination.csv"),
+        compiled_hrs_csv = glue("output/review/model/suppressed_compiled_HR_results_{outcome}_pre_vaccination.csv"),
+        compiled_hrs_csv_to_release = glue("output/review/model/suppressed_compiled_HR_results_{outcome}_pre_vaccination_to_release.csv"),
+        compiled_event_counts_csv = glue("output/review/model/suppressed_compiled_event_counts_{outcome}_pre_vaccination.csv"),
+        compiled_event_counts_csv_non_supressed = glue("output/review/model/compiled_event_counts_{outcome}_pre_vaccination.csv"),
+        describe_data_surv = glue("output/not-for-review/describe_data_surv_{outcome}_*_time_periods.txt")
       )
     )
   )
@@ -176,7 +158,7 @@ actions_list <- splice(
       histograms = glue("output/not-for-review/numeric_histograms_*.svg")
     ),
     highly_sensitive = list(
-      cohort = glue("output/input_stage1*.rds")
+      cohort = glue("output/input_stage1.rds")
     )
   ),
   
@@ -186,7 +168,7 @@ actions_list <- splice(
     run = "r:latest analysis/preprocess/create_follow_up_end_date.R",
     needs = list("preprocess_data","stage1_data_cleaning"),
     highly_sensitive = list(
-      end_date_table = glue("output/follow_up_end_dates*.rds")
+      end_date_table = glue("output/follow_up_end_dates.rds")
     )
   ),
 
@@ -196,45 +178,49 @@ actions_list <- splice(
     run = "r:latest analysis/descriptives/Stage2_Missing_Table1.R",
     needs = list("stage1_data_cleaning"),
     moderately_sensitive = list(
-      Missing_RangeChecks = glue("output/not-for-review/Check_missing_range*.csv"),
-      DateChecks = glue("output/not-for-review/Check_dates_range*.csv"),
-      Descriptive_Table = glue("output/review/descriptives/Table1*.csv")
+      Missing_RangeChecks = glue("output/not-for-review/Check_missing_range.csv"),
+      DateChecks = glue("output/not-for-review/Check_dates_range.csv"),
+      Descriptive_Table = glue("output/review/descriptives/Table1_pre_vaccination_cvd.csv")
     )
   ),
-
-  #comment("Stage 3 - Diabetes flow"),  
-
+  
+  #comment("Stage 2 - events by covariate level)
   action(
-    name = "stage3_diabetes_flow",
-    run = "r:latest analysis/descriptives/diabetes_flowchart.R",
-    needs = list("stage1_data_cleaning"),
+    name = "stage_2_events_split_by_covariate_level",
+    run = "r:latest analysis/descriptives/events_split_by_covariate_level.R",
+    needs = list("stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
-      flow_df = glue("output/review/figure-data/diabetes_flow_values*.csv")
-      # flow_fig = glue("output/diabetes_flow.png"),
-    ),
+      counts_by_covariate_level = "output/not-for-review/event_counts_by_covariate_level_*.csv",
+      selected_covariates = "output/not-for-review/non_zero_selected_covariates_*.csv"
+      
+      )
   ),
   
-  #comment("Stage 4 - Create input for table2"),
-  splice(
-    # over outcomes
-    unlist(lapply(cohort_to_run, function(x) table2(cohort = x)), recursive = FALSE)
+  #comment("Table 2)
+  action(
+    name = "table_2",
+    run = "r:latest analysis/descriptives/table_2.R",
+    needs = list("stage1_data_cleaning","stage1_end_date_table"),
+    moderately_sensitive = list(
+      counts_by_covariate_level = "output/not-for-review/event_counts_by_covariate_level_*.csv",
+      table_2 = "output/review/descriptives/table2_pre_vaccination_cvd.csv"
+      
+    )
   ),
   
   #comment("Stage 4 - Venn diagrams"),
   action(
-    name = "stage4_venn_diagram",
+    name = "venn_diagram",
     run = "r:latest analysis/descriptives/venn_diagram.R",
-    needs = list("preprocess_data", "stage1_data_cleaning", "stage1_end_date_table"),
+    needs = list("preprocess_data","stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
-      venn_diagram = glue("output/review/venn-diagrams/venn_diagram_*")
-    )
+      venn_diagram = glue("output/review/venn-diagrams/venn_diagram_*"))
   ),
 
   #comment("Stage 5 - Apply models"),
   splice(
     # over outcomes
-    unlist(lapply(outcomes_model, function(x) splice(unlist(lapply(cohort_to_run, function(y) apply_model_function(outcome = x)), recursive = FALSE))
-      ),recursive = FALSE)))
+    unlist(lapply(outcomes_model, function(x) apply_model_function(outcome = x)), recursive = FALSE)))
   
 
 ## combine everything ----
