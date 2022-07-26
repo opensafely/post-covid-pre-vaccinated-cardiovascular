@@ -187,7 +187,7 @@ actions_list <- splice(
   #comment("Stage 2 - events by covariate level)
   action(
     name = "stage_2_events_split_by_covariate_level",
-    run = "r:latest analysis/descriptives/events_split_by_covariate_level.R",
+    run = "r:latest analysis/preprocess/covariates_split_by_time_period.R",
     needs = list("stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
       counts_by_covariate_level = "output/not-for-review/event_counts_by_covariate_level_*.csv",

@@ -73,7 +73,7 @@ actions:
         Descriptive_Table: output/review/descriptives/Table1_pre_vaccination_cvd.csv
 
   stage_2_events_split_by_covariate_level:
-    run: r:latest analysis/descriptives/events_split_by_covariate_level.R
+    run: r:latest analysis/preprocess/covariates_split_by_time_period.R
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
