@@ -758,7 +758,7 @@ def generate_common_variables(index_date_variable):
 
     ## Age
     cov_num_age = patients.age_as_of(
-        f"{index_date_variable}",
+        f"{index_date_variable} - 1 day",
         return_expectations = {
         "rate": "universal",
         "int": {"distribution": "population_ages"},
@@ -774,25 +774,25 @@ def generate_common_variables(index_date_variable):
         ),
         cov_ethnicity_gp_opensafely=patients.with_these_clinical_events(
             opensafely_ethnicity_codes_6,
-            on_or_before=f"{index_date_variable}",
+            on_or_before=f"{index_date_variable} - 1 day",
             returning="category",
             find_last_match_in_period=True,
         ),
         cov_ethnicity_gp_primis=patients.with_these_clinical_events(
             primis_covid19_vacc_update_ethnicity,
-            on_or_before=f"{index_date_variable}",
+            on_or_before=f"{index_date_variable} - 1 day",
             returning="category",
             find_last_match_in_period=True,
         ),
         cov_ethnicity_gp_opensafely_date=patients.with_these_clinical_events(
             opensafely_ethnicity_codes_6,
-            on_or_before=f"{index_date_variable}",
+            on_or_before=f"{index_date_variable} - 1 day",
             returning="category",
             find_last_match_in_period=True,
         ),
         cov_ethnicity_gp_primis_date=patients.with_these_clinical_events(
             primis_covid19_vacc_update_ethnicity,
-            on_or_before=f"{index_date_variable}",
+            on_or_before=f"{index_date_variable} - 1 day",
             returning="category",
             find_last_match_in_period=True,
         ),
@@ -803,7 +803,7 @@ def generate_common_variables(index_date_variable):
     cov_cat_deprivation=patients.categorised_as(
         helpers.generate_deprivation_ntile_dictionary(10),
         index_of_multiple_deprivation=patients.address_as_of(
-            f"{index_date_variable}",
+            f"{index_date_variable} - 1 day",
             returning="index_of_multiple_deprivation",
             round_to_nearest=100,
         ),
@@ -812,7 +812,7 @@ def generate_common_variables(index_date_variable):
 
     ## Region
     cov_cat_region=patients.registered_practice_as_of(
-        f"{index_date_variable}",
+        f"{index_date_variable} - 1 day",
         returning="nuts1_region_name",
         return_expectations={
             "rate": "universal",
@@ -850,18 +850,18 @@ def generate_common_variables(index_date_variable):
         most_recent_smoking_code=patients.with_these_clinical_events(
             smoking_clear,
             find_last_match_in_period=True,
-            on_or_before=f"{index_date_variable}",
+            on_or_before=f"{index_date_variable} - 1 day",
             returning="category",
         ),
         ever_smoked=patients.with_these_clinical_events(
             filter_codes_by_category(smoking_clear, include=["S", "E"]),
-            on_or_before=f"{index_date_variable}",
+            on_or_before=f"{index_date_variable} - 1 day",
         ),
     ),
 
     ## Care home status
     cov_bin_carehome_status=patients.care_home_status_as_of(
-        f"{index_date_variable}", 
+        f"{index_date_variable} - 1 day", 
         categorised_as={
             "TRUE": """
               IsPotentialCareHome
@@ -887,20 +887,20 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_ami_snomed=patients.with_these_clinical_events(
         ami_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_ami_prior_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=ami_prior_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     tmp_cov_bin_ami_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=ami_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -913,26 +913,26 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_stroke_isch_snomed=patients.with_these_clinical_events(
         stroke_isch_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     tmp_cov_bin_stroke_sah_hs_snomed=patients.with_these_clinical_events(
         stroke_sah_hs_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_stroke_isch_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=stroke_isch_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     tmp_cov_bin_stroke_sah_hs_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=stroke_sah_hs_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -945,14 +945,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_other_arterial_embolism_snomed=patients.with_these_clinical_events(
         other_arterial_embolism_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_other_arterial_embolism_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=ami_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -965,14 +965,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_vte_snomed=patients.with_these_clinical_events(
         all_vte_codes_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_vte_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=all_vte_codes_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -985,14 +985,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_hf_snomed=patients.with_these_clinical_events(
         hf_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_hf_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=hf_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1005,14 +1005,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_angina_snomed=patients.with_these_clinical_events(
         angina_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_angina_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=angina_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1025,28 +1025,28 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_dementia_snomed=patients.with_these_clinical_events(
         dementia_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC (Hospital Episode Statistics Admitted Patient Care)
     tmp_cov_bin_dementia_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=dementia_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Primary care - vascular
     tmp_cov_bin_dementia_vascular_snomed=patients.with_these_clinical_events(
         dementia_vascular_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC - vascular
     tmp_cov_bin_dementia_vascular_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=dementia_vascular_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1059,14 +1059,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_liver_disease_snomed=patients.with_these_clinical_events(
         liver_disease_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_liver_disease_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=liver_disease_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1079,14 +1079,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_chronic_kidney_disease_snomed=patients.with_these_clinical_events(
         ckd_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_chronic_kidney_disease_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=ckd_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1099,14 +1099,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_cancer_snomed=patients.with_these_clinical_events(
         cancer_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_cancer_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=cancer_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1119,21 +1119,21 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_hypertension_snomed=patients.with_these_clinical_events(
         hypertension_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_hypertension_hes=patients.admitted_to_hospital(
        returning='binary_flag',
        with_these_diagnoses=hypertension_icd10,
-       on_or_before=f"{index_date_variable}",
+       on_or_before=f"{index_date_variable} - 1 day",
        return_expectations={"incidence": 0.1},
     ),
     ### DMD
     cov_bin_hypertension_drugs_dmd=patients.with_these_medications(
         hypertension_drugs_dmd,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1145,56 +1145,56 @@ def generate_common_variables(index_date_variable):
     cov_bin_diabetes_type1_snomed=patients.with_these_clinical_events(
         diabetes_type1_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ## Type 1 diabetes HES
     cov_bin_diabetes_type1_hes=patients.admitted_to_hospital(
        returning='binary_flag',
        with_these_diagnoses=diabetes_type1_icd10,
-       on_or_before=f"{index_date_variable}",
+       on_or_before=f"{index_date_variable} - 1 day",
        return_expectations={"incidence": 0.1},
     ),
     ## Type 2 diabetes primary care
     cov_bin_diabetes_type2_snomed=patients.with_these_clinical_events(
         diabetes_type2_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ## Type 2 diabetes HES
     cov_bin_diabetes_type2_hes=patients.admitted_to_hospital(
        returning='binary_flag',
        with_these_diagnoses=diabetes_type2_icd10,
-       on_or_before=f"{index_date_variable}",
+       on_or_before=f"{index_date_variable} - 1 day",
        return_expectations={"incidence": 0.1},
     ),
     ## Other or non-specific diabetes
     cov_bin_diabetes_other=patients.with_these_clinical_events(
         diabetes_other_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ## Gestational diabetes
     cov_bin_diabetes_gestational=patients.with_these_clinical_events(
         diabetes_gestational_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ## Diabetes medication
     tmp_cov_bin_insulin_snomed=patients.with_these_medications(
         insulin_snomed_clinical,
         returning="binary_flag",
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.05},
     ),
 
     tmp_cov_bin_antidiabetic_drugs_snomed=patients.with_these_medications(
         antidiabetic_drugs_snomed_clinical,
         returning="binary_flag",
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.05},
     ),
 
@@ -1211,7 +1211,7 @@ def generate_common_variables(index_date_variable):
     cov_bin_prediabetes=patients.with_these_clinical_events(
         prediabetes_snomed,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
 
@@ -1220,14 +1220,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_obesity_snomed=patients.with_these_clinical_events(
         bmi_obesity_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_obesity_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=bmi_obesity_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1240,14 +1240,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_chronic_obstructive_pulmonary_disease_snomed=patients.with_these_clinical_events(
         copd_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### HES APC
     tmp_cov_bin_chronic_obstructive_pulmonary_disease_hes=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses= copd_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Combined
@@ -1259,7 +1259,7 @@ def generate_common_variables(index_date_variable):
     cov_bin_lipid_medications=patients.with_these_medications(
         lipid_lowering_dmd,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
 
@@ -1267,7 +1267,7 @@ def generate_common_variables(index_date_variable):
     cov_bin_antiplatelet_medications=patients.with_these_medications(
         antiplatelet_dmd,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
 
@@ -1275,7 +1275,7 @@ def generate_common_variables(index_date_variable):
     cov_bin_anticoagulation_medications=patients.with_these_medications(
         anticoagulant_dmd, 
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
    
@@ -1284,7 +1284,7 @@ def generate_common_variables(index_date_variable):
     cov_bin_combined_oral_contraceptive_pill=patients.with_these_medications(
         cocp_dmd, 
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
 
@@ -1292,7 +1292,7 @@ def generate_common_variables(index_date_variable):
     cov_bin_hormone_replacement_therapy=patients.with_these_medications(
         hrt_dmd, 
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
 
@@ -1301,14 +1301,14 @@ def generate_common_variables(index_date_variable):
     tmp_cov_bin_depression_snomed=patients.with_these_clinical_events(
         depression_snomed_clinical,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.03},
     ),
      ### HES
     tmp_cov_bin_depression_icd10=patients.admitted_to_hospital(
         returning='binary_flag',
         with_these_diagnoses=depression_icd10,
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.03},
     ),
      ### Combined Depression
@@ -1319,7 +1319,7 @@ def generate_common_variables(index_date_variable):
     ## BMI
     # taken from: https://github.com/opensafely/BMI-and-Metabolic-Markers/blob/main/analysis/common_variables.py 
     cov_num_bmi=patients.most_recent_bmi(
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         minimum_age_at_measurement=18,
         include_measurement_date=True,
         date_format="YYYY-MM",
@@ -1380,7 +1380,7 @@ def generate_common_variables(index_date_variable):
         pathogen="SARS-CoV-2",
         test_result="positive",
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### COVID-19 code (diagnosis, positive test or sequalae) in primary care
@@ -1391,14 +1391,14 @@ def generate_common_variables(index_date_variable):
             covid_primary_care_sequalae,
         ),
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ### Hospital episode with confirmed diagnosis in any position
     tmp_sub_bin_covid19_confirmed_history_hes=patients.admitted_to_hospital(
         with_these_diagnoses=covid_codes,
         returning='binary_flag',
-        on_or_before=f"{index_date_variable}",
+        on_or_before=f"{index_date_variable} - 1 day",
         return_expectations={"incidence": 0.1},
     ),
     ## Generate variable to identify first date of confirmed COVID
