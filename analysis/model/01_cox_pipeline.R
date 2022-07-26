@@ -6,24 +6,42 @@
 ## original scripts: https://github.com/BHFDSC/CCU002_01 & https://github.com/BHFDSC/CCU002_03
 ## =============================================================================
 
-# libraries 
 
-library(data.table); library(dplyr); library(survival); library(broom); library(DBI); library(ggplot2);
-library(nlme); library(tidyverse); library(lubridate); library(purrr); library(parallel); library(stats);
-library(utils); library(stringr); library(rms); library(readr)
+library(data.table)
+library(dplyr)
+library(survival)
+library(broom)
+library(DBI)
+library(ggplot2)
+library(nlme)
+library(tidyverse)
+#library(R.utils)
+library(lubridate)
+library(purrr)
+library(parallel)
+library(stats)
+library(utils)
+library(stringr)
+library(rms)
+#library(multcomp)
+library(readr)
+library(Hmisc)
+library(matrixStats)
+
 
 args = commandArgs(trailingOnly=TRUE)
 
 if(length(args)==0){
-  event_name="t2dm"
+  event_name="ami"
 }else{
-  event_name  = args[[1]] 
+  event_name  = args[[1]]
 }
 
 # Specify directories ----------------------------------------------------------
 
 fs::dir_create(here::here("output", "not-for-review"))
 fs::dir_create(here::here("output", "review", "model"))
+fs::dir_create(here::here("output", "review", "model","fit-individual-covariates"))
 output_dir <- "output/review/model"
 scripts_dir <- "analysis/model"
 
@@ -37,42 +55,34 @@ source(file.path(scripts_dir,"06_cox_extra_functions.R"))
 
 source(file.path(scripts_dir,"02_03_cox_timepoint_param.R")) # Prepare dataset for model
 
-analyses_to_run_timepoints <- analyses_to_run %>% filter(mdl=="mdl_max_adj")
-
-# add reduced time point column 
-
-analyses_to_run_timepoints$reduced_timepoint <- NA
-
-analyses_to_run_timepoints$reduced_timepoint <- lapply(split(analyses_to_run_timepoints,seq(nrow(analyses_to_run_timepoints))),
-                                                       function(analyses_to_run_timepoints) 
-                                                         get_timepoint(
-                                                           event=analyses_to_run_timepoints$event,
-                                                           subgroup=analyses_to_run_timepoints$subgroup,
-                                                           stratify_by_subgroup=analyses_to_run_timepoints$stratify_by_subgroup,
-                                                           stratify_by=analyses_to_run_timepoints$strata,
-                                                           mdl=analyses_to_run_timepoints$mdl,
-                                                           input, cuts_days_since_expo,cuts_days_since_expo_reduced,covar_names)
+analyses_to_run$reduced_timepoint <- lapply(split(analyses_to_run,seq(nrow(analyses_to_run))),
+                                            function(analyses_to_run) 
+                                              get_timepoint(
+                                                event=analyses_to_run$event,
+                                                subgroup=analyses_to_run$subgroup,
+                                                stratify_by_subgroup=analyses_to_run$stratify_by_subgroup,
+                                                stratify_by=analyses_to_run$strata,
+                                                input, cuts_days_since_expo,cuts_days_since_expo_reduced)
 )
 
-analyses_to_run_timepoints <- analyses_to_run_timepoints %>% select(subgroup, reduced_timepoint)
-
-analyses_to_run <- analyses_to_run %>% left_join(analyses_to_run_timepoints, by="subgroup")
+analyses_to_run$reduced_timepoint <-  as.character(analyses_to_run$reduced_timepoint)
 analyses_to_run <- analyses_to_run %>% filter(reduced_timepoint != "remove")
+analyses_to_run_normal_timepoint <- analyses_to_run %>% filter(reduced_timepoint == "normal")
+analyses_to_run$reduced_timepoint <- "reduced"
+analyses_to_run <- rbind(analyses_to_run, analyses_to_run_normal_timepoint)
 
-# If one subgroup category is "reduced" then make sure all of the subgroup categories are "reduced" for comparison purposes
+rm(analyses_to_run_normal_timepoint)
 
-analyses_to_run <- analyses_to_run %>%
-  group_by(subgroup_cat) %>%
-  dplyr::mutate(reduced_timepoint = case_when(
-    any(reduced_timepoint == "reduced") ~ "reduced",
-    TRUE ~ as.character(reduced_timepoint)))
+# Join in reduced covariates
+
+analyses_to_run <- analyses_to_run %>% left_join(non_zero_covar_names, by= c("event"="outcome_event","subgroup","reduced_timepoint"="time_period"))
+rm(non_zero_covar_names)
 
 # Source remainder of relevant files --------------------------------------------------------
 
 source(file.path(scripts_dir,paste0("03_01_cox_subgrouping.R"))) # Model specification
 
-  # ------------------------------------ LAUNCH JOBS -----------------------------
-  
+# ------------------------------------ LAUNCH JOBS -----------------------------
 if(nrow(analyses_to_run>0)){
   lapply(split(analyses_to_run,seq(nrow(analyses_to_run))),
          function(analyses_to_run)
@@ -81,15 +91,24 @@ if(nrow(analyses_to_run>0)){
              subgroup=analyses_to_run$subgroup,           
              stratify_by_subgroup=analyses_to_run$stratify_by_subgroup,           
              stratify_by=analyses_to_run$strata,           
-             mdl=analyses_to_run$mdl,   
              time_point=analyses_to_run$reduced_timepoint,       
-             input,cuts_days_since_expo,cuts_days_since_expo_reduced, covar_names))
+             input,covar_names,
+             reduced_covar_names=analyses_to_run$covariates,
+             cuts_days_since_expo,cuts_days_since_expo_reduced,mdl))
 }
-  
-  
-#Save csv of anlayses not run
-write.csv(analyses_not_run, paste0(output_dir,"/analyses_not_run_" , event_name , ".csv"), row.names = T)
 
+#Save csv of anlayses not run
+write.csv(analyses_not_run, paste0(output_dir,"/analyses_not_run_" , event_name ,"_pre_vaccination.csv"), row.names = T)
+
+if(nrow(analyses_to_run)==0){
+  sink(paste0("output/not-for-review/describe_data_surv_",event_name,"__time_periods.txt"))
+  sink()
+  
+  #df <- as.data.frame(matrix(ncol = 2))
+  #write.csv(df, paste0("output/input_",event_name,"__time_periods.csv"))
+  #write.csv(df, paste0("output/input_sampled_data_",event_name,"__time_periods.csv"))
+  
+}
 
 #Combine all results into one .csv
 source(file.path(scripts_dir, "05_cox_format_tbls_HRs.R"))
