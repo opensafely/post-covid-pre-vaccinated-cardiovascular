@@ -1,11 +1,6 @@
 ## =============================================================================
 ## Purpose:  Create venn diagrams outside of OpenSAFELY environment using check number dataframe (CSV)
 ## 
-## Author:   Kurt Taylor
-##
-## Reviewer: 
-##
-## Date:     27th May 2022
 ##
 ## Data:     Post covid projects
 ##
@@ -23,7 +18,7 @@ library(gridExtra)
 
 # Read file ---------------------------------------------------------------
 
-df <- read.csv("output/review/venn-diagrams/venn_diagram_number_check_diabetes.csv")
+df <- read.csv("output/review/venn-diagrams/venn_diagram_number_check_pre_vaccination_cvd.csv")
 
 active_analyses <- readr::read_rds("lib/active_analyses.rds")
 
@@ -34,7 +29,7 @@ outcomes <- df$outcome
 
 for(i in outcomes) {
   
-  df <- read.csv("output/review/venn-diagrams/venn_diagram_number_check_diabetes.csv")
+  df <- read.csv("output/review/venn-diagrams/venn_diagram_number_check_pre_vaccination_cvd.csv")
   
   # calculate totals columns
   df <- df %>%
@@ -63,5 +58,3 @@ for(i in outcomes) {
   print(g)
   dev.off()
 }
-
-# END
