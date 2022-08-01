@@ -10,15 +10,25 @@
 active_analyses <- read_rds("lib/active_analyses.rds")
 active_analyses <- active_analyses %>%dplyr::filter(outcome_variable==paste0("out_date_",event_name) & active == "TRUE")
 
-## Select covariates of interest 
-covar_names<-str_split(active_analyses$covariates, ";")[[1]]
-covar_names<-append(covar_names,"patient_id")
-covar_names<-covar_names[!covar_names %in% c("cov_num_age","cov_cat_ethnicity","cov_cat_region","cov_cat_sex")]
+## Select covariates of interest
+for(i in c("normal","reduced")){
+   assign(paste0("non_zero_covar_names_",i),read_csv(paste0("output/not-for-review/non_zero_selected_covariates_",i,"_time_periods.csv")) )
+}
+
+non_zero_covar_names <- rbind(non_zero_covar_names_normal, non_zero_covar_names_reduced)
+rm(non_zero_covar_names_normal, non_zero_covar_names_reduced)
+
+non_zero_covar_names <- non_zero_covar_names %>% filter(outcome_event == paste0("out_date_",event_name))
+non_zero_covar_names$outcome_event <- gsub("out_date_", "",non_zero_covar_names$outcome_event)
+
+covar_names <-str_split(active_analyses$covariates, ";")[[1]]
+covar_names <-append(covar_names,"patient_id")
+covar_names <-covar_names[!covar_names %in% c("cov_num_age","cov_cat_ethnicity","cov_cat_region","cov_cat_sex")]
 
 ##Set which models and cohorts are required
 
 if(active_analyses$model=="all"){
-  mdl=c("mdl_agesex","mdl_max_adj")
+  mdl=c("mdl_age_sex","mdl_age_sex_region","mdl_max_adj","mdl_max_adj_reduced_covars")
 }else{
   mdl=active_analyses$model
 }
@@ -27,16 +37,12 @@ if(active_analyses$model=="all"){
 ## Transpose active_analyses to single column so can filter to analysis models to run
 
 analyses_to_run <- as.data.frame(t(active_analyses))
-analyses_to_run <- analyses_to_run[row.names(analyses_to_run) != "venn", , drop = FALSE]
 analyses_to_run$subgroup <- row.names(analyses_to_run)
 colnames(analyses_to_run) <- c("run","subgroup")
 analyses_to_run<- analyses_to_run %>% filter(run=="TRUE" & subgroup != "active" ) 
 rownames(analyses_to_run) <- NULL
 analyses_to_run <- analyses_to_run %>% select(!run)
 analyses_to_run$event=event_name
-
-## Add in  all possible combinations of the subgroups, models and cohorts
-analyses_to_run <- crossing(analyses_to_run,mdl)
 
 ## Add in which covariates to stratify by
 analyses_to_run$stratify_by_subgroup=NA
@@ -46,15 +52,12 @@ for(i in c("ethnicity","sex")){
 analyses_to_run$stratify_by_subgroup <- ifelse(startsWith(analyses_to_run$subgroup,"prior_history"),active_analyses$prior_history_var,analyses_to_run$stratify_by_subgroup)
 analyses_to_run$stratify_by_subgroup <- ifelse(is.na(analyses_to_run$stratify_by_subgroup),analyses_to_run$subgroup,analyses_to_run$stratify_by_subgroup)
 
-
 ## Add in relevant subgroup levels to specify which stratum to run for
 analyses_to_run$strata <- NA
 analyses_to_run$strata <- ifelse(analyses_to_run$subgroup=="main","main",analyses_to_run$strata)
-analyses_to_run$strata <- ifelse(analyses_to_run$subgroup=="covid_history","TRUE",analyses_to_run$strata)
 
-for(i in c("covid_pheno_","agegp_","sex_","ethnicity_")){
+for(i in c("covid_pheno_","agegp_","sex_","ethnicity_","prior_history_")){
   analyses_to_run$strata <- ifelse(startsWith(analyses_to_run$subgroup,i),gsub(i,"",analyses_to_run$subgroup),analyses_to_run$strata)
-  
 }
 
 analyses_to_run$strata[analyses_to_run$strata=="South_Asian"]<- "South Asian"
@@ -64,7 +67,6 @@ analyses_to_run$strata[analyses_to_run$strata=="South_Asian"]<- "South Asian"
 analyses_to_run <- analyses_to_run %>% 
   dplyr::mutate(subgroup_cat = case_when(
     startsWith(subgroup, "agegp") ~ "age",
-    startsWith(subgroup, "covid_history") ~ "covid_history",
     startsWith(subgroup, "covid_pheno") ~ "covid_pheno",
     startsWith(subgroup, "ethnicity") ~ "ethnicity",
     startsWith(subgroup, "main") ~ "main",
