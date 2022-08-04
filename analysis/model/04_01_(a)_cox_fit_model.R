@@ -123,18 +123,19 @@ fit_model_reducedcovariates <- function(event,subgroup,stratify_by_subgroup,stra
   #write.csv(sampled_data, paste0("output/input_sampled_data_",event,"_", subgroup,"_",cohort,"_",time_point,"_time_periods.csv") )
   
   #data.table::fwrite(data_surv, paste0("output/input_",event,"_", subgroup,"_",cohort,"_",time_point,"_time_periods.csv"))
-  
-  #Fit model and prep output csv
-  fit_model <- coxfit(data_surv, interval_names, covar_names,reduced_covar_names, mdl, subgroup)
-  fit_model$subgroup <- subgroup
-  fit_model$event <- event
-  fit_model$cohort <- "pre_vaccination"
-  fit_model$time_points <- time_point
-  fit_model$total_covid19_cases <- total_covid_cases
-  
-  write.csv(fit_model, paste0(output_dir,"/tbl_hr_" , event, "_",subgroup,"_",time_point, "_time_periods_pre_vaccination.csv"), row.names = T)
-  print(paste0("Hazard ratios saved: ", output_dir,"/tbl_hr_" , event, "_",subgroup,"_",time_point,"_time_periods_pre_vaccination.csv"))
-  
+  if(time_point != "alternative"){
+    #Fit model and prep output csv
+    fit_model <- coxfit(data_surv, interval_names, covar_names,reduced_covar_names, mdl, subgroup)
+    fit_model$subgroup <- subgroup
+    fit_model$event <- event
+    fit_model$cohort <- "pre_vaccination"
+    fit_model$time_points <- time_point
+    fit_model$total_covid19_cases <- total_covid_cases
+    
+    write.csv(fit_model, paste0(output_dir,"/tbl_hr_" , event, "_",subgroup,"_",time_point, "_time_periods_pre_vaccination.csv"), row.names = T)
+    print(paste0("Hazard ratios saved: ", output_dir,"/tbl_hr_" , event, "_",subgroup,"_",time_point,"_time_periods_pre_vaccination.csv"))
+    
+  }
 }
 
 #------------------------ GET SURV FORMULA & COXPH() ---------------------------
