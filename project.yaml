@@ -441,3 +441,12 @@ actions:
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_vte_primary_position_*_time_periods.txt
 
+  event_counts_by_time_period:
+    run: r:latest analysis/descriptives/event_counts_by_time_period.R pre_vaccination
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        event_counts: output/review/descriptives/event_counts_by_time_period_pre_vaccination.csv
+
