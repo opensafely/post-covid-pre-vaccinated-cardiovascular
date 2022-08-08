@@ -219,7 +219,18 @@ actions_list <- splice(
   #comment("Stage 5 - Apply models"),
   splice(
     # over outcomes
-    unlist(lapply(outcomes_model, function(x) apply_model_function(outcome = x)), recursive = FALSE)))
+    unlist(lapply(outcomes_model, function(x) apply_model_function(outcome = x)), recursive = FALSE)
+    ),
+  
+  action(
+    name = "event_counts_by_time_period",
+    run = "r:latest analysis/descriptives/event_counts_by_time_period.R",
+    needs = list("stage1_data_cleaning", "stage1_end_date_table"),
+    moderately_sensitive = list(
+      event_counts = "output/review/descriptives/event_counts_by_time_period_pre_vaccination.csv")
+  )
+  
+  )
   
 
 ## combine everything ----
