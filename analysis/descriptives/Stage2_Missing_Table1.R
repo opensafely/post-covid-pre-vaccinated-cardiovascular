@@ -104,9 +104,9 @@ write.csv(check_dates, file = file.path("output/not-for-review", paste0("Check_d
 #Define populations of interest
 
 pop <- data.frame(rbind(c("Whole_population","!is.na(input$patient_id)"),
-                        c("COVID_exposed","is.na(input$exp_date_covid19_confirmed)==F"),
-                        c("COVID_hospitalised","input$sub_cat_covid19_hospital=='hospitalised'"),
-                        c("COVID_non_hospitalised","input$sub_cat_covid19_hospital=='non_hospitalised'")),
+                        c("COVID_exposed","!is.na(input$exp_date_covid19_confirmed)"),
+                        c("COVID_hospitalised","!is.na(input$exp_date_covid19_confirmed) & input$sub_cat_covid19_hospital=='hospitalised'"),
+                        c("COVID_non_hospitalised","!is.na(input$exp_date_covid19_confirmed) & input$sub_cat_covid19_hospital=='non_hospitalised'")),
                   stringsAsFactors = FALSE)
 
 colnames(pop) <- c("name","condition")
