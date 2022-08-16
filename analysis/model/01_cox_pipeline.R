@@ -78,15 +78,6 @@ rm(analyses_to_run_normal_timepoint)
 analyses_to_run <- analyses_to_run %>% left_join(non_zero_covar_names, by= c("event"="outcome_event","subgroup","reduced_timepoint"="time_period"))
 rm(non_zero_covar_names)
 
-if(event_name %in% c("pe","ami")){
-  analyses_to_run_alternative <- analyses_to_run %>% select(-covariates)
-  analyses_to_run_alternative$reduced_timepoint <- "alternative"
-  analyses_to_run_alternative <- distinct(analyses_to_run_alternative)
-  analyses_to_run_alternative$covariates <- analyses_to_run$covariates[1]
-  analyses_to_run <- rbind(analyses_to_run, analyses_to_run_alternative)
-  rm(analyses_to_run_alternative)
-}
-
 # Source remainder of relevant files --------------------------------------------------------
 
 source(file.path(scripts_dir,paste0("03_01_cox_subgrouping.R"))) # Model specification
