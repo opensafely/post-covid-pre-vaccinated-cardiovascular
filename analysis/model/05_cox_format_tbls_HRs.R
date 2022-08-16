@@ -77,9 +77,6 @@ event_counts_completed <- pmap(list(event_count_done),
 if(length(event_count_done)>0){
   df_event_counts <- rbindlist(event_counts_completed, fill=TRUE)
   df_event_counts <- df_event_counts %>% select(event, cohort, subgroup, time_points, expo_week, events_total, person_time, `incidence rate (per 1000 person years)`, person_time_median)
-  df_event_counts$subgroup <- factor(df_event_counts$subgroup, levels = c("main","covid_pheno_hospitalised","covid_pheno_non_hospitalised","covid_history"))
-  df_event_counts$time_points <- factor(df_event_counts$time_points, levels = c("normal","reduced","alternative"))
-  df_event_counts <- df_event_counts[order(df_event_counts$subgroup,df_event_counts$time_points),]
   write.csv(df_event_counts, paste0(output_dir,"/compiled_event_counts_", event_name, "_pre_vaccination.csv") , row.names=F)
   print(paste0("Compiled event counts saved: ", output_dir,"/compiled_event_counts_", event_name,"_pre_vaccination.csv"))
   
