@@ -100,8 +100,8 @@ if(nrow(analyses_to_run)==0){
   sink()
   
   df <- as.data.frame(matrix(ncol = 2))
-  #write.csv(df, paste0("output/input_",event_name,"__time_periods.csv"))
-  write.csv(df, paste0("output/input_sampled_data_",event_name,"__time_periods.csv"))
+  write.csv(df, paste0("output/input_",event_name,"_",cohort,"__time_periods.csv"))
+  write.csv(df, paste0("output/input_sampled_data_",event_name,"_",cohort,"__time_periods.csv"))
   
 }
 

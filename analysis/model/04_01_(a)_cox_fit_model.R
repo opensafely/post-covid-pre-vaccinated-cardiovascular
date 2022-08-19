@@ -25,7 +25,7 @@ fit_model_reducedcovariates <- function(event,subgroup,stratify_by_subgroup,stra
   sampled_data <- list_data_surv_noncase_ids_interval_names[[7]]
   
   if(less_than_50_events=="TRUE"){
-    analyses_not_run[nrow(analyses_not_run)+1,]<<-c(event,subgroup,mdl,"TRUE","TRUE","TRUE","FALSE")
+    analyses_not_run[nrow(analyses_not_run)+1,]<<-c(event,subgroup,"TRUE","TRUE","TRUE","FALSE")
     return(fit_model_reducedcovariates)
   }
 
@@ -52,10 +52,52 @@ fit_model_reducedcovariates <- function(event,subgroup,stratify_by_subgroup,stra
   print(Hmisc::describe(data_surv))
   sink()
   
+  #Check for covariates to remove or collapse for stata data
+  if("mdl_max_adj" %in% mdl){
+    covars_to_remove <- rm_lowvar_covars(data_surv)[!is.na((rm_lowvar_covars(data_surv)))]
+    sampled_data <- sampled_data %>% dplyr::select(!all_of(covars_to_remove))
+    sampled_data_covariates <- covar_names[covar_names %in% names(sampled_data)] %>% sort()
+    sampled_data$covariates_to_fit=paste0(sampled_data_covariates, collapse = ",")
+    print(paste0("Covariates to fit in sampled data: ", sampled_data_covariates))
+    
+    collapse_covars_list=collapse_categorical_covars(data_surv,subgroup)
+    covars_collapsed=collapse_covars_list[[2]]
+    covars_collapsed=unique(covars_collapsed[covars_collapsed %in% c("cov_cat_deprivation","cov_cat_smoking_status")])
+    print(paste0("Categorical covariates collapsed in sampled data: ", covars_collapsed))
+    
+    if("cov_cat_deprivation" %in% covars_collapsed){
+      sampled_data=sampled_data %>% mutate(cov_cat_deprivation= 
+                                       case_when(cov_cat_deprivation=="1-2 (most deprived)"~"1-4",
+                                                 cov_cat_deprivation=="3-4"~"1-4",
+                                                 cov_cat_deprivation=="5-6"~"5-6",
+                                                 cov_cat_deprivation=="7-8"~"7-10",
+                                                 cov_cat_deprivation=="9-10 (least deprived)"~"7-10"))
+      
+      sampled_data$cov_cat_deprivation <- ordered(sampled_data$cov_cat_deprivation, levels = c("1-4","5-6","7-10"))
+    }
+    
+    if("cov_cat_smoking_status" %in% covars_collapsed){
+      sampled_data=sampled_data %>% mutate(cov_cat_smoking_status = as.character(cov_cat_smoking_status)) %>%
+        mutate(cov_cat_smoking_status= case_when(cov_cat_smoking_status=="Never smoker"~"Never smoker",
+                                                 cov_cat_smoking_status=="Ever smoker"~"Ever smoker",
+                                                 cov_cat_smoking_status=="Current smoker"~"Ever smoker",
+                                                 cov_cat_smoking_status=="Missing"~"Never smoker"))
+      
+      smoking_status_mode <- get_mode(sampled_data,"cov_cat_smoking_status")
+      sampled_data <- sampled_data %>% mutate(cov_cat_smoking_status = as.factor(cov_cat_smoking_status)) %>%
+        mutate(cov_cat_smoking_status = relevel(cov_cat_smoking_status,ref=smoking_status_mode))
+      
+    }
+    sampled_data$covariates_collapsed=paste0(covars_collapsed, collapse = ",")
+  }
+  
   # Save sampled data for Stata
   write.csv(sampled_data, paste0("output/input_sampled_data_",event,"_", subgroup,"_",cohort,"_",time_point,"_time_periods.csv") )
+  rm(sampled_data)
   
-  #data.table::fwrite(data_surv, paste0("output/input_",event,"_", subgroup,"_",cohort,"_",time_point,"_time_periods.csv"))
+  data.table::fwrite(data_surv, paste0("output/input_",event,"_", subgroup,"_",cohort,"_",time_point,"_time_periods.csv"))
+  
+  
   #Fit model and prep output csv
   fit_model <- coxfit(data_surv, interval_names, covar_names, mdl, subgroup)
   fit_model$subgroup <- subgroup
@@ -72,7 +114,6 @@ fit_model_reducedcovariates <- function(event,subgroup,stratify_by_subgroup,stra
 #------------------------ GET SURV FORMULA & COXPH() ---------------------------
 coxfit <- function(data_surv, interval_names, covar_names, mdl, subgroup){
   print("Working on cox model")
-  
   if("mdl_max_adj" %in% mdl){
     covars_to_remove <- rm_lowvar_covars(data_surv)[!is.na((rm_lowvar_covars(data_surv)))]
     print(paste0("Covariates removed: ", covars_to_remove))
@@ -83,6 +124,8 @@ coxfit <- function(data_surv, interval_names, covar_names, mdl, subgroup){
     covars_collapsed=unique(covars_collapsed[covars_collapsed %in% c("cov_cat_deprivation","cov_cat_smoking_status")])
     print(paste0("Categorical covariates collapsed: ", covars_collapsed))
   }
+  
+  
   
   print("Post Exposure event counts split by covariate levels")
   if(!"mdl_max_adj" %in% mdl){
