@@ -166,7 +166,7 @@ if(length(results_done)>0){
       tmp <- combined_hr_event_counts %>% filter(subgroup==subgroup_of_interest & time_points == time_points_of_interest, model==model_of_interest)
       tmp <- tmp %>% mutate(across(where(is.numeric), as.character))
       redacted_counts <- tmp[which(tmp$events_total == "[Redacted]"),expo_week]
-      tmp[which(tmp$term %in% redacted_counts),2:7] = "[Redacted]"
+      tmp[which(tmp$term %in% redacted_counts),2:6] = "[Redacted]"
       tmp$redacted_results <- ifelse(any(tmp$events_total == "[Redacted]", na.rm = T), "Redacted results", "No redacted results")
       supressed_combined_hr_event_counts <- rbind(supressed_combined_hr_event_counts,tmp)
     }
