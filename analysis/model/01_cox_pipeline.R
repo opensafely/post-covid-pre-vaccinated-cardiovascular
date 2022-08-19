@@ -37,6 +37,7 @@ if(length(args)==0){
   event_name  = args[[1]]
 }
 
+cohort <- "pre_vaccination"
 # Specify directories ----------------------------------------------------------
 
 fs::dir_create(here::here("output", "not-for-review"))
@@ -70,13 +71,8 @@ analyses_to_run <- analyses_to_run %>% filter(reduced_timepoint != "remove")
 analyses_to_run_normal_timepoint <- analyses_to_run %>% filter(reduced_timepoint == "normal")
 analyses_to_run$reduced_timepoint <- "reduced"
 analyses_to_run <- rbind(analyses_to_run, analyses_to_run_normal_timepoint)
-
+analyses_to_run$cohort <- cohort
 rm(analyses_to_run_normal_timepoint)
-
-# Join in reduced covariates
-
-analyses_to_run <- analyses_to_run %>% left_join(non_zero_covar_names, by= c("event"="outcome_event","subgroup","reduced_timepoint"="time_period"))
-rm(non_zero_covar_names)
 
 # Source remainder of relevant files --------------------------------------------------------
 
@@ -93,20 +89,19 @@ if(nrow(analyses_to_run>0)){
              stratify_by=analyses_to_run$strata,           
              time_point=analyses_to_run$reduced_timepoint,       
              input,covar_names,
-             reduced_covar_names=analyses_to_run$covariates,
              cuts_days_since_expo,cuts_days_since_expo_reduced,mdl))
 }
 
 #Save csv of anlayses not run
-write.csv(analyses_not_run, paste0(output_dir,"/analyses_not_run_" , event_name ,"_pre_vaccination.csv"), row.names = T)
+write.csv(analyses_not_run, paste0(output_dir,"/analyses_not_run_" , event_name ,"_",cohort,".csv"), row.names = T)
 
 if(nrow(analyses_to_run)==0){
   sink(paste0("output/not-for-review/describe_data_surv_",event_name,"__time_periods.txt"))
   sink()
   
-  #df <- as.data.frame(matrix(ncol = 2))
+  df <- as.data.frame(matrix(ncol = 2))
   #write.csv(df, paste0("output/input_",event_name,"__time_periods.csv"))
-  #write.csv(df, paste0("output/input_sampled_data_",event_name,"__time_periods.csv"))
+  write.csv(df, paste0("output/input_sampled_data_",event_name,"__time_periods.csv"))
   
 }
 

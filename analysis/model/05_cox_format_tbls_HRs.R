@@ -17,7 +17,8 @@ for (i in 1:nrow(results_needed)) {
                      paste0("tbl_hr_",
                             row$event, "_",
                             row$subgroup, "_",
-                            row$reduced_timepoint,"_time_periods_pre_vaccination.csv"))
+                            row$cohort, "_",
+                            row$reduced_timepoint,"_time_periods.csv"))
   
   if (!file.exists(fpath)) {
     results_missing <- rbind(results_missing, row)
@@ -36,14 +37,14 @@ result_file_paths <- pmap(list(results_done),
 if(length(results_done)>0){
   df_hr <- rbindlist(result_file_paths, fill=TRUE)
   df_hr <- df_hr %>% mutate_if(is.numeric, round, digits=5)%>%select(-V1)
-  write.csv(df_hr, paste0(output_dir,"/compiled_HR_results_", event_name,"_pre_vaccination.csv") , row.names=F)
-  print(paste0("Compiled HR's saved: ", output_dir,"/compiled_HR_results_", event_name,"_pre_vaccination.csv"))
+  write.csv(df_hr, paste0(output_dir,"/compiled_HR_results_", event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Compiled HR's saved: ", output_dir,"/compiled_HR_results_", event_name,"_",cohort,".csv"))
 }else{
   df_hr <- as.data.frame(matrix(ncol = 14))
   colnames(df_hr) <- c("term", "estimate", "conf.low", "conf.high", "std.error", "robust.se", "covariate", "P","model",
                        "subgroup", "event", "cohort", "time_period", "total_covid19_cases")
-  write.csv(df_hr, paste0(output_dir,"/compiled_HR_results_", event_name,"_pre_vaccination.csv") , row.names=F)
-  print(paste0("Compiled HR's saved: ", output_dir,"/compiled_HR_results_", event_name,"_pre_vaccination.csv"))
+  write.csv(df_hr, paste0(output_dir,"/compiled_HR_results_", event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Compiled HR's saved: ", output_dir,"/compiled_HR_results_", event_name,"_",cohort,".csv"))
 }
 
 
@@ -58,7 +59,8 @@ for (i in 1:nrow(results_needed)) {
                      paste0("tbl_event_count_",
                             row$event, "_",
                             row$subgroup, "_",
-                            row$reduced_timepoint,"_time_periods_pre_vaccination.csv"))
+                            row$cohort, "_",
+                            row$reduced_timepoint,"_time_periods.csv"))
   
   if (!file.exists(fpath)) {
     event_count_missing <- rbind(event_count_missing, row)
@@ -77,8 +79,8 @@ event_counts_completed <- pmap(list(event_count_done),
 if(length(event_count_done)>0){
   df_event_counts <- rbindlist(event_counts_completed, fill=TRUE)
   df_event_counts <- df_event_counts %>% select(event, cohort, subgroup, time_points, expo_week, events_total, person_time, `incidence rate (per 1000 person years)`, person_time_median)
-  write.csv(df_event_counts, paste0(output_dir,"/compiled_event_counts_", event_name, "_pre_vaccination.csv") , row.names=F)
-  print(paste0("Compiled event counts saved: ", output_dir,"/compiled_event_counts_", event_name,"_pre_vaccination.csv"))
+  write.csv(df_event_counts, paste0(output_dir,"/compiled_event_counts_", event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Compiled event counts saved: ", output_dir,"/compiled_event_counts_", event_name,"_",cohort,".csv"))
   
   # Add in suppression for counts <=5
   df_event_counts$redacted_results <- "NA"
@@ -98,7 +100,8 @@ if(length(event_count_done)>0){
     tmp <- tmp %>% 
       mutate(events_total = replace(events_total, expo_week=="all post expo", sum(tmp[which(tmp$events_total >5 & !(tmp$expo_week %in% c("pre expo", "all post expo"))),events_total])))   
     tmp <- tmp %>% 
-      mutate(events_total = replace(events_total, events_total <=5, "[Redacted]"))
+      mutate(person_time_median = replace(person_time_median, events_total <=5, "[Redacted]"),
+             events_total = replace(events_total, events_total <=5, "[Redacted]"))
     
     tmp$events_total <- as.character(tmp$events_total)
     tmp$redacted_results <- ifelse(any(tmp$events_total == "[Redacted]", na.rm = T), "Redacted results", "No redacted results")
@@ -109,16 +112,16 @@ if(length(event_count_done)>0){
                                                                                                               "No redacted results"))
   supressed_df_event_counts <- supressed_df_event_counts[order(supressed_df_event_counts$redacted_results),]
   
-  write.csv(supressed_df_event_counts, paste0(output_dir,"/suppressed_compiled_event_counts_", event_name,"_pre_vaccination.csv") , row.names=F)
-  print(paste0("Supressed event counts saved: ", output_dir,"/suppressed_compiled_event_counts_", event_name,"_pre_vaccination.csv"))
+  write.csv(supressed_df_event_counts, paste0(output_dir,"/suppressed_compiled_event_counts_", event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Supressed event counts saved: ", output_dir,"/suppressed_compiled_event_counts_", event_name,"_",cohort,".csv"))
   
 }else{
   df_event_counts <- as.data.frame(matrix(ncol = 7))
   colnames(df_event_counts)<- c("expo_week", "events_total", "event", "subgroup", "cohort", "time_points","redacted_results")
-  write.csv(df_event_counts, paste0(output_dir,"/compiled_event_counts_", event_name,"_pre_vaccination.csv") , row.names=F)
-  print(paste0("Compiled event counts saved: ", output_dir,"/compiled_event_counts_", event_name,"_pre_vaccination.csv"))
-  write.csv(df_event_counts, paste0(output_dir,"/suppressed_compiled_event_counts_", event_name,"_pre_vaccination.csv") , row.names=F)
-  print(paste0("Supressed event counts saved: ", output_dir,"/suppressed_compiled_event_counts_", event_name,"_pre_vaccination.csv"))
+  write.csv(df_event_counts, paste0(output_dir,"/compiled_event_counts_", event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Compiled event counts saved: ", output_dir,"/compiled_event_counts_", event_name,"_",cohort,".csv"))
+  write.csv(df_event_counts, paste0(output_dir,"/suppressed_compiled_event_counts_", event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Supressed event counts saved: ", output_dir,"/suppressed_compiled_event_counts_", event_name,"_",cohort,".csv"))
   
 }
 
@@ -155,8 +158,7 @@ if(length(results_done)>0){
   combined_hr_event_counts$redacted_results <- "NA"
 
   supressed_combined_hr_event_counts <- combined_hr_event_counts[0,]
-  i=1
-  model_of_interest = "mdl_age_sex"
+
   for(i in 1:nrow(analyses_to_run)){
     subgroup_of_interest=analyses_to_run$subgroup[i]
     time_points_of_interest=analyses_to_run$reduced_timepoint[i]
@@ -175,20 +177,20 @@ if(length(results_done)>0){
   supressed_combined_hr_event_counts <- supressed_combined_hr_event_counts[order(supressed_combined_hr_event_counts$redacted_results),]
 
   
-  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_pre_vaccination.csv") , row.names=F)
-  print(paste0("Supressed HR with event counts saved: ", output_dir,"/suppressed_compiled_HR_results_",event_name,"__pre_vaccination.csv"))
+  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Supressed HR with event counts saved: ", output_dir,"/suppressed_compiled_HR_results_",event_name,"_",cohort,".csv"))
   
   supressed_combined_hr_event_counts <- supressed_combined_hr_event_counts %>% select(!c("events_total"))
-  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_pre_vaccination_to_release.csv") , row.names=F)
+  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_",cohort,"_to_release.csv") , row.names=F)
   
 }else{
   supressed_combined_hr_event_counts <- as.data.frame(matrix(ncol = 16))
   colnames(supressed_combined_hr_event_counts) <- c("term","estimate","conf.low","conf.high","std.error","robust.se","P","expo_week","events_total",
                                                     "event","subgroup","model","cohort","time_points,","total_covid19_cases","redacted_results")
-  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_pre_vaccination.csv") , row.names=F)
-  print(paste0("Supressed HR with event counts saved: ", output_dir,"/suppressed_compiled_HR_results_",event_name,"_pre_vaccination.csv"))
+  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_",cohort,".csv") , row.names=F)
+  print(paste0("Supressed HR with event counts saved: ", output_dir,"/suppressed_compiled_HR_results_",event_name,"_",cohort,".csv"))
   
   supressed_combined_hr_event_counts <- supressed_combined_hr_event_counts[!colnames(supressed_combined_hr_event_counts) %in% c("expo_week","events_total")]
-  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_pre_vaccination_to_release.csv") , row.names=F) 
+  write.csv(supressed_combined_hr_event_counts,paste0(output_dir,"/suppressed_compiled_HR_results_",event_name,"_",cohort,"_to_release.csv") , row.names=F) 
 }
 

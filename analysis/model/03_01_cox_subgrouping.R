@@ -5,7 +5,7 @@
 ## =============================================================================
 source(file.path(scripts_dir,"04_01_(a)_cox_fit_model.R"))
 
-get_vacc_res <- function(event,subgroup,stratify_by_subgroup,stratify_by,time_point,input,covar_names,reduced_covar_names,cuts_days_since_expo,cuts_days_since_expo_reduced,mdl){
+get_vacc_res <- function(event,subgroup,stratify_by_subgroup,stratify_by,time_point,input,covar_names,cuts_days_since_expo,cuts_days_since_expo_reduced,mdl){
   print(paste0("Working on subgroup: ", subgroup))
   print(paste0("Using ",time_point," time point"))
   
@@ -80,6 +80,8 @@ get_vacc_res <- function(event,subgroup,stratify_by_subgroup,stratify_by,time_po
     survival_data <- survival_data %>% mutate(expo_date = replace(expo_date, which(!is.na(date_expo_censor) & (expo_date >= date_expo_censor)), NA) )%>%
       mutate(event_date = replace(event_date, which(!is.na(date_expo_censor) & (event_date >= date_expo_censor)), NA)) %>%
       filter((follow_up_start != date_expo_censor)|is.na(date_expo_censor))
+    
+    setDT(survival_data)[follow_up_end == date_expo_censor, follow_up_end := follow_up_end-1]
   }
   
   
@@ -89,11 +91,9 @@ get_vacc_res <- function(event,subgroup,stratify_by_subgroup,stratify_by,time_po
   
   # add statement for reduced time cutoffs
   if(time_point == "reduced"){
-    res_vacc <- fit_model_reducedcovariates(event,subgroup,stratify_by_subgroup,stratify_by,mdl, survival_data,input,cuts_days_since_expo=cuts_days_since_expo_reduced,cuts_days_since_expo_reduced,covar_names,reduced_covar_names,total_covid_cases,time_point)
+    res_vacc <- fit_model_reducedcovariates(event,subgroup,stratify_by_subgroup,stratify_by,mdl, survival_data,input,cuts_days_since_expo=cuts_days_since_expo_reduced,cuts_days_since_expo_reduced,covar_names,total_covid_cases,time_point)
   }else if(time_point == "normal"){
-    res_vacc <- fit_model_reducedcovariates(event,subgroup,stratify_by_subgroup,stratify_by,mdl, survival_data,input,cuts_days_since_expo, cuts_days_since_expo_reduced,covar_names,reduced_covar_names,total_covid_cases,time_point)
-  }else if(time_point == "alternative"){
-    res_vacc <- fit_model_reducedcovariates(event,subgroup,stratify_by_subgroup,stratify_by,mdl, survival_data,input,cuts_days_since_expo=cuts_days_since_expo_alternative, cuts_days_since_expo_reduced=cuts_days_since_expo_alternative,covar_names,reduced_covar_names,total_covid_cases,time_point)
+    res_vacc <- fit_model_reducedcovariates(event,subgroup,stratify_by_subgroup,stratify_by,mdl, survival_data,input,cuts_days_since_expo, cuts_days_since_expo_reduced,covar_names,total_covid_cases,time_point)
   }
 
   print(paste0("Finished working on subgroup: ", subgroup))
