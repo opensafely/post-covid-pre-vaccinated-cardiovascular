@@ -72,16 +72,6 @@ actions:
         DateChecks: output/not-for-review/Check_dates_range.csv
         Descriptive_Table: output/review/descriptives/Table1_pre_vaccination_cvd.csv
 
-  stage_2_events_split_by_covariate_level:
-    run: r:latest analysis/preprocess/covariates_split_by_time_period.R
-    needs:
-    - stage1_data_cleaning
-    - stage1_end_date_table
-    outputs:
-      moderately_sensitive:
-        counts_by_covariate_level: output/not-for-review/event_counts_by_covariate_level_*.csv
-        selected_covariates: output/not-for-review/non_zero_selected_covariates_*.csv
-
   table_2:
     run: r:latest analysis/descriptives/table_2.R
     needs:
@@ -108,7 +98,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_ami_pre_vaccination.csv
@@ -117,6 +106,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_ami_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ami_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ami_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for stroke_isch 
 
@@ -125,7 +117,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_stroke_isch_pre_vaccination.csv
@@ -134,6 +125,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_isch_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_isch_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for dvt 
 
@@ -142,7 +136,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_dvt_pre_vaccination.csv
@@ -151,6 +144,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_dvt_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_dvt_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_dvt_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for pe 
 
@@ -159,7 +155,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_pe_pre_vaccination.csv
@@ -168,6 +163,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_pe_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_pe_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_pe_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for tia 
 
@@ -176,7 +174,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_tia_pre_vaccination.csv
@@ -185,6 +182,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_tia_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_tia_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_tia_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for stroke_sah_hs 
 
@@ -193,7 +193,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_stroke_sah_hs_pre_vaccination.csv
@@ -202,6 +201,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_sah_hs_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_sah_hs_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for hf 
 
@@ -210,7 +212,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_hf_pre_vaccination.csv
@@ -219,6 +220,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_hf_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_hf_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_hf_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for angina 
 
@@ -227,7 +231,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_angina_pre_vaccination.csv
@@ -236,6 +239,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_angina_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_angina_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_angina_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for ate 
 
@@ -244,7 +250,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_ate_pre_vaccination.csv
@@ -253,6 +258,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_ate_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ate_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ate_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for vte 
 
@@ -261,7 +269,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_vte_pre_vaccination.csv
@@ -270,6 +277,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_vte_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_vte_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_vte_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for ami_primary_position 
 
@@ -278,7 +288,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_ami_primary_position_pre_vaccination.csv
@@ -287,6 +296,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_ami_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ami_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ami_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for stroke_isch_primary_position 
 
@@ -295,7 +307,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_stroke_isch_primary_position_pre_vaccination.csv
@@ -304,6 +315,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_isch_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_isch_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for dvt_primary_position 
 
@@ -312,7 +326,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_dvt_primary_position_pre_vaccination.csv
@@ -321,6 +334,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_dvt_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_dvt_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_dvt_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for pe_primary_position 
 
@@ -329,7 +345,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_pe_primary_position_pre_vaccination.csv
@@ -338,6 +353,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_pe_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_pe_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_pe_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for tia_primary_position 
 
@@ -346,7 +364,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_tia_primary_position_pre_vaccination.csv
@@ -355,6 +372,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_tia_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_tia_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_tia_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for stroke_sah_hs_primary_position 
 
@@ -363,7 +383,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_stroke_sah_hs_primary_position_pre_vaccination.csv
@@ -372,6 +391,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_sah_hs_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_sah_hs_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for hf_primary_position 
 
@@ -380,7 +402,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_hf_primary_position_pre_vaccination.csv
@@ -389,6 +410,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_hf_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_hf_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_hf_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for angina_primary_position 
 
@@ -397,7 +421,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_angina_primary_position_pre_vaccination.csv
@@ -406,6 +429,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_angina_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_angina_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_angina_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for ate_primary_position 
 
@@ -414,7 +440,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_ate_primary_position_pre_vaccination.csv
@@ -423,6 +448,9 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_ate_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ate_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ate_primary_position_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for vte_primary_position 
 
@@ -431,7 +459,6 @@ actions:
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
-    - stage_2_events_split_by_covariate_level
     outputs:
       moderately_sensitive:
         analyses_not_run: output/review/model/analyses_not_run_vte_primary_position_pre_vaccination.csv
@@ -440,9 +467,12 @@ actions:
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_primary_position_pre_vaccination.csv
         describe_data_surv: output/not-for-review/describe_data_surv_vte_primary_position_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_vte_primary_position_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_vte_primary_position_*_pre_vaccination_*_time_periods.csv
 
   event_counts_by_time_period:
-    run: r:latest analysis/descriptives/event_counts_by_time_period.R pre_vaccination
+    run: r:latest analysis/descriptives/event_counts_by_time_period.R
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
