@@ -86,7 +86,7 @@ apply_model_function <- function(outcome){
       name = glue("Analysis_cox_{outcome}"),
       run = "r:latest analysis/model/01_cox_pipeline.R",
       arguments = c(outcome),
-      needs = list("stage1_data_cleaning", "stage1_end_date_table","stage_2_events_split_by_covariate_level"),
+      needs = list("stage1_data_cleaning", "stage1_end_date_table"),
       moderately_sensitive = list(
         analyses_not_run = glue("output/review/model/analyses_not_run_{outcome}_pre_vaccination.csv"),
         compiled_hrs_csv = glue("output/review/model/suppressed_compiled_HR_results_{outcome}_pre_vaccination.csv"),
@@ -94,6 +94,10 @@ apply_model_function <- function(outcome){
         compiled_event_counts_csv = glue("output/review/model/suppressed_compiled_event_counts_{outcome}_pre_vaccination.csv"),
         compiled_event_counts_csv_non_supressed = glue("output/review/model/compiled_event_counts_{outcome}_pre_vaccination.csv"),
         describe_data_surv = glue("output/not-for-review/describe_data_surv_{outcome}_*_time_periods.txt")
+      ),
+      highly_sensitive = list(
+        sampled_data = glue("output/input_sampled_data_{outcome}_*_{cohort}_*_time_periods.csv"),
+        cox_input_data = glue("output/input_{outcome}_*_{cohort}_*_time_periods.csv")
       )
     )
   )
@@ -182,18 +186,6 @@ actions_list <- splice(
       DateChecks = glue("output/not-for-review/Check_dates_range.csv"),
       Descriptive_Table = glue("output/review/descriptives/Table1_pre_vaccination_cvd.csv")
     )
-  ),
-  
-  #comment("Stage 2 - events by covariate level)
-  action(
-    name = "stage_2_events_split_by_covariate_level",
-    run = "r:latest analysis/preprocess/covariates_split_by_time_period.R",
-    needs = list("stage1_data_cleaning","stage1_end_date_table"),
-    moderately_sensitive = list(
-      counts_by_covariate_level = "output/not-for-review/event_counts_by_covariate_level_*.csv",
-      selected_covariates = "output/not-for-review/non_zero_selected_covariates_*.csv"
-      
-      )
   ),
   
   #comment("Table 2)
