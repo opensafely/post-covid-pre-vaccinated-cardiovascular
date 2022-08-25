@@ -74,11 +74,11 @@ analyses_to_run <- rbind(analyses_to_run, analyses_to_run_normal_timepoint)
 analyses_to_run$cohort <- cohort
 rm(analyses_to_run_normal_timepoint)
 
-#Remove VTE and PE hospitalied analysis with normal timepoints as this analysis does not run
-if(event_name %in% c("vte","pe")){
-  analyses_to_run <- analyses_to_run %>% filter(subgroup != "covid_pheno_hospitalised" | reduced_timepoint != "normal")
-  
-}
+#Remove hospitalised analysis with normal timepoints as this will be run in stata and we don't need the saved data sets
+#from this.
+
+analyses_to_run <- analyses_to_run %>% filter(subgroup != "covid_pheno_hospitalised" | reduced_timepoint != "normal")
+
 
 # Source remainder of relevant files --------------------------------------------------------
 
