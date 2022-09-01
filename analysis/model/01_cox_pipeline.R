@@ -32,7 +32,7 @@ library(matrixStats)
 args = commandArgs(trailingOnly=TRUE)
 
 if(length(args)==0){
-  event_name="ami"
+  event_name="ate"
 }else{
   event_name  = args[[1]]
 }
@@ -78,7 +78,6 @@ rm(analyses_to_run_normal_timepoint)
 #from this.
 
 analyses_to_run <- analyses_to_run %>% filter(subgroup != "covid_pheno_hospitalised" | reduced_timepoint != "normal")
-
 
 # Source remainder of relevant files --------------------------------------------------------
 
