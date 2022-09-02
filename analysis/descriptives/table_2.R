@@ -21,6 +21,7 @@ fs::dir_create(here::here("output", "review", "descriptives"))
 #pre-vaccination period
 cohort_start <- as.Date("2020-01-01")
 cohort_end <- as.Date("2021-06-18")
+study_length <- as.numeric(cohort_end - cohort_start) +1
 
 agebreaks <- c(0, 40, 60, 80, 111)
 agelabels <- c("18_39", "40_59", "60_79", "80_110")
@@ -262,8 +263,8 @@ table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_b
   # calculate total person days of follow-up
   data_active = data_active %>% mutate(person_days = as.numeric((as.Date(follow_up_end) - as.Date(index_date)))+1)
   
-  data_active = data_active %>% filter((person_days_unexposed >=0 & person_days_unexposed <= 197)
-                                       & (person_days >=0 & person_days <= 197)) # filter out follow up period
+  data_active = data_active %>% filter((person_days_unexposed >=0 & person_days_unexposed <= study_length)
+                                       & (person_days >=0 & person_days <= study_length)) # filter out follow up period
   
   
   person_days_total_unexposed  = round(sum(data_active$person_days_unexposed, na.rm = TRUE),1)
