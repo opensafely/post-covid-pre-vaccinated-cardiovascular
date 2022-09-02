@@ -144,7 +144,7 @@ table_2_subgroups_output <- function(cohort_name){
     
     table2_output <- table_2_calculation(survival_data,
                                          event=analyses_of_interest$event[i],
-                                         cohort=analyses_of_interest$cohort_to_run[i],
+                                         cohort=analyses_of_interest$cohort_name[i],
                                          subgroup=analyses_of_interest$subgroup[i], 
                                          stratify_by=analyses_of_interest$strata[i], 
                                          stratify_by_subgroup=analyses_of_interest$stratify_by_subgroup[i])
