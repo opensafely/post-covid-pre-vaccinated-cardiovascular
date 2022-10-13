@@ -516,14 +516,14 @@ actions:
         medianfup: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
         stata_output: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model.txt
 
-  stata_cox_model_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+  stata_cox_model_tia_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_stroke_tia
+    - Analysis_cox_tia
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model.txt
 
   stata_cox_model_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
@@ -606,14 +606,14 @@ actions:
         medianfup: output/input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
         stata_output: output/input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model.txt
 
-  stata_cox_model_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+  stata_cox_model_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_stroke_tia_primary_position
+    - Analysis_cox_tia_primary_position
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model.txt
 
   stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
@@ -955,7 +955,7 @@ actions:
     - stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_reduced
-    - stata_cox_model_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced
+    - stata_cox_model_tia_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_reduced
@@ -965,7 +965,7 @@ actions:
     - stata_cox_model_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
-    - stata_cox_model_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
+    - stata_cox_model_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
     - stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced
