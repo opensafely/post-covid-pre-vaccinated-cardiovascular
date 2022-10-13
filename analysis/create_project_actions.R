@@ -5,8 +5,6 @@ library(glue)
 library(readr)
 #library(dplyr)
 
-
-
 ###########################
 # Load information to use #
 ###########################
@@ -20,6 +18,13 @@ defaults_list <- list(
 active_analyses <- read_rds("lib/active_analyses.rds")
 active_analyses_table <- subset(active_analyses, active_analyses$active =="TRUE")
 outcomes_model <- active_analyses_table$outcome_variable %>% str_replace("out_date_", "")
+cohort_to_run <- c("pre_vaccination")
+analyses <- c("main", "subgroups")
+analyses_to_run_stata <- read.csv("lib/analyses_to_run_in_stata.csv")
+analyses_to_run_stata <- analyses_to_run_stata[,c("outcome","subgroup","cohort","time_periods")]
+analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="hospitalised","covid_pheno_hospitalised",analyses_to_run_stata$subgroup)
+analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="non_hospitalised","covid_pheno_non_hospitalised",analyses_to_run_stata$subgroup)
+analyses_to_run_stata <- analyses_to_run_stata %>% filter(cohort %in% cohort_to_run)
 
 # create action functions ----
 
@@ -27,13 +32,13 @@ outcomes_model <- active_analyses_table$outcome_variable %>% str_replace("out_da
 ## generic action function #
 ############################
 action <- function(
-  name,
-  run,
-  dummy_data_file=NULL,
-  arguments=NULL,
-  needs=NULL,
-  highly_sensitive=NULL,
-  moderately_sensitive=NULL
+    name,
+    run,
+    dummy_data_file=NULL,
+    arguments=NULL,
+    needs=NULL,
+    highly_sensitive=NULL,
+    moderately_sensitive=NULL
 ){
   
   outputs <- list(
@@ -79,7 +84,8 @@ convert_comment_actions <-function(yaml.txt){
 ## Function for typical actions to analyse data #
 #################################################
 # Updated to a typical action running Cox models for one outcome
-apply_model_function <- function(outcome){
+
+apply_model_function <- function(outcome,cohort){
   splice(
     comment(glue("Apply cox model for {outcome}")),
     action(
@@ -103,12 +109,27 @@ apply_model_function <- function(outcome){
   )
 }
 
+stata_actions <- function(outcome, cohort, subgroup, time_periods){
+  splice(
+    #comment(glue("Stata cox {outcome} {subgroup} {cohort} {time_periods}")),
+    action(
+      name = glue("stata_cox_model_{outcome}_{subgroup}_{cohort}_{time_periods}"),
+      run = "stata-mp:latest analysis/cox_model.do",
+      arguments = c(glue("input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods")),
+      needs = list(glue("Analysis_cox_{outcome}_{cohort}")),
+      moderately_sensitive = list(
+        medianfup = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_stata_median_fup.csv"),
+        stata_output = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_cox_model.txt")
+      )
+    )
+  )
+}
 
 ##########################################################
 ## Define and combine all actions into a list of actions #
 ##########################################################
 actions_list <- splice(
-
+  
   comment("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #",
           "DO NOT EDIT project.yaml DIRECTLY",
           "This file is created by create_project_actions.R",
@@ -149,7 +170,7 @@ actions_list <- splice(
       venn = glue("output/venn.rds")
     )
   ), 
-
+  
   #comment("Stage 1 - Data cleaning"),
   action(
     name = "stage1_data_cleaning",
@@ -175,7 +196,7 @@ actions_list <- splice(
       end_date_table = glue("output/follow_up_end_dates.rds")
     )
   ),
-
+  
   #comment("Stage 2 - Missing - Table 1"),
   action(
     name = "stage2_missing_table1",
@@ -207,12 +228,6 @@ actions_list <- splice(
     moderately_sensitive = list(
       venn_diagram = glue("output/review/venn-diagrams/venn_diagram_*"))
   ),
-
-  #comment("Stage 5 - Apply models"),
-  splice(
-    # over outcomes
-    unlist(lapply(outcomes_model, function(x) apply_model_function(outcome = x)), recursive = FALSE)
-    ),
   
   action(
     name = "event_counts_by_time_period",
@@ -220,17 +235,39 @@ actions_list <- splice(
     needs = list("stage1_data_cleaning", "stage1_end_date_table"),
     moderately_sensitive = list(
       event_counts = "output/review/descriptives/event_counts_by_time_period_pre_vaccination.csv")
+  ),
+  
+  #comment("Stage 5 - Apply models"),
+  splice(
+    # over outcomes
+    unlist(lapply(outcomes_model, function(x) splice(unlist(lapply(cohort_to_run, function(y) apply_model_function(outcome = x, cohort = y)), recursive = FALSE))
+    ),recursive = FALSE)),
+  
+  splice(unlist(lapply(1:nrow(analyses_to_run_stata), 
+                       function(i) stata_actions(outcome = analyses_to_run_stata[i, "outcome"],
+                                                 subgroup = analyses_to_run_stata[i, "subgroup"],
+                                                 cohort = analyses_to_run_stata[i, "cohort"],
+                                                 time_periods = analyses_to_run_stata[i, "time_periods"])),
+                recursive = FALSE)),
+  
+  #comment("Format Stata output")
+  action(
+    name = "format_stata_output",
+    run = "r:latest analysis/format_stata_output.R",
+    needs = paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods),
+    moderately_sensitive = list(
+      stata_output = "output/stata_output.csv")
   )
   
-  )
-  
+)
+
 
 ## combine everything ----
 project_list <- splice(
   defaults_list,
   list(actions = actions_list)
 )
-  
+
 #####################################################################################
 ## convert list to yaml, reformat comments and white space, and output a .yaml file #
 #####################################################################################
