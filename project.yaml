@@ -483,7 +483,7 @@ actions:
   stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_ami_pre_vaccination
+    - Analysis_cox_ami
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -492,7 +492,7 @@ actions:
   stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_stroke_isch_pre_vaccination
+    - Analysis_cox_stroke_isch
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -501,7 +501,7 @@ actions:
   stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_dvt_pre_vaccination
+    - Analysis_cox_dvt
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -510,7 +510,7 @@ actions:
   stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_pe_pre_vaccination
+    - Analysis_cox_pe
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -519,7 +519,7 @@ actions:
   stata_cox_model_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_stroke_tia_pre_vaccination
+    - Analysis_cox_stroke_tia
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -528,7 +528,7 @@ actions:
   stata_cox_model_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_stroke_sah_hs_pre_vaccination
+    - Analysis_cox_stroke_sah_hs
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -537,7 +537,7 @@ actions:
   stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_hf_pre_vaccination
+    - Analysis_cox_hf
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -546,7 +546,7 @@ actions:
   stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_angina_pre_vaccination
+    - Analysis_cox_angina
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -555,7 +555,7 @@ actions:
   stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_ate_pre_vaccination
+    - Analysis_cox_ate
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -564,7 +564,7 @@ actions:
   stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -573,7 +573,7 @@ actions:
   stata_cox_model_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_ami_primary_position_pre_vaccination
+    - Analysis_cox_ami_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -582,7 +582,7 @@ actions:
   stata_cox_model_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_stroke_isch_primary_position_pre_vaccination
+    - Analysis_cox_stroke_isch_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -591,7 +591,7 @@ actions:
   stata_cox_model_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_dvt_primary_position_pre_vaccination
+    - Analysis_cox_dvt_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -600,7 +600,7 @@ actions:
   stata_cox_model_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_pe_primary_position_pre_vaccination
+    - Analysis_cox_pe_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -609,7 +609,7 @@ actions:
   stata_cox_model_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_stroke_tia_primary_position_pre_vaccination
+    - Analysis_cox_stroke_tia_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -618,7 +618,7 @@ actions:
   stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_hf_primary_position_pre_vaccination
+    - Analysis_cox_hf_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -627,7 +627,7 @@ actions:
   stata_cox_model_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_angina_primary_position_pre_vaccination
+    - Analysis_cox_angina_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -636,7 +636,7 @@ actions:
   stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_ate_primary_position_pre_vaccination
+    - Analysis_cox_ate_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -645,7 +645,7 @@ actions:
   stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_vte_primary_position_pre_vaccination
+    - Analysis_cox_vte_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -654,7 +654,7 @@ actions:
   stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_ami_pre_vaccination
+    - Analysis_cox_ami
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -663,7 +663,7 @@ actions:
   stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_stroke_isch_pre_vaccination
+    - Analysis_cox_stroke_isch
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -672,7 +672,7 @@ actions:
   stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_dvt_pre_vaccination
+    - Analysis_cox_dvt
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -681,7 +681,7 @@ actions:
   stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_pe_pre_vaccination
+    - Analysis_cox_pe
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -690,7 +690,7 @@ actions:
   stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_hf_pre_vaccination
+    - Analysis_cox_hf
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -699,7 +699,7 @@ actions:
   stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_angina_pre_vaccination
+    - Analysis_cox_angina
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -708,7 +708,7 @@ actions:
   stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_ate_pre_vaccination
+    - Analysis_cox_ate
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -717,7 +717,7 @@ actions:
   stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -726,7 +726,7 @@ actions:
   stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_hf_primary_position_pre_vaccination
+    - Analysis_cox_hf_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -735,7 +735,7 @@ actions:
   stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_ate_primary_position_pre_vaccination
+    - Analysis_cox_ate_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -744,7 +744,7 @@ actions:
   stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_primary_position_pre_vaccination
+    - Analysis_cox_vte_primary_position
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -753,7 +753,7 @@ actions:
   stata_cox_model_stroke_isch_main_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_main_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_stroke_isch_pre_vaccination
+    - Analysis_cox_stroke_isch
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_isch_main_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -762,7 +762,7 @@ actions:
   stata_cox_model_pe_main_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_main_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_pe_pre_vaccination
+    - Analysis_cox_pe
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_main_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -771,7 +771,7 @@ actions:
   stata_cox_model_stroke_sah_hs_main_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_main_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_stroke_sah_hs_pre_vaccination
+    - Analysis_cox_stroke_sah_hs
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_sah_hs_main_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -780,7 +780,7 @@ actions:
   stata_cox_model_hf_main_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_main_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_hf_pre_vaccination
+    - Analysis_cox_hf
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_main_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -789,7 +789,7 @@ actions:
   stata_cox_model_vte_main_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_main_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_main_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -798,7 +798,7 @@ actions:
   stata_cox_model_pe_covid_pheno_non_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_covid_pheno_non_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_pe_pre_vaccination
+    - Analysis_cox_pe
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_covid_pheno_non_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -807,7 +807,7 @@ actions:
   stata_cox_model_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_stroke_sah_hs_pre_vaccination
+    - Analysis_cox_stroke_sah_hs
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -816,7 +816,7 @@ actions:
   stata_cox_model_ate_sex_Male_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_sex_Male_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_ate_pre_vaccination
+    - Analysis_cox_ate
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_sex_Male_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -825,7 +825,7 @@ actions:
   stata_cox_model_ate_agegp_60_79_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_agegp_60_79_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_ate_pre_vaccination
+    - Analysis_cox_ate
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_agegp_60_79_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -834,7 +834,7 @@ actions:
   stata_cox_model_ate_agegp_80_110_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_agegp_80_110_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_ate_pre_vaccination
+    - Analysis_cox_ate
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_agegp_80_110_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -843,7 +843,7 @@ actions:
   stata_cox_model_vte_sex_Female_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_sex_Female_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_sex_Female_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -852,7 +852,7 @@ actions:
   stata_cox_model_vte_sex_Male_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_sex_Male_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_sex_Male_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -861,7 +861,7 @@ actions:
   stata_cox_model_vte_agegp_40_59_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_40_59_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_agegp_40_59_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -870,7 +870,7 @@ actions:
   stata_cox_model_vte_agegp_60_79_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_60_79_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -879,7 +879,7 @@ actions:
   stata_cox_model_vte_agegp_60_79_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -888,7 +888,7 @@ actions:
   stata_cox_model_vte_agegp_80_110_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_80_110_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_agegp_80_110_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -897,7 +897,7 @@ actions:
   stata_cox_model_vte_ethnicity_White_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_ethnicity_White_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_ethnicity_White_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -906,7 +906,7 @@ actions:
   stata_cox_model_vte_ethnicity_South_Asian_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_ethnicity_South_Asian_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_ethnicity_South_Asian_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -915,7 +915,7 @@ actions:
   stata_cox_model_vte_ethnicity_Other_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_ethnicity_Other_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_ethnicity_Other_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -924,7 +924,7 @@ actions:
   stata_cox_model_vte_ethnicity_Other_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_ethnicity_Other_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_ethnicity_Other_pre_vaccination_reduced_time_periods_stata_median_fup.csv
@@ -933,7 +933,7 @@ actions:
   stata_cox_model_vte_prior_history_FALSE_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_prior_history_FALSE_pre_vaccination_normal_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_prior_history_FALSE_pre_vaccination_normal_time_periods_stata_median_fup.csv
@@ -942,7 +942,7 @@ actions:
   stata_cox_model_vte_aer_Male_60_79_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_aer_Male_60_79_pre_vaccination_reduced_time_periods
     needs:
-    - Analysis_cox_vte_pre_vaccination
+    - Analysis_cox_vte
     outputs:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_aer_Male_60_79_pre_vaccination_reduced_time_periods_stata_median_fup.csv
