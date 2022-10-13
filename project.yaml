@@ -822,23 +822,23 @@ actions:
         medianfup: output/input_sampled_data_ate_sex_Male_pre_vaccination_normal_time_periods_stata_median_fup.csv
         stata_output: output/input_sampled_data_ate_sex_Male_pre_vaccination_normal_time_periods_cox_model.txt
 
-  stata_cox_model_ate_age_60_79_pre_vaccination_normal:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_age_60_79_pre_vaccination_normal_time_periods
+  stata_cox_model_ate_agegp_60_79_pre_vaccination_normal:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_agegp_60_79_pre_vaccination_normal_time_periods
     needs:
     - Analysis_cox_ate_pre_vaccination
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_ate_age_60_79_pre_vaccination_normal_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_ate_age_60_79_pre_vaccination_normal_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_ate_agegp_60_79_pre_vaccination_normal_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_ate_agegp_60_79_pre_vaccination_normal_time_periods_cox_model.txt
 
-  stata_cox_model_ate_age_80_110_pre_vaccination_normal:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_age_80_110_pre_vaccination_normal_time_periods
+  stata_cox_model_ate_agegp_80_110_pre_vaccination_normal:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_agegp_80_110_pre_vaccination_normal_time_periods
     needs:
     - Analysis_cox_ate_pre_vaccination
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_ate_age_80_110_pre_vaccination_normal_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_ate_age_80_110_pre_vaccination_normal_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_ate_agegp_80_110_pre_vaccination_normal_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_ate_agegp_80_110_pre_vaccination_normal_time_periods_cox_model.txt
 
   stata_cox_model_vte_sex_Female_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_sex_Female_pre_vaccination_normal_time_periods
@@ -858,41 +858,41 @@ actions:
         medianfup: output/input_sampled_data_vte_sex_Male_pre_vaccination_normal_time_periods_stata_median_fup.csv
         stata_output: output/input_sampled_data_vte_sex_Male_pre_vaccination_normal_time_periods_cox_model.txt
 
-  stata_cox_model_vte_age_40_59_pre_vaccination_normal:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_age_40_59_pre_vaccination_normal_time_periods
+  stata_cox_model_vte_agegp_40_59_pre_vaccination_normal:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_40_59_pre_vaccination_normal_time_periods
     needs:
     - Analysis_cox_vte_pre_vaccination
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_vte_age_40_59_pre_vaccination_normal_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_vte_age_40_59_pre_vaccination_normal_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_vte_agegp_40_59_pre_vaccination_normal_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_vte_agegp_40_59_pre_vaccination_normal_time_periods_cox_model.txt
 
-  stata_cox_model_vte_age_60_79_pre_vaccination_normal:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_age_60_79_pre_vaccination_normal_time_periods
+  stata_cox_model_vte_agegp_60_79_pre_vaccination_normal:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_60_79_pre_vaccination_normal_time_periods
     needs:
     - Analysis_cox_vte_pre_vaccination
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_vte_age_60_79_pre_vaccination_normal_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_vte_age_60_79_pre_vaccination_normal_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_normal_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_normal_time_periods_cox_model.txt
 
-  stata_cox_model_vte_age_60_79_pre_vaccination_reduced:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_age_60_79_pre_vaccination_reduced_time_periods
+  stata_cox_model_vte_agegp_60_79_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods
     needs:
     - Analysis_cox_vte_pre_vaccination
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_vte_age_60_79_pre_vaccination_reduced_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_vte_age_60_79_pre_vaccination_reduced_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods_cox_model.txt
 
-  stata_cox_model_vte_age_80_110_pre_vaccination_normal:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_age_80_110_pre_vaccination_normal_time_periods
+  stata_cox_model_vte_agegp_80_110_pre_vaccination_normal:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_80_110_pre_vaccination_normal_time_periods
     needs:
     - Analysis_cox_vte_pre_vaccination
     outputs:
       moderately_sensitive:
-        medianfup: output/input_sampled_data_vte_age_80_110_pre_vaccination_normal_time_periods_stata_median_fup.csv
-        stata_output: output/input_sampled_data_vte_age_80_110_pre_vaccination_normal_time_periods_cox_model.txt
+        medianfup: output/input_sampled_data_vte_agegp_80_110_pre_vaccination_normal_time_periods_stata_median_fup.csv
+        stata_output: output/input_sampled_data_vte_agegp_80_110_pre_vaccination_normal_time_periods_cox_model.txt
 
   stata_cox_model_vte_ethnicity_White_pre_vaccination_normal:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_ethnicity_White_pre_vaccination_normal_time_periods
@@ -989,14 +989,14 @@ actions:
     - stata_cox_model_pe_covid_pheno_non_hospitalised_pre_vaccination_normal
     - stata_cox_model_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_normal
     - stata_cox_model_ate_sex_Male_pre_vaccination_normal
-    - stata_cox_model_ate_age_60_79_pre_vaccination_normal
-    - stata_cox_model_ate_age_80_110_pre_vaccination_normal
+    - stata_cox_model_ate_agegp_60_79_pre_vaccination_normal
+    - stata_cox_model_ate_agegp_80_110_pre_vaccination_normal
     - stata_cox_model_vte_sex_Female_pre_vaccination_normal
     - stata_cox_model_vte_sex_Male_pre_vaccination_normal
-    - stata_cox_model_vte_age_40_59_pre_vaccination_normal
-    - stata_cox_model_vte_age_60_79_pre_vaccination_normal
-    - stata_cox_model_vte_age_60_79_pre_vaccination_reduced
-    - stata_cox_model_vte_age_80_110_pre_vaccination_normal
+    - stata_cox_model_vte_agegp_40_59_pre_vaccination_normal
+    - stata_cox_model_vte_agegp_60_79_pre_vaccination_normal
+    - stata_cox_model_vte_agegp_60_79_pre_vaccination_reduced
+    - stata_cox_model_vte_agegp_80_110_pre_vaccination_normal
     - stata_cox_model_vte_ethnicity_White_pre_vaccination_normal
     - stata_cox_model_vte_ethnicity_South_Asian_pre_vaccination_normal
     - stata_cox_model_vte_ethnicity_Other_pre_vaccination_normal
