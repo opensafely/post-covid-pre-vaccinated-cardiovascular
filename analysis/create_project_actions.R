@@ -84,7 +84,8 @@ convert_comment_actions <-function(yaml.txt){
 ## Function for typical actions to analyse data #
 #################################################
 # Updated to a typical action running Cox models for one outcome
-apply_model_function <- function(outcome){
+
+apply_model_function <- function(outcome,cohort){
   splice(
     comment(glue("Apply cox model for {outcome}")),
     action(
@@ -229,10 +230,10 @@ actions_list <- splice(
   ),
   
   #comment("Stage 5 - Apply models"),
-  splice(
+  #splice(
     # over outcomes
-    unlist(lapply(outcomes_model, function(x) apply_model_function(outcome = x)), recursive = FALSE)
-  ),
+   # unlist(lapply(outcomes_model, function(x) splice(unlist(lapply(cohort_to_run, function(y) apply_model_function(outcome = x, cohort = y)), recursive = FALSE))
+    #),recursive = FALSE)),
   
   action(
     name = "event_counts_by_time_period",
