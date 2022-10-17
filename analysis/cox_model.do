@@ -176,12 +176,12 @@ mkspline age_spline = age, cubic knots(`r(c_1)' `r(c_2)' `r(c_3)')
 
 * Apply stset // including IPW here as if unsampled dataset will be 1
 
-stset follow_up_end [pweight=cox_weights], failure(outcome_status) id(patient_id) enter(follow_up_start) origin(time mdy(06,01,2021))
-stsplit days, after(exposure_date) at(0 28 197)
+stset follow_up_end  [pweight=cox_weights], failure(outcome_status) id(patient_id) enter(follow_up_start) origin(time mdy(01,01,2020))
+stsplit days, after(exposure_date) at(0 28 197 535)
 
 * Calculate study follow up
 
-replace days = 197 if days==-1
+replace days = 535 if days==-1
 gen follow_up = _t - _t0
 egen follow_up_total = total(follow_up)  
 
@@ -195,6 +195,10 @@ gen days28_197 = 0
 replace days28_197 = 1 if days==28
 tab days28_197
 
+gen days197_535 = 0
+replace days197_535 = 1 if days==197
+tab days197_535
+
 * Run models and save output [Note: cannot use efron method with weights]
 
 tab days outcome_status 
@@ -202,9 +206,9 @@ tab days outcome_status
 di "Total follow-up in days: " follow_up_total
 bysort days: summarize(follow_up), detail
 
-stcox days0_28 days28_197 i.sex age_spline1 age_spline2, strata(region) vce(r)
+stcox days0_28 days28_197 days197_535 i.sex age_spline1 age_spline2, strata(region) vce(r)
 est store min, title(Age_Sex)
-stcox days0_28 days28_197 i.sex age_spline1 age_spline2 i.cov_cat_ethnicity i.cov_cat_deprivation i.cov_cat_smoking_status cov_num_consulation_rate cov_bin_*, strata(region) vce(r)
+stcox days0_28 days28_197 days197_535 i.sex age_spline1 age_spline2 i.cov_cat_ethnicity i.cov_cat_deprivation i.cov_cat_smoking_status cov_num_consulation_rate cov_bin_*, strata(region) vce(r)
 est store max, title(Maximal)
 
 estout * using "output/`cpf'_cox_model.txt", cells("b se t ci_l ci_u p") stats(risk N_fail N_sub N N_clust) replace 
@@ -212,14 +216,16 @@ estout * using "output/`cpf'_cox_model.txt", cells("b se t ci_l ci_u p") stats(r
 * Calculate median follow-up
 
 keep if outcome_status==1
-drop if days0_28==0 & days28_197==0
-keep patient_id days0_28 days28_197 follow_up
+keep patient_id days0_28 days28_197 days197_535 follow_up
+drop if days0_28==0 & days28_197==0 & days197_535==0
 
 gen term = ""
-replace term = "days0_28" if days0_28==1 & days28_197==0
-replace term = "days28_197" if days0_28==0 & days28_197==1
+replace term = "days0_28" if days0_28==1 & days28_197==0 & days197_535==0
+replace term = "days28_197" if days0_28==0 & days28_197==1 & days197_535==0
+replace term = "days197_535" if days0_28==0 & days28_197==0 & days197_535==1
 
 replace follow_up = follow_up + 28 if term == "days28_197"
+replace follow_up = follow_up + 197 if term == "days197_535"
 bysort term: egen medianfup = median(follow_up)
 
 keep term medianfup
