@@ -250,11 +250,23 @@ actions_list <- splice(
                                                  time_periods = analyses_to_run_stata[i, "time_periods"])),
                 recursive = FALSE)),
   
-  #comment("Format Stata output")
   action(
     name = "format_stata_output",
     run = "r:latest analysis/format_stata_output.R",
-    needs = paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods),
+    needs = 
+      setdiff(paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods),
+              c("stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_normal",
+                "stata_cox_model_vte_ethnicity_Other_pre_vaccination_normal",
+                "stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_normal")),
     moderately_sensitive = list(
       stata_output = "output/stata_output.csv")
   )
