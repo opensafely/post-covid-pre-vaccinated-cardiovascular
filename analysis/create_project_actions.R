@@ -24,7 +24,8 @@ analyses_to_run_stata <- read.csv("lib/analyses_to_run_in_stata.csv")
 analyses_to_run_stata <- analyses_to_run_stata[,c("outcome","subgroup","cohort","time_periods")]
 analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="hospitalised","covid_pheno_hospitalised",analyses_to_run_stata$subgroup)
 analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="non_hospitalised","covid_pheno_non_hospitalised",analyses_to_run_stata$subgroup)
-analyses_to_run_stata <- analyses_to_run_stata %>% filter(cohort %in% cohort_to_run)
+analyses_to_run_stata <- analyses_to_run_stata %>% filter(cohort %in% cohort_to_run
+                                                          & time_periods == "reduced")
 
 # create action functions ----
 
@@ -253,20 +254,7 @@ actions_list <- splice(
   action(
     name = "format_stata_output",
     run = "r:latest analysis/format_stata_output.R",
-    needs = 
-      setdiff(paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods),
-              c("stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_normal",
-                "stata_cox_model_vte_ethnicity_Other_pre_vaccination_normal",
-                "stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_normal")),
+    needs = paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods),
     moderately_sensitive = list(
       stata_output = "output/stata_output.csv")
   )
