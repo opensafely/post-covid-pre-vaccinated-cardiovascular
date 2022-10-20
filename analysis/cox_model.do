@@ -44,7 +44,6 @@ foreach var of varlist `r(varlist)' {
 	replace `var' = "" if `var' == "NA"
 }
 
-	
 * Reformat variables
 
 foreach var of varlist exposure_date outcome_date follow_up_start follow_up_end {
@@ -57,8 +56,6 @@ foreach var of varlist exposure_date outcome_date follow_up_start follow_up_end 
 	drop `var' tmp_date* year month day
 	rename `var'_tmp `var'
 }
-
-misstable summarize
 
 * Shorten covariate names
 
@@ -138,7 +135,7 @@ rename ethnicity_tmp cov_cat_ethnicity
 
 gen cov_cat_deprivation_tmp = .
 replace cov_cat_deprivation_tmp = 1 if cov_cat_deprivation=="1-2 (most deprived)"
-replace cov_cat_deprivation_tmp = 2 if cov_cat_deprivation=="2-4"
+replace cov_cat_deprivation_tmp = 2 if cov_cat_deprivation=="3-4"
 replace cov_cat_deprivation_tmp = 3 if cov_cat_deprivation=="5-6"
 replace cov_cat_deprivation_tmp = 4 if cov_cat_deprivation=="7-8"
 replace cov_cat_deprivation_tmp = 5 if cov_cat_deprivation=="9-10 (least deprived)"
@@ -158,6 +155,10 @@ lab def cov_cat_smoking_status_tmp 1 "Never smoker" 2 "Ever smoker" 3 "Current s
 lab val cov_cat_smoking_status_tmp cov_cat_smoking_status_tmp
 drop cov_cat_smoking_status
 rename cov_cat_smoking_status_tmp cov_cat_smoking_status 
+	
+* Summarize missingness following recoding
+
+misstable summarize	
 	
 * Make failure variable
 
