@@ -100,7 +100,7 @@ apply_model_function <- function(outcome,cohort){
         compiled_hrs_csv_to_release = glue("output/review/model/suppressed_compiled_HR_results_{outcome}_pre_vaccination_to_release.csv"),
         compiled_event_counts_csv = glue("output/review/model/suppressed_compiled_event_counts_{outcome}_pre_vaccination.csv"),
         compiled_event_counts_csv_non_supressed = glue("output/review/model/compiled_event_counts_{outcome}_pre_vaccination.csv"),
-        describe_data_surv = glue("output/not-for-review/describe_data_surv_{outcome}_*_time_periods.txt")
+        describe_data_surv = glue("output/not-for-review/describe_{outcome}_*_time_periods.txt")
       ),
       highly_sensitive = list(
         sampled_data = glue("output/input_sampled_data_{outcome}_*_{cohort}_*_time_periods.csv"),

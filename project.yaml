@@ -114,7 +114,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ami_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ami_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ami_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ami_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ami_*_pre_vaccination_*_time_periods.csv
@@ -133,7 +133,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_isch_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_isch_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_isch_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_isch_*_pre_vaccination_*_time_periods.csv
@@ -152,7 +152,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_dvt_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_dvt_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_dvt_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_dvt_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_dvt_*_pre_vaccination_*_time_periods.csv
@@ -171,7 +171,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_pe_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_pe_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_pe_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_pe_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_pe_*_pre_vaccination_*_time_periods.csv
@@ -190,7 +190,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_tia_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_tia_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_tia_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_tia_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_tia_*_pre_vaccination_*_time_periods.csv
@@ -209,7 +209,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_sah_hs_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_sah_hs_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_sah_hs_*_pre_vaccination_*_time_periods.csv
@@ -228,7 +228,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_hf_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_hf_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_hf_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_hf_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_hf_*_pre_vaccination_*_time_periods.csv
@@ -247,7 +247,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_angina_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_angina_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_angina_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_angina_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_angina_*_pre_vaccination_*_time_periods.csv
@@ -266,7 +266,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ami_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ami_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ami_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ami_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ami_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -285,7 +285,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_isch_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_isch_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_isch_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_isch_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -304,7 +304,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_dvt_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_dvt_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_dvt_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_dvt_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_dvt_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -323,7 +323,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_pe_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_pe_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_pe_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_pe_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_pe_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -342,7 +342,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_tia_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_tia_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_tia_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_tia_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_tia_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -361,7 +361,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_sah_hs_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_sah_hs_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_sah_hs_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -380,7 +380,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_hf_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_hf_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_hf_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_hf_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_hf_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -399,7 +399,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_angina_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_angina_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_angina_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_angina_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_angina_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -418,7 +418,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ate_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ate_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ate_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ate_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ate_*_pre_vaccination_*_time_periods.csv
@@ -437,7 +437,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_vte_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_vte_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_vte_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_vte_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_vte_*_pre_vaccination_*_time_periods.csv
@@ -456,7 +456,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ate_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ate_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ate_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ate_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ate_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -475,7 +475,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_vte_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_vte_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_vte_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_vte_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_vte_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -494,7 +494,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ami_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ami_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ami_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ami_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ami_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -513,7 +513,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_isch_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_isch_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_isch_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_isch_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -532,7 +532,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_dvt_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_dvt_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_dvt_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_dvt_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_dvt_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -551,7 +551,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_pe_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_pe_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_pe_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_pe_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_pe_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -570,7 +570,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_tia_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_tia_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_tia_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_tia_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_tia_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -589,7 +589,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_sah_hs_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_sah_hs_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_sah_hs_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -608,7 +608,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_hf_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_hf_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_hf_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_hf_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_hf_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -627,7 +627,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_angina_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_angina_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_angina_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_angina_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_angina_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -646,7 +646,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ami_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ami_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ami_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ami_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ami_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -665,7 +665,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_isch_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_isch_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_isch_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -684,7 +684,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_dvt_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_dvt_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_dvt_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_dvt_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_dvt_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -703,7 +703,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_pe_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_pe_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_pe_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_pe_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_pe_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -722,7 +722,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_tia_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_tia_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_tia_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_tia_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_tia_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -741,7 +741,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_stroke_sah_hs_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_stroke_sah_hs_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_stroke_sah_hs_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -760,7 +760,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_hf_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_hf_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_hf_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_hf_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_hf_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -779,7 +779,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_angina_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_angina_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_angina_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_angina_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_angina_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -798,7 +798,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ate_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ate_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ate_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ate_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ate_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -817,7 +817,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_vte_primary_position_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_primary_position_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_primary_position_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_vte_primary_position_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_vte_primary_position_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_vte_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_vte_primary_position_*_pre_vaccination_*_time_periods.csv
@@ -836,7 +836,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ate_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_ate_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_ate_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_ate_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_ate_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
@@ -855,7 +855,7 @@ actions:
         compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_vte_primary_position_extended_follow_up_pre_vaccination_to_release.csv
         compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_primary_position_extended_follow_up_pre_vaccination.csv
         compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_primary_position_extended_follow_up_pre_vaccination.csv
-        describe_data_surv: output/not-for-review/describe_data_surv_vte_primary_position_extended_follow_up_*_time_periods.txt
+        describe_data_surv: output/not-for-review/describe_vte_primary_position_extended_follow_up_*_time_periods.txt
       highly_sensitive:
         sampled_data: output/input_sampled_data_vte_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_vte_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
