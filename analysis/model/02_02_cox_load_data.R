@@ -54,6 +54,8 @@ agelabels_strata <- c("18_39", "40_59", "60_79", "80_110")
 
 cuts_days_since_expo <- c(7, 14, 28, 56, 84, 197,535) 
 cuts_days_since_expo_reduced <- c(28,197,535)
+cuts_days_since_expo_day_zero <- c(1,7, 14, 28, 56, 84, 197,535) 
+cuts_days_since_expo_reduced_day_zero <- c(1,28,197,535)
 
 #These are the study start and end dates for the pre-vaccination period
 cohort_start_date <- as.Date("2020-01-01")
