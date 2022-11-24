@@ -53,10 +53,18 @@ agelabels_strata <- c("18_39", "40_59", "60_79", "80_110")
 #Used to split time since COVID exposure; when there are time periods with no events then
 #a reduced number of time periods is used (need 197 instead of 196 as time periods are split using [ , ) 
 
-cuts_days_since_expo <- c(7, 14, 28, 56, 84, 197,535) 
-cuts_days_since_expo_reduced <- c(28,197,535)
-cuts_days_since_expo_day_zero <- c(1,7, 14, 28, 56, 84, 197,535) 
-cuts_days_since_expo_reduced_day_zero <- c(1,28,197,535)
+if(grepl("extended_follow_up",event_name)){
+  cuts_days_since_expo <- c(7, 14, 28, 56, 84, 197,365,714) 
+  cuts_days_since_expo_reduced <- c(28,197,365,714)
+  cuts_days_since_expo_day_zero <- c(1,7, 14, 28, 56, 84, 197,365,714) 
+  cuts_days_since_expo_reduced_day_zero <- c(1,28,197,365,714)
+}else{
+  cuts_days_since_expo <- c(7, 14, 28, 56, 84, 197,535) 
+  cuts_days_since_expo_reduced <- c(28,197,535)
+  cuts_days_since_expo_day_zero <- c(1,7, 14, 28, 56, 84, 197,535) 
+  cuts_days_since_expo_reduced_day_zero <- c(1,28,197,535)
+}
+
 
 #These are the study start and end dates for the pre-vaccination period
 cohort_start_date <- as.Date("2020-01-01")

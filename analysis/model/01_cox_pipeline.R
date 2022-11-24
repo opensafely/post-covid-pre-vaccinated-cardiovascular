@@ -53,10 +53,6 @@ source(file.path(scripts_dir,"02_02_cox_load_data.R")) # Prepare dataset for mod
 source(file.path(scripts_dir,"06_cox_extra_functions.R"))
 
 # Add time point parameter to analyses to run  ----------------------------
-event=analyses_to_run$event[1]
-subgroup=analyses_to_run$subgroup[1]
-stratify_by_subgroup=analyses_to_run$stratify_by_subgroup[1]
-stratify_by=analyses_to_run$strata[1]
 source(file.path(scripts_dir,"02_03_cox_timepoint_param.R")) # Prepare dataset for model
 
 analyses_to_run$reduced_timepoint <- lapply(split(analyses_to_run,seq(nrow(analyses_to_run))),
