@@ -29,11 +29,12 @@ input <- input %>% select(all_of(read_in_cols))
 
 end_dates <- read_rds(paste0("output/follow_up_end_dates.rds"))
 end_dates <- end_dates[,c("patient_id",
-                          colnames(end_dates)[grepl(paste0(event_name,"_follow_up_end"),colnames(end_dates))],
-                          colnames(end_dates)[grepl(paste0(event_name,"_hospitalised_follow_up_end"),colnames(end_dates))],
-                          colnames(end_dates)[grepl(paste0(event_name,"_non_hospitalised_follow_up_end"),colnames(end_dates))],
-                          colnames(end_dates)[grepl(paste0(event_name,"_hospitalised_date_expo_censor"),colnames(end_dates))],
-                          colnames(end_dates)[grepl(paste0(event_name,"_non_hospitalised_date_expo_censor"),colnames(end_dates))])] 
+                          paste0(event_name,"_follow_up_end"),
+                          paste0(event_name,"_follow_up_end_exposure_period"),
+                          paste0(event_name,"_hospitalised_follow_up_end"),
+                          paste0(event_name,"_non_hospitalised_follow_up_end"),
+                          paste0(event_name,"_hospitalised_date_expo_censor"),
+                          paste0(event_name,"_non_hospitalised_date_expo_censor"))] 
 
 
 input <- input %>% left_join(end_dates, by = "patient_id")
@@ -60,6 +61,7 @@ cuts_days_since_expo_reduced_day_zero <- c(1,28,197,535)
 #These are the study start and end dates for the pre-vaccination period
 cohort_start_date <- as.Date("2020-01-01")
 cohort_end_date <- as.Date("2021-06-18")
+cohort_end_date_extended <- as.Date("2021-12-14")
 
 #Rename input variable names (by renaming here it means that these scripts can be used for other datasets without
 ## having to keep updating all the variable names throughout the following scripts)
@@ -72,12 +74,13 @@ setnames(input,
                  "cov_cat_region",
                  "index_date",
                  "cov_cat_ethnicity",
-                 c(paste0("out_date_", event_name)),
-                 c(paste0(event_name,"_follow_up_end")),
-                 c(paste0(event_name,"_hospitalised_follow_up_end")),
-                 c(paste0(event_name,"_non_hospitalised_follow_up_end")),
-                 c(paste0(event_name,"_hospitalised_date_expo_censor")),
-                 c(paste0(event_name,"_non_hospitalised_date_expo_censor"))),
+                 paste0("out_date_", event_name),
+                 paste0(event_name,"_follow_up_end"),
+                 paste0(event_name,"_follow_up_end_exposure_period"),
+                 paste0(event_name,"_hospitalised_follow_up_end"),
+                 paste0(event_name,"_non_hospitalised_follow_up_end"),
+                 paste0(event_name,"_hospitalised_date_expo_censor"),
+                 paste0(event_name,"_non_hospitalised_date_expo_censor")),
          
          new = c("DATE_OF_DEATH", 
                  "sex",
@@ -89,6 +92,7 @@ setnames(input,
                  "ethnicity",
                  "event_date",
                  "follow_up_end",
+                 "follow_up_end_exposure_period",
                  "hospitalised_follow_up_end",
                  "non_hospitalised_follow_up_end",
                  "hospitalised_censor_date",
@@ -110,6 +114,7 @@ cohort_cols <- c("patient_id",
                  "follow_up_start",
                  "event_date",
                  "follow_up_end",
+                 "follow_up_end_exposure_period",
                  "hospitalised_follow_up_end",
                  "non_hospitalised_follow_up_end",
                  "hospitalised_censor_date",

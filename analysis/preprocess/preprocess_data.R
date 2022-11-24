@@ -72,6 +72,15 @@ df <- df %>%
                          ifelse(is.na(exp_date_covid19_confirmed), "no_infection", NA)))) %>%
   mutate(across(sub_cat_covid19_hospital, factor))
 
+# Create extended follow up outcome columns
+
+active_analyses <- read_rds("lib/active_analyses.rds")
+active_analyses <- active_analyses %>% filter(!outcome_variable %in% outcome_variable[grepl("extended_follow_up", outcome_variable)])
+
+for(i in 1:nrow(active_analyses)){
+  outcome <- active_analyses$outcome_variable[i]
+  df[,paste0(outcome,"_extended_follow_up")] <- df[,outcome]
+}
 
 # Restrict columns and save analysis dataset ---------------------------------
 
@@ -83,8 +92,9 @@ df1 <- df %>%
   dplyr::select(-contains("df_out_")) %>%
   dplyr::select(-contains("tmp_"))
 
-# Describe data --------------------------------------------------------------
 
+
+# Describe data --------------------------------------------------------------
 sink(paste0("output/not-for-review/describe_input_stage0.txt"))
 print(Hmisc::describe(df1))
 sink()
