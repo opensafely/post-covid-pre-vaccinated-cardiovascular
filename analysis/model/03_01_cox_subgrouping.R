@@ -96,7 +96,7 @@ get_vacc_res <- function(event,subgroup,stratify_by_subgroup,stratify_by,time_po
   
   
   survival_data=survival_data%>%filter(follow_up_end>=follow_up_start)
-  total_covid_cases <- length(survival_data$expo_date)
+  total_covid_cases <- nrow(survival_data %>% filter(!is.na(expo_date)))
   
   # add statement for reduced time cutoffs
   if(time_point == "reduced"){

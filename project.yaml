@@ -252,6 +252,158 @@ actions:
         sampled_data: output/input_sampled_data_angina_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_angina_*_pre_vaccination_*_time_periods.csv
 
+  ## Apply cox model for ami_extended_follow_up 
+
+  Analysis_cox_ami_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R ami_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_ami_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_ami_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ami_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_ami_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ami_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ami_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for stroke_isch_extended_follow_up 
+
+  Analysis_cox_stroke_isch_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R stroke_isch_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_stroke_isch_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_stroke_isch_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_isch_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_isch_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_isch_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for dvt_extended_follow_up 
+
+  Analysis_cox_dvt_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R dvt_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_dvt_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_dvt_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_dvt_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_dvt_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_dvt_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_dvt_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for pe_extended_follow_up 
+
+  Analysis_cox_pe_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R pe_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_pe_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_pe_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_pe_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_pe_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_pe_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_pe_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for tia_extended_follow_up 
+
+  Analysis_cox_tia_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R tia_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_tia_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_tia_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_tia_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_tia_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_tia_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_tia_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for stroke_sah_hs_extended_follow_up 
+
+  Analysis_cox_stroke_sah_hs_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R stroke_sah_hs_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_stroke_sah_hs_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_sah_hs_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_sah_hs_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for hf_extended_follow_up 
+
+  Analysis_cox_hf_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R hf_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_hf_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_hf_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_hf_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_hf_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_hf_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_hf_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for angina_extended_follow_up 
+
+  Analysis_cox_angina_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R angina_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_angina_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_angina_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_angina_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_angina_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_angina_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_angina_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
   ## Apply cox model for ate 
 
   Analysis_cox_ate:
@@ -289,6 +441,44 @@ actions:
       highly_sensitive:
         sampled_data: output/input_sampled_data_vte_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_vte_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for ate_extended_follow_up 
+
+  Analysis_cox_ate_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R ate_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_ate_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_ate_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ate_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_ate_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ate_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ate_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for vte_extended_follow_up 
+
+  Analysis_cox_vte_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R vte_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_vte_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_vte_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_vte_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_vte_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_vte_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_vte_extended_follow_up_*_pre_vaccination_*_time_periods.csv
 
   ## Apply cox model for ami_primary_position 
 
@@ -442,6 +632,158 @@ actions:
         sampled_data: output/input_sampled_data_angina_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_angina_primary_position_*_pre_vaccination_*_time_periods.csv
 
+  ## Apply cox model for ami_primary_position_extended_follow_up 
+
+  Analysis_cox_ami_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R ami_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_ami_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_ami_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ami_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ami_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ami_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_ami_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ami_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ami_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for stroke_isch_primary_position_extended_follow_up 
+
+  Analysis_cox_stroke_isch_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R stroke_isch_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_stroke_isch_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_stroke_isch_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_isch_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_isch_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_isch_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_stroke_isch_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_isch_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for dvt_primary_position_extended_follow_up 
+
+  Analysis_cox_dvt_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R dvt_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_dvt_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_dvt_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_dvt_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_dvt_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_dvt_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_dvt_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_dvt_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_dvt_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for pe_primary_position_extended_follow_up 
+
+  Analysis_cox_pe_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R pe_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_pe_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_pe_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_pe_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_pe_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_pe_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_pe_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_pe_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_pe_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for tia_primary_position_extended_follow_up 
+
+  Analysis_cox_tia_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R tia_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_tia_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_tia_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_tia_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_tia_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_tia_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_tia_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_tia_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_tia_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for stroke_sah_hs_primary_position_extended_follow_up 
+
+  Analysis_cox_stroke_sah_hs_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R stroke_sah_hs_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_stroke_sah_hs_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_stroke_sah_hs_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_stroke_sah_hs_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_stroke_sah_hs_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for hf_primary_position_extended_follow_up 
+
+  Analysis_cox_hf_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R hf_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_hf_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_hf_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_hf_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_hf_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_hf_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_hf_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_hf_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_hf_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for angina_primary_position_extended_follow_up 
+
+  Analysis_cox_angina_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R angina_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_angina_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_angina_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_angina_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_angina_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_angina_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_angina_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_angina_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_angina_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
   ## Apply cox model for ate_primary_position 
 
   Analysis_cox_ate_primary_position:
@@ -479,6 +821,44 @@ actions:
       highly_sensitive:
         sampled_data: output/input_sampled_data_vte_primary_position_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_vte_primary_position_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for ate_primary_position_extended_follow_up 
+
+  Analysis_cox_ate_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R ate_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_ate_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_ate_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_ate_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_ate_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_ate_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_ate_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_ate_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_ate_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+
+  ## Apply cox model for vte_primary_position_extended_follow_up 
+
+  Analysis_cox_vte_primary_position_extended_follow_up:
+    run: r:latest analysis/model/01_cox_pipeline.R vte_primary_position_extended_follow_up
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        analyses_not_run: output/review/model/analyses_not_run_vte_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv: output/review/model/suppressed_compiled_HR_results_vte_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_hrs_csv_to_release: output/review/model/suppressed_compiled_HR_results_vte_primary_position_extended_follow_up_pre_vaccination_to_release.csv
+        compiled_event_counts_csv: output/review/model/suppressed_compiled_event_counts_vte_primary_position_extended_follow_up_pre_vaccination.csv
+        compiled_event_counts_csv_non_supressed: output/review/model/compiled_event_counts_vte_primary_position_extended_follow_up_pre_vaccination.csv
+        describe_data_surv: output/not-for-review/describe_data_surv_vte_primary_position_extended_follow_up_*_time_periods.txt
+      highly_sensitive:
+        sampled_data: output/input_sampled_data_vte_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
+        cox_input_data: output/input_vte_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
 
   stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
