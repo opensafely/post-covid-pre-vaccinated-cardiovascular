@@ -32,7 +32,7 @@ library(matrixStats)
 args = commandArgs(trailingOnly=TRUE)
 
 if(length(args)==0){
-  event_name="ate"
+  event_name="ate_extended_follow_up"
 }else{
   event_name  = args[[1]]
 }
@@ -53,7 +53,6 @@ source(file.path(scripts_dir,"02_02_cox_load_data.R")) # Prepare dataset for mod
 source(file.path(scripts_dir,"06_cox_extra_functions.R"))
 
 # Add time point parameter to analyses to run  ----------------------------
-
 source(file.path(scripts_dir,"02_03_cox_timepoint_param.R")) # Prepare dataset for model
 
 analyses_to_run$reduced_timepoint <- lapply(split(analyses_to_run,seq(nrow(analyses_to_run))),
@@ -63,7 +62,7 @@ analyses_to_run$reduced_timepoint <- lapply(split(analyses_to_run,seq(nrow(analy
                                                 subgroup=analyses_to_run$subgroup,
                                                 stratify_by_subgroup=analyses_to_run$stratify_by_subgroup,
                                                 stratify_by=analyses_to_run$strata,
-                                                input, cuts_days_since_expo,cuts_days_since_expo_reduced)
+                                                input)
 )
 
 analyses_to_run$reduced_timepoint <-  as.character(analyses_to_run$reduced_timepoint)

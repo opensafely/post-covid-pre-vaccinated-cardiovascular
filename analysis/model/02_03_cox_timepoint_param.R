@@ -5,7 +5,7 @@
 ## =============================================================================
 # source(file.path(scripts_dir,"fit_model.R"))
 
-get_timepoint <- function(event,subgroup,stratify_by_subgroup,stratify_by,input,cuts_days_since_expo,cuts_days_since_expo_reduced){
+get_timepoint <- function(event,subgroup,stratify_by_subgroup,stratify_by,input){
   print(paste0("Getting event counts and time cut-offs for subgroup: ", subgroup))
   
   # Select the relevant cohort columns required to stratify by subgroup if necessary
@@ -74,7 +74,7 @@ get_timepoint <- function(event,subgroup,stratify_by_subgroup,stratify_by,input,
   #have been checked in inclusion/exclusion & QA
   
   survival_data <- survival_data %>% mutate(event_date = replace(event_date, which(event_date>follow_up_end | event_date<follow_up_start), NA))
-  survival_data <- survival_data %>% mutate(expo_date = replace(expo_date, which(expo_date>follow_up_end | expo_date<follow_up_start), NA))
+  survival_data <- survival_data %>% mutate(expo_date = replace(expo_date, which(expo_date>follow_up_end_exposure_period | expo_date<follow_up_start), NA))
   
   # 1.Adjust follow up end date for COVID phenotype dataset to censor at COVID exposure for the
   # phenotype that is not of interest
