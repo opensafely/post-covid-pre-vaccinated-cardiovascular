@@ -91,15 +91,6 @@ actions:
       moderately_sensitive:
         venn_diagram: output/review/venn-diagrams/venn_diagram_*
 
-  event_counts_by_time_period:
-    run: r:latest analysis/descriptives/event_counts_by_time_period.R
-    needs:
-    - stage1_data_cleaning
-    - stage1_end_date_table
-    outputs:
-      moderately_sensitive:
-        event_counts: output/review/descriptives/event_counts_by_time_period_pre_vaccination.csv
-
   ## Apply cox model for ami 
 
   Analysis_cox_ami:
@@ -1086,4 +1077,51 @@ actions:
     outputs:
       moderately_sensitive:
         stata_output: output/stata_output.csv
+
+  format_R_output:
+    run: r:latest analysis/model/07_combine_HRs_to_one_files.R
+    needs:
+    - Analysis_cox_ami
+    - Analysis_cox_stroke_isch
+    - Analysis_cox_dvt
+    - Analysis_cox_pe
+    - Analysis_cox_tia
+    - Analysis_cox_stroke_sah_hs
+    - Analysis_cox_hf
+    - Analysis_cox_angina
+    - Analysis_cox_ami_extended_follow_up
+    - Analysis_cox_stroke_isch_extended_follow_up
+    - Analysis_cox_dvt_extended_follow_up
+    - Analysis_cox_pe_extended_follow_up
+    - Analysis_cox_tia_extended_follow_up
+    - Analysis_cox_stroke_sah_hs_extended_follow_up
+    - Analysis_cox_hf_extended_follow_up
+    - Analysis_cox_angina_extended_follow_up
+    - Analysis_cox_ate
+    - Analysis_cox_vte
+    - Analysis_cox_ate_extended_follow_up
+    - Analysis_cox_vte_extended_follow_up
+    - Analysis_cox_ami_primary_position
+    - Analysis_cox_stroke_isch_primary_position
+    - Analysis_cox_dvt_primary_position
+    - Analysis_cox_pe_primary_position
+    - Analysis_cox_tia_primary_position
+    - Analysis_cox_stroke_sah_hs_primary_position
+    - Analysis_cox_hf_primary_position
+    - Analysis_cox_angina_primary_position
+    - Analysis_cox_ami_primary_position_extended_follow_up
+    - Analysis_cox_stroke_isch_primary_position_extended_follow_up
+    - Analysis_cox_dvt_primary_position_extended_follow_up
+    - Analysis_cox_pe_primary_position_extended_follow_up
+    - Analysis_cox_tia_primary_position_extended_follow_up
+    - Analysis_cox_stroke_sah_hs_primary_position_extended_follow_up
+    - Analysis_cox_hf_primary_position_extended_follow_up
+    - Analysis_cox_angina_primary_position_extended_follow_up
+    - Analysis_cox_ate_primary_position
+    - Analysis_cox_vte_primary_position
+    - Analysis_cox_ate_primary_position_extended_follow_up
+    - Analysis_cox_vte_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        R_output: output/review/model/R_HR_output.csv
 

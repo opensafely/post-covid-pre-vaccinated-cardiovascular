@@ -230,13 +230,13 @@ actions_list <- splice(
       venn_diagram = glue("output/review/venn-diagrams/venn_diagram_*"))
   ),
   
-  action(
-    name = "event_counts_by_time_period",
-    run = "r:latest analysis/descriptives/event_counts_by_time_period.R",
-    needs = list("stage1_data_cleaning", "stage1_end_date_table"),
-    moderately_sensitive = list(
-      event_counts = "output/review/descriptives/event_counts_by_time_period_pre_vaccination.csv")
-  ),
+  # action(
+  #   name = "event_counts_by_time_period",
+  #   run = "r:latest analysis/descriptives/event_counts_by_time_period.R",
+  #   needs = list("stage1_data_cleaning", "stage1_end_date_table"),
+  #   moderately_sensitive = list(
+  #     event_counts = "output/review/descriptives/event_counts_by_time_period_pre_vaccination.csv")
+  # ),
   
   #comment("Stage 5 - Apply models"),
   splice(
@@ -257,6 +257,14 @@ actions_list <- splice(
     needs = paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods),
     moderately_sensitive = list(
       stata_output = "output/stata_output.csv")
+  ),
+  
+  action(
+    name = "format_R_output",
+    run = "r:latest analysis/model/07_combine_HRs_to_one_files.R",
+    needs = paste0("Analysis_cox_",outcomes_model),
+    moderately_sensitive = list(
+      R_output = "output/review/model/R_HR_output.csv")
   )
   
 )
