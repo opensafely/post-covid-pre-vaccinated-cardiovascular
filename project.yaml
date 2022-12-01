@@ -1079,7 +1079,7 @@ actions:
         stata_output: output/stata_output.csv
 
   format_R_output:
-    run: r:latest analysis/model/07_combine_HRs_to_one_files.R
+    run: r:latest analysis/model/07_combine_HRs_to_one_file.R
     needs:
     - Analysis_cox_ami
     - Analysis_cox_stroke_isch
