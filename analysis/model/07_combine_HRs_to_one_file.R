@@ -21,4 +21,5 @@ estimates$redacted_results <- factor(estimates$redacted_results, levels = c("Red
                                                                                         "No redacted results"))
 estimates <- estimates[order(estimates$redacted_results),]
 
-write.csv(estimates,paste0(output_dir,"/R_HR_ouput.csv") , row.names=F)
+write.csv(estimates,paste0(output_dir,"/R_HR_output.csv") , row.names=F)
+
