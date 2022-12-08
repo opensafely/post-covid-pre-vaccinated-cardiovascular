@@ -275,6 +275,14 @@ actions_list <- splice(
       venn_diagram = glue("output/review/venn-diagrams/venn_diagram_*"))
   ),
   
+  action(
+    name = "days_to_event_histogram",
+    run = "r:latest analysis/descriptives/histogram_data_post_exposure_days_to_event.R",
+    needs =  list("stage1_data_cleaning","stage1_end_date_table"),
+    moderately_sensitive = list(
+      histogram_data = "output/review/descriptives/histogram_data_pre_vaccination.csv")
+  ),
+    
   # action(
   #   name = "event_counts_by_time_period",
   #   run = "r:latest analysis/descriptives/event_counts_by_time_period.R",

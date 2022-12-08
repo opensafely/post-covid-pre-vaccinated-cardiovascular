@@ -91,6 +91,15 @@ actions:
       moderately_sensitive:
         venn_diagram: output/review/venn-diagrams/venn_diagram_*
 
+  days_to_event_histogram:
+    run: r:latest analysis/descriptives/histogram_data_post_exposure_days_to_event.R
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        histogram_data: output/review/descriptives/histogram_data_pre_vaccination.csv
+
   ## Apply cox model for ami 
 
   Analysis_cox_ami:
