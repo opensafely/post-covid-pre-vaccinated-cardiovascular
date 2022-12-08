@@ -34,6 +34,12 @@ analyses_to_run_stata_day_zero$subgroup <- ifelse(analyses_to_run_stata_day_zero
 analyses_to_run_stata_day_zero$subgroup <- ifelse(analyses_to_run_stata_day_zero$subgroup=="non_hospitalised","covid_pheno_non_hospitalised",analyses_to_run_stata_day_zero$subgroup)
 analyses_to_run_stata_day_zero$time_periods <- gsub("day_zero_","",analyses_to_run_stata_day_zero$time_periods)
 
+# Analyses to run in stata - extended follow up
+analyses_to_run_stata_extended_follow_up <- read.csv("lib/analyses_to_run_in_stata_extended_follow_up.csv")
+analyses_to_run_stata_extended_follow_up <- analyses_to_run_stata_extended_follow_up[,c("outcome","subgroup","cohort","time_periods")]
+analyses_to_run_stata_extended_follow_up$subgroup <- ifelse(analyses_to_run_stata_extended_follow_up$subgroup=="hospitalised","covid_pheno_hospitalised",analyses_to_run_stata_day_zero$subgroup)
+analyses_to_run_stata_extended_follow_up$subgroup <- ifelse(analyses_to_run_stata_extended_follow_up$subgroup=="non_hospitalised","covid_pheno_non_hospitalised",analyses_to_run_stata_day_zero$subgroup)
+
 # create action functions ----
 
 ############################
@@ -144,6 +150,22 @@ stata_actions_day_zero <- function(outcome, cohort, subgroup, time_periods){
       moderately_sensitive = list(
         medianfup = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_stata_median_fup_day_zero.csv"),
         stata_output = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_cox_model_day_zero.txt")
+      )
+    )
+  )
+}
+
+stata_actions_extended <- function(outcome, cohort, subgroup, time_periods){
+  splice(
+    #comment(glue("Stata cox {outcome} {subgroup} {cohort} {time_periods}")),
+    action(
+      name = glue("stata_cox_extended_{outcome}_{subgroup}_{cohort}_{time_periods}"),
+      run = "stata-mp:latest analysis/cox_model_extended_follow_up.do",
+      arguments = c(glue("input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods")),
+      needs = list(glue("Analysis_cox_{outcome}")),
+      moderately_sensitive = list(
+        medianfup = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_stata_median_fup_extended_follow_up.csv"),
+        stata_output = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_cox_model_extended_follow_up.txt")
       )
     )
   )
@@ -280,6 +302,14 @@ actions_list <- splice(
                                                           subgroup = analyses_to_run_stata_day_zero[i, "subgroup"],
                                                           cohort = analyses_to_run_stata_day_zero[i, "cohort"],
                                                           time_periods = analyses_to_run_stata_day_zero[i, "time_periods"])),
+                recursive = FALSE)),
+  
+  #Stata extended follow up analyses
+  splice(unlist(lapply(1:nrow(analyses_to_run_stata_extended_follow_up), 
+                       function(i) stata_actions_extended(outcome = analyses_to_run_stata_extended_follow_up[i, "outcome"],
+                                                          subgroup = analyses_to_run_stata_extended_follow_up[i, "subgroup"],
+                                                          cohort = analyses_to_run_stata_extended_follow_up[i, "cohort"],
+                                                          time_periods = analyses_to_run_stata_extended_follow_up[i, "time_periods"])),
                 recursive = FALSE)),
   
   action(
