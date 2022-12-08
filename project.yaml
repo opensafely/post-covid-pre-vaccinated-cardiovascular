@@ -1364,6 +1364,177 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
         stata_output: output/input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
 
+  stata_cox_extended_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ami_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_stroke_isch_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_dvt_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_pe_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_tia_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_stroke_sah_hs_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_hf_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_angina_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ate_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_vte_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ami_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_stroke_isch_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_dvt_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_pe_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_tia_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_hf_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_angina_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ate_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
+  stata_cox_extended_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_extended_follow_up.do input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_vte_primary_position_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_extended_follow_up.csv
+        stata_output: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_extended_follow_up.txt
+
   format_stata_output:
     run: r:latest analysis/format_stata_output.R
     needs:
