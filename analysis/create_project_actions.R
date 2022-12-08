@@ -27,6 +27,13 @@ analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="non_ho
 analyses_to_run_stata <- analyses_to_run_stata %>% filter(cohort %in% cohort_to_run
                                                           & time_periods == "reduced")
 
+# Analyses to run in stata - day zero
+analyses_to_run_stata_day_zero <- read.csv("lib/analyses_to_run_in_stata_day_zero.csv")
+analyses_to_run_stata_day_zero <- analyses_to_run_stata_day_zero[,c("outcome","subgroup","cohort","time_periods")]
+analyses_to_run_stata_day_zero$subgroup <- ifelse(analyses_to_run_stata_day_zero$subgroup=="hospitalised","covid_pheno_hospitalised",analyses_to_run_stata_day_zero$subgroup)
+analyses_to_run_stata_day_zero$subgroup <- ifelse(analyses_to_run_stata_day_zero$subgroup=="non_hospitalised","covid_pheno_non_hospitalised",analyses_to_run_stata_day_zero$subgroup)
+analyses_to_run_stata_day_zero$time_periods <- gsub("day_zero_","",analyses_to_run_stata_day_zero$time_periods)
+
 # create action functions ----
 
 ############################
@@ -121,6 +128,22 @@ stata_actions <- function(outcome, cohort, subgroup, time_periods){
       moderately_sensitive = list(
         medianfup = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_stata_median_fup.csv"),
         stata_output = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_cox_model.txt")
+      )
+    )
+  )
+}
+
+stata_actions_day_zero <- function(outcome, cohort, subgroup, time_periods){
+  splice(
+    #comment(glue("Stata cox {outcome} {subgroup} {cohort} {time_periods}")),
+    action(
+      name = glue("stata_cox_day_zero_{outcome}_{subgroup}_{cohort}_{time_periods}"),
+      run = "stata-mp:latest analysis/cox_model_day0.do",
+      arguments = c(glue("input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods")),
+      needs = list(glue("Analysis_cox_{outcome}")),
+      moderately_sensitive = list(
+        medianfup = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_stata_median_fup_day_zero.csv"),
+        stata_output = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_cox_model_day_zero.txt")
       )
     )
   )
@@ -249,6 +272,14 @@ actions_list <- splice(
                                                  subgroup = analyses_to_run_stata[i, "subgroup"],
                                                  cohort = analyses_to_run_stata[i, "cohort"],
                                                  time_periods = analyses_to_run_stata[i, "time_periods"])),
+                recursive = FALSE)),
+  
+  #Stata day zero analyses
+  splice(unlist(lapply(1:nrow(analyses_to_run_stata_day_zero), 
+                       function(i) stata_actions_day_zero(outcome = analyses_to_run_stata_day_zero[i, "outcome"],
+                                                          subgroup = analyses_to_run_stata_day_zero[i, "subgroup"],
+                                                          cohort = analyses_to_run_stata_day_zero[i, "cohort"],
+                                                          time_periods = analyses_to_run_stata_day_zero[i, "time_periods"])),
                 recursive = FALSE)),
   
   action(
