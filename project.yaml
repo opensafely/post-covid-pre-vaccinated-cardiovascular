@@ -1220,6 +1220,150 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
         stata_output: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
 
+  stata_cox_day_zero_ami_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_ami_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ami
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ami_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_ami_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_stroke_isch_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_stroke_isch_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_stroke_isch
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_stroke_isch_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_stroke_isch_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_dvt_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_dvt_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_dvt
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_dvt_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_dvt_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_pe_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_pe_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_pe
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_pe_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_pe_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_tia_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_tia_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_tia
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_tia_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_tia_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_stroke_sah_hs_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_stroke_sah_hs_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_stroke_sah_hs
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_stroke_sah_hs_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_stroke_sah_hs_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_hf_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_hf_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_hf
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_hf_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_hf_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_angina_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_angina_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_angina
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_angina_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_angina_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_ate_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_ate_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ate
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ate_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_ate_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_vte_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_vte_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_vte
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_vte_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_vte_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_ami_primary_position_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_ami_primary_position_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ami_primary_position
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ami_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_ami_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_stroke_isch_primary_position_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_stroke_isch_primary_position_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_stroke_isch_primary_position
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_stroke_isch_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_stroke_isch_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_pe_primary_position_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_pe_primary_position_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_pe_primary_position
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_pe_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_pe_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_hf_primary_position_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_hf_primary_position_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_hf_primary_position
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_hf_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_hf_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_ate_primary_position_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_ate_primary_position_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_ate_primary_position
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_ate_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_ate_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
+  stata_cox_day_zero_vte_primary_position_main_pre_vaccination_reduced:
+    run: stata-mp:latest analysis/cox_model_day0.do input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods
+    needs:
+    - Analysis_cox_vte_primary_position
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day_zero.csv
+        stata_output: output/input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day_zero.txt
+
   format_stata_output:
     run: r:latest analysis/format_stata_output.R
     needs:
