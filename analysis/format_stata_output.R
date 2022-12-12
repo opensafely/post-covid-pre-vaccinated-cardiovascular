@@ -15,8 +15,7 @@ for (f in files) {
   tmp <- readr::read_tsv(file = paste0("output/",f), skip = 2,
                          col_names = c("term",
                                        "b_min","se_min","t_min","lci_min","uci_min","p_min",
-                                       "b_max","se_max","t_max","lci_max","uci_max","p_max"),
-                         show_col_types = FALSE)
+                                       "b_max","se_max","t_max","lci_max","uci_max","p_max"))
   
   ## Make variables numeric
   
