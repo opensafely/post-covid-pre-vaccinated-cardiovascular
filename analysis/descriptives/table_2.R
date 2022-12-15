@@ -210,6 +210,9 @@ table_2_subgroups_output <- function(cohort_name){
 }
 
 table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_by, stratify_by_subgroup){
+  print("Starting table 2 calculation")
+  print("Subsetting data")
+  
   data_active <- survival_data
   data_active$date_expo_censor <- NA
   
@@ -262,6 +265,8 @@ table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_b
   data_active=data_active%>%filter(follow_up_end>=index_date)
   
   # calculate unexposed follow-up days for AER script
+  print("Calculating follow up")
+  
   data_active = data_active %>% mutate(person_days_unexposed = as.numeric((as.Date(follow_up_end_unexposed) - as.Date(index_date))))
   
   index <- which((data_active$follow_up_end_unexposed < data_active$exp_date_covid19_confirmed | is.na(data_active$exp_date_covid19_confirmed)) &
