@@ -19,7 +19,8 @@ histogram_events <- function(cohort_name){
   #----------------------Define analyses of interests---------------------------
   active_analyses <- read_rds("lib/active_analyses.rds")
   
-  active_analyses <- active_analyses %>%dplyr::filter(active == "TRUE")
+  active_analyses <- active_analyses %>%dplyr::filter(active == "TRUE" 
+                                                      & !outcome_variable %in% outcome_variable[grepl("extended_follow_up", outcome_variable)])
   
   analyses_of_interest <- as.data.frame(matrix(ncol = 5,nrow = 0))
   
@@ -112,6 +113,7 @@ histogram_events <- function(cohort_name){
 }
 
 histogram_output_calculation <- function(survival_data, event,cohort,subgroup,stratify_by){
+  print("Subsetting data")
   data_active <- as.data.table(survival_data)
   data_active$date_expo_censor <- NA
   
@@ -147,6 +149,7 @@ histogram_output_calculation <- function(survival_data, event,cohort,subgroup,st
   data_active=data_active%>%filter(follow_up_end>=index_date)
   
   #Filter to only post covid events
+  print("Calculating histogram data")
   data_active <- data_active %>% filter(data_active$event_date >= data_active$index_date &
                                           data_active$event_date >= data_active$exp_date_covid19_confirmed & 
                                           data_active$event_date <= data_active$follow_up_end)
