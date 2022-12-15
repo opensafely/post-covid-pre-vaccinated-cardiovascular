@@ -53,6 +53,9 @@ histogram_events <- function(cohort_name){
   analyses_of_interest$stratify_by <- NA
   analyses_of_interest$stratify_by <- ifelse(analyses_of_interest$subgroup == "covid_pheno_hospitalised", "hospitalised", ifelse(analyses_of_interest$subgroup == "covid_pheno_non_hospitalised","non_hospitalised","main"))
   
+  # Test - limit to just line one of analyses of interest
+  analyses_of_interest <- analyses_of_interest[1,]
+  
   # Create empty results data frame
   output <- as.data.frame(matrix(ncol = 5, nrow = 0))
   colnames(output) <- c("event_days_post_covid","n","event","subgroup","cohort")
