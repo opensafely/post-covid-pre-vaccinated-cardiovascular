@@ -40,6 +40,9 @@ table_2_subgroups_output <- function(cohort_name){
   outcomes<-active_analyses$outcome_variable
   
   #--------------------Load data and left join end dates------------------------
+  
+  print("Read in data and left join end dates")
+  
   survival_data <- read_rds(paste0("output/input_stage1.rds"))
   end_dates <- read_rds(paste0("output/follow_up_end_dates.rds")) 
   end_dates$index_date <- NULL
@@ -66,6 +69,7 @@ table_2_subgroups_output <- function(cohort_name){
                                           breaks = agebreaks, 
                                           right = FALSE, 
                                           labels = agelabels)]
+  print("Data successfully read in")
   
   for(i in outcomes){
     analyses_to_run <- active_analyses %>% filter(outcome_variable==i)
@@ -120,7 +124,7 @@ table_2_subgroups_output <- function(cohort_name){
       startsWith(subgroup, "aer") ~ "aer_subgroup",
       TRUE ~ as.character(subgroup)))
   
-  analyses_of_interest[,c("unexposed_person_days", "unexposed_event_count","post_exposure_event_count", "total_person_days","day_0_event_counts","total_covid19_cases","N_population_size")] <- NA
+  analyses_of_interest[,c("unexposed_person_days", "unexposed_event_count","post_exposure_event_count", "total_person_days","total_person_days_to_day_197", "day_0_event_counts","total_covid19_cases","N_population_size")] <- NA
   
   #-----------Populate analyses_of_interest with events counts/follow up--------
   for(i in 1:nrow(analyses_of_interest)){
@@ -158,9 +162,10 @@ table_2_subgroups_output <- function(cohort_name){
     analyses_of_interest$unexposed_event_count [i] <- table2_output[[2]]
     analyses_of_interest$post_exposure_event_count[i] <- table2_output[[3]]
     analyses_of_interest$total_person_days[i] <- table2_output[[4]]
-    analyses_of_interest$day_0_event_counts[i] <- table2_output[[5]]
-    analyses_of_interest$total_covid19_cases[i] <- table2_output[[6]]
-    analyses_of_interest$N_population_size[i] <- table2_output[[7]]
+    analyses_of_interest$total_person_days_to_day_197[i] <- table2_output[[5]]
+    analyses_of_interest$day_0_event_counts[i] <- table2_output[[6]]
+    analyses_of_interest$total_covid19_cases[i] <- table2_output[[7]]
+    analyses_of_interest$N_population_size[i] <- table2_output[[8]]
     
     
     setnames(survival_data,
@@ -276,6 +281,10 @@ table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_b
   # calculate total person days of follow-up
   data_active = data_active %>% mutate(person_days = as.numeric((as.Date(follow_up_end) - as.Date(index_date)))+1)
   
+  #calculate post exposure follow-up up to day 197 for AER calculation
+  data_active$person_days_exposed <- data_active$person_days - data_active$person_days_unexposed
+  data_active$person_days_exposed <- ifelse(data_active$person_days_exposed > 197, 197,data_active$person_days_exposed)
+  
   if(grepl("extended_follow_up",event)){
     data_active = data_active %>% filter((person_days_unexposed >=0 & person_days_unexposed <= study_length_extended)
                                          & (person_days >=0 & person_days <= study_length_extended)) # filter out follow up period
@@ -286,7 +295,8 @@ table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_b
   
   person_days_total_unexposed  = round(sum(data_active$person_days_unexposed, na.rm = TRUE),1)
   person_days_total = round(sum(data_active$person_days, na.rm = TRUE),1)
-  
+  person_days_total_to_day_197 = round(sum(data_active$person_days_exposed, na.rm = TRUE),1)
+ 
   # calculate total covid cases for aer
   total_covid_cases <- nrow(data_active %>% filter(!is.na(exp_date_covid19_confirmed)))
   
@@ -317,7 +327,7 @@ table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_b
     event_count_exposed <- "[Redacted]"
   }
   
-  return(list(person_days_total_unexposed, event_count_unexposed, event_count_exposed, person_days_total, day_0_event_count, total_covid_cases,N_population_size))
+  return(list(person_days_total_unexposed, event_count_unexposed, event_count_exposed, person_days_total, person_days_total_to_day_197, day_0_event_count, total_covid_cases,N_population_size))
 }
 
 #Run Table 2 function
