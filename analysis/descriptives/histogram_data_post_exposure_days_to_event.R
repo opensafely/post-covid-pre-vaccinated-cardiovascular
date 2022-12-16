@@ -54,7 +54,7 @@ histogram_events <- function(cohort_name){
   analyses_of_interest$stratify_by <- ifelse(analyses_of_interest$subgroup == "covid_pheno_hospitalised", "hospitalised", ifelse(analyses_of_interest$subgroup == "covid_pheno_non_hospitalised","non_hospitalised","main"))
   
   # Test - limit to just line one of analyses of interest
-  analyses_of_interest <- analyses_of_interest[1,]
+  #analyses_of_interest <- analyses_of_interest[1,]
   
   # Create empty results data frame
   output <- as.data.frame(matrix(ncol = 5, nrow = 0))
@@ -81,7 +81,7 @@ histogram_events <- function(cohort_name){
                      "non_hospitalised_follow_up_end",
                      "hospitalised_date_expo_censor",
                      "non_hospitalised_date_expo_censor"))
-
+ 
     histogram_output <- histogram_output_calculation(survival_data,
                                                      event=analyses_of_interest$event[i],
                                                      cohort=analyses_of_interest$cohort[i],
@@ -120,7 +120,8 @@ histogram_output_calculation <- function(survival_data, event,cohort,subgroup,st
   print("1")
   data_active <- as.data.table(survival_data)
   print("2")
-  data_active$date_expo_censor <- NA
+  data_active[, "date_expo_censor" := NA] 
+  #data_active$date_expo_censor <- NA
   print("3")
   for(i in c("hospitalised","non_hospitalised")){
     if(stratify_by == i){
