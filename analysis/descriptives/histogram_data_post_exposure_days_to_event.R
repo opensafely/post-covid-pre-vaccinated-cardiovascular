@@ -42,6 +42,8 @@ histogram_events <- function(cohort_name){
                                   colnames(survival_data)[grepl("_expo_",colnames(survival_data))],
                                   unique(active_analyses$prior_history_var[active_analyses$prior_history_var !=""])))]
   
+  survival_data <- survival_data[,colnames(survival_data)[!grepl("extended_follow_up",colnames(survival_data))]]
+  
   setnames(survival_data, 
            old = c("cov_cat_sex", 
                    "cov_cat_ethnicity"), 
