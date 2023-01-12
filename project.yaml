@@ -72,14 +72,23 @@ actions:
         DateChecks: output/not-for-review/Check_dates_range.csv
         Descriptive_Table: output/review/descriptives/Table1_pre_vaccination_cvd.csv
 
-  table_2:
-    run: r:latest analysis/descriptives/table_2.R
+  table_2_original_follow_up:
+    run: r:latest analysis/descriptives/table_2.R FALSE
     needs:
     - stage1_data_cleaning
     - stage1_end_date_table
     outputs:
       moderately_sensitive:
         table_2: output/review/descriptives/table2_pre_vaccination_cvd.csv
+
+  table_2_extended_follow_up:
+    run: r:latest analysis/descriptives/table_2.R TRUE
+    needs:
+    - stage1_data_cleaning
+    - stage1_end_date_table
+    outputs:
+      moderately_sensitive:
+        table_2: output/review/descriptives/table2_pre_vaccination_extended_follow_up_outcomes_cvd.csv
 
   venn_diagram:
     run: r:latest analysis/descriptives/venn_diagram.R

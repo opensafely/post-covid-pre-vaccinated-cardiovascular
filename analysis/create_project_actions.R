@@ -257,11 +257,23 @@ actions_list <- splice(
   
   #comment("Table 2)
   action(
-    name = "table_2",
+    name = "table_2_original_follow_up",
     run = "r:latest analysis/descriptives/table_2.R",
+    arguments = "FALSE",
     needs = list("stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
       table_2 = "output/review/descriptives/table2_pre_vaccination_cvd.csv"
+      
+    )
+  ),
+  
+  action(
+    name = "table_2_extended_follow_up",
+    run = "r:latest analysis/descriptives/table_2.R",
+    arguments = "TRUE",
+    needs = list("stage1_data_cleaning","stage1_end_date_table"),
+    moderately_sensitive = list(
+      table_2 = "output/review/descriptives/table2_pre_vaccination_extended_follow_up_outcomes_cvd.csv"
       
     )
   ),

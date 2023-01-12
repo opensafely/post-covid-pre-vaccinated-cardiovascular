@@ -119,12 +119,9 @@ histogram_events <- function(cohort_name){
 
 histogram_output_calculation <- function(survival_data, event,cohort,subgroup,stratify_by){
   print("Subsetting data")
-  print("1")
   data_active <- as.data.table(survival_data)
-  print("2")
-  data_active[, "date_expo_censor" := NA] 
-  #data_active$date_expo_censor <- NA
-  print("3")
+  data_active$date_expo_censor <- NA
+  
   for(i in c("hospitalised","non_hospitalised")){
     if(stratify_by == i){
       data_active$follow_up_end <- NULL
@@ -139,23 +136,18 @@ histogram_output_calculation <- function(survival_data, event,cohort,subgroup,st
   }
   
   # filter the population to remove those with a history of COVID-19
-  print("4")
   data_active <- data_active %>% filter(sub_bin_covid19_confirmed_history ==F)
   
   #Filter to subgroup of interest
   if(startsWith(subgroup,"covid_pheno_")){
-    print("5")
     data_active <- data_active %>% mutate(exp_date_covid19_confirmed = replace(exp_date_covid19_confirmed, which(!is.na(date_expo_censor) & (exp_date_covid19_confirmed >= date_expo_censor)), NA) )%>%
       mutate(event_date = replace(event_date, which(!is.na(date_expo_censor) & (event_date >= date_expo_censor)), NA)) %>%
       filter((index_date != date_expo_censor)|is.na(date_expo_censor))
-    print("6")
     data_active[follow_up_end == date_expo_censor, follow_up_end := follow_up_end-1]
-    # setDT(data_active)[follow_up_end == date_expo_censor, follow_up_end := follow_up_end-1]
   }
-  print("7")
   data_active <- data_active %>% mutate(event_date = replace(event_date, which(event_date>follow_up_end | event_date<index_date), NA),
                                         exp_date_covid19_confirmed = replace(exp_date_covid19_confirmed, which(exp_date_covid19_confirmed>follow_up_end | exp_date_covid19_confirmed<index_date), NA))
-  print("8")
+  
   data_active=data_active%>%filter(follow_up_end>=index_date)
   
   #Filter to only post covid events

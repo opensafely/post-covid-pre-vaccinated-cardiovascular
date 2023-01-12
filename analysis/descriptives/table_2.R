@@ -13,6 +13,16 @@ library(lubridate)
 library(stringr)
 library(tidyverse)
 
+args <- commandArgs(trailingOnly=TRUE)
+
+if(length(args)==0){
+  # use for interactive testing
+  extended_follow_up_outcomes <- "TRUE"
+  
+}else{
+  extended_follow_up_outcomes <- args[[1]]
+}
+
 cohort_name <- "pre_vaccination"
 
 fs::dir_create(here::here("output", "not-for-review"))
@@ -28,7 +38,7 @@ study_length_extended <- as.numeric(cohort_end_extended - cohort_start) +1
 agebreaks <- c(0, 40, 60, 80, 111)
 agelabels <- c("18_39", "40_59", "60_79", "80_110")
 
-table_2_subgroups_output <- function(cohort_name){
+table_2_subgroups_output <- function(cohort_name,extended_follow_up_outcomes){
   
   #----------------------Define analyses of interests---------------------------
   active_analyses <- read_rds("lib/active_analyses.rds")
@@ -37,7 +47,11 @@ table_2_subgroups_output <- function(cohort_name){
   
   analyses_of_interest <- as.data.frame(matrix(ncol = 5,nrow = 0))
   
-  outcomes<-active_analyses$outcome_variable
+  if(extended_follow_up_outcomes == FALSE){
+    outcomes<-active_analyses$outcome_variable[!grepl("extended_follow_up",active_analyses$outcome_variable)]
+  }else if(extended_follow_up_outcomes == TRUE){
+    outcomes<-active_analyses$outcome_variable[grepl("extended_follow_up",active_analyses$outcome_variable)]
+  }
   
   #--------------------Load data and left join end dates------------------------
   
@@ -51,12 +65,16 @@ table_2_subgroups_output <- function(cohort_name){
   rm(end_dates)
   
   survival_data<-survival_data[,unique(c("patient_id","index_date","cov_cat_sex",
-                                  "cov_num_age","cov_cat_ethnicity",
-                                  "sub_bin_covid19_confirmed_history","exp_date_covid19_confirmed","sub_cat_covid19_hospital",
-                                  colnames(survival_data)[grepl("out_",colnames(survival_data))],
-                                  colnames(survival_data)[grepl("follow_up",colnames(survival_data))],
-                                  colnames(survival_data)[grepl("_expo_",colnames(survival_data))],
-                                  unique(active_analyses$prior_history_var[active_analyses$prior_history_var !=""])))]
+                                         "cov_num_age","cov_cat_ethnicity",
+                                         "sub_bin_covid19_confirmed_history","exp_date_covid19_confirmed","sub_cat_covid19_hospital",
+                                         outcomes,
+                                         paste0(gsub("out_date_","",outcomes),"_follow_up_end_exposure_period"),
+                                         paste0(gsub("out_date_","",outcomes),"_follow_up_end_unexposed"),
+                                         paste0(gsub("out_date_","",outcomes),"_follow_up_end"),
+                                         paste0(gsub("out_date_","",outcomes),"_hospitalised_follow_up_end"),
+                                         paste0(gsub("out_date_","",outcomes),"_non_hospitalised_follow_up_end"),
+                                         colnames(survival_data)[grepl("_expo_",colnames(survival_data))],
+                                         unique(active_analyses$prior_history_var[active_analyses$prior_history_var !=""])))]
   
   setnames(survival_data, 
            old = c("cov_cat_sex", 
@@ -211,7 +229,12 @@ table_2_subgroups_output <- function(cohort_name){
       TRUE ~ as.character(day_0_event_counts)))
   
   # write output for table2
-  write.csv(analyses_of_interest, file=paste0("output/review/descriptives/table2_",cohort_name, "_cvd.csv"), row.names = F)
+  if(extended_follow_up_outcomes == FALSE){
+    write.csv(analyses_of_interest, file=paste0("output/review/descriptives/table2_",cohort_name, "_cvd.csv"), row.names = F)
+  }else if(extended_follow_up_outcomes == TRUE){
+    write.csv(analyses_of_interest, file=paste0("output/review/descriptives/table2_",cohort_name, "_extended_follow_up_outcomes_cvd.csv"), row.names = F)
+    
+  }
 }
 
 table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_by, stratify_by_subgroup){
@@ -331,6 +354,6 @@ table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_b
 }
 
 #Run Table 2 function
-table_2_subgroups_output(cohort_name)
+table_2_subgroups_output(cohort_name,extended_follow_up_outcomes)
 
 
