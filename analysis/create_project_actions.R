@@ -335,7 +335,8 @@ actions_list <- splice(
     run = "r:latest analysis/model/07_combine_HRs_to_one_file.R",
     needs = paste0("Analysis_cox_",outcomes_model),
     moderately_sensitive = list(
-      R_output = "output/review/model/R_HR_output.csv")
+      R_output = "output/review/model/R_HR_output.csv",
+      R_event_counts = "output/review/model/R_event_count_output.csv")
   )
   
 )
