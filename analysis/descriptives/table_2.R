@@ -17,10 +17,12 @@ args <- commandArgs(trailingOnly=TRUE)
 
 if(length(args)==0){
   # use for interactive testing
-  extended_follow_up_outcomes <- "TRUE"
+  follow_up <- "extended_follow_up"
+  event_position <- "primary_position"
   
 }else{
-  extended_follow_up_outcomes <- args[[1]]
+  follow_up <- args[[1]]
+  event_position <- args[[2]]
 }
 
 cohort_name <- "pre_vaccination"
@@ -38,7 +40,7 @@ study_length_extended <- as.numeric(cohort_end_extended - cohort_start) +1
 agebreaks <- c(0, 40, 60, 80, 111)
 agelabels <- c("18_39", "40_59", "60_79", "80_110")
 
-table_2_subgroups_output <- function(cohort_name,extended_follow_up_outcomes){
+table_2_subgroups_output <- function(cohort_name,follow_up,event_position){
   
   #----------------------Define analyses of interests---------------------------
   active_analyses <- read_rds("lib/active_analyses.rds")
@@ -47,10 +49,16 @@ table_2_subgroups_output <- function(cohort_name,extended_follow_up_outcomes){
   
   analyses_of_interest <- as.data.frame(matrix(ncol = 5,nrow = 0))
   
-  if(extended_follow_up_outcomes == FALSE){
+  if(follow_up == "original_follow_up"){
     outcomes<-active_analyses$outcome_variable[!grepl("extended_follow_up",active_analyses$outcome_variable)]
-  }else if(extended_follow_up_outcomes == TRUE){
+  }else if(follow_up == "extended_follow_up"){
     outcomes<-active_analyses$outcome_variable[grepl("extended_follow_up",active_analyses$outcome_variable)]
+  }
+  
+  if(event_position == "any_position"){
+    outcomes<-outcomes[!grepl("primary_position",outcomes)]
+  }else if(event_position == "primary_position"){
+    outcomes<-outcomes[grepl("primary_position",outcomes)]
   }
   
   #--------------------Load data and left join end dates------------------------
@@ -229,12 +237,8 @@ table_2_subgroups_output <- function(cohort_name,extended_follow_up_outcomes){
       TRUE ~ as.character(day_0_event_counts)))
   
   # write output for table2
-  if(extended_follow_up_outcomes == FALSE){
-    write.csv(analyses_of_interest, file=paste0("output/review/descriptives/table2_",cohort_name, "_cvd.csv"), row.names = F)
-  }else if(extended_follow_up_outcomes == TRUE){
-    write.csv(analyses_of_interest, file=paste0("output/review/descriptives/table2_",cohort_name, "_extended_follow_up_outcomes_cvd.csv"), row.names = F)
-    
-  }
+  write.csv(analyses_of_interest, file=paste0("output/review/descriptives/table2_",cohort_name,"_",follow_up,"_", event_position,"_events.csv"), row.names = F)
+
 }
 
 table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_by, stratify_by_subgroup){
@@ -354,6 +358,6 @@ table_2_calculation <- function(survival_data, event,cohort,subgroup, stratify_b
 }
 
 #Run Table 2 function
-table_2_subgroups_output(cohort_name,extended_follow_up_outcomes)
+table_2_subgroups_output(cohort_name,follow_up,event_position)
 
 
