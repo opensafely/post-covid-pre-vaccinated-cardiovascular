@@ -311,11 +311,21 @@ actions_list <- splice(
   ),
   
   action(
-    name = "days_to_event_histogram",
+    name = "days_to_event_histogram_original_follow_up",
     run = "r:latest analysis/descriptives/histogram_data_post_exposure_days_to_event.R",
+    arguments = "original_follow_up",
     needs =  list("stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
-      histogram_data = "output/review/descriptives/histogram_data_pre_vaccination.csv")
+      histogram_data = "output/review/descriptives/histogram_data_pre_vaccination_original_follow_up.csv")
+  ),
+  
+  action(
+    name = "days_to_event_histogram_extended_follow_up",
+    run = "r:latest analysis/descriptives/histogram_data_post_exposure_days_to_event.R",
+    arguments = "extended_follow_up",
+    needs =  list("stage1_data_cleaning","stage1_end_date_table"),
+    moderately_sensitive = list(
+      histogram_data = "output/review/descriptives/histogram_data_pre_vaccination_extended_follow_up.csv")
   ),
     
   # action(

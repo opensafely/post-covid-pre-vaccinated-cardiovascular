@@ -5,6 +5,15 @@ library(lubridate)
 library(stringr)
 library(tidyverse)
 
+args <- commandArgs(trailingOnly=TRUE)
+
+if(length(args)==0){
+  # use for interactive testing
+  follow_up <- "extended_follow_up"
+}else{
+  follow_up <- args[[1]]
+}
+
 cohort_name <- "pre_vaccination"
 
 fs::dir_create(here::here("output", "not-for-review"))
@@ -14,17 +23,19 @@ cohort_start <- as.Date("2020-01-01")
 cohort_end <- as.Date("2021-06-18")
 days_follow_up <- as.numeric(cohort_end - cohort_start) +1
 
-histogram_events <- function(cohort_name){
+histogram_events <- function(cohort_name, follow_up){
   
   #----------------------Define analyses of interests---------------------------
   active_analyses <- read_rds("lib/active_analyses.rds")
+  active_analyses <- active_analyses %>%dplyr::filter(active == "TRUE")
   
-  active_analyses <- active_analyses %>%dplyr::filter(active == "TRUE" 
-                                                      & !outcome_variable %in% outcome_variable[grepl("extended_follow_up", outcome_variable)])
+  if(follow_up == "original_follow_up"){
+    outcomes<-active_analyses$outcome_variable[!grepl("extended_follow_up",active_analyses$outcome_variable)]
+  }else if(follow_up == "extended_follow_up"){
+    outcomes<-active_analyses$outcome_variable[grepl("extended_follow_up",active_analyses$outcome_variable)]
+  }
   
   analyses_of_interest <- as.data.frame(matrix(ncol = 5,nrow = 0))
-  
-  outcomes<-active_analyses$outcome_variable
   
   #--------------------Load data and left join end dates------------------------
   survival_data <- read_rds("output/input_stage1.rds")
@@ -42,8 +53,7 @@ histogram_events <- function(cohort_name){
                                   colnames(survival_data)[grepl("_expo_",colnames(survival_data))],
                                   unique(active_analyses$prior_history_var[active_analyses$prior_history_var !=""])))]
   
-  survival_data <- survival_data[,colnames(survival_data)[!grepl("extended_follow_up",colnames(survival_data))]]
-  
+
   setnames(survival_data, 
            old = c("cov_cat_sex", 
                    "cov_cat_ethnicity"), 
@@ -112,9 +122,8 @@ histogram_events <- function(cohort_name){
     print(paste0("histogram data has been produced successfully for", analyses_of_interest$event[i], " in ", cohort_name, " population!"))
   }
   
-  
   # write output for histogram data
-  write.csv(output, file=paste0("output/review/descriptives/histogram_data_",cohort_name, ".csv"), row.names = F)
+  write.csv(output, file=paste0("output/review/descriptives/histogram_data_",cohort_name,"_",follow_up, ".csv"), row.names = F)
 }
 
 histogram_output_calculation <- function(survival_data, event,cohort,subgroup,stratify_by){
@@ -182,4 +191,4 @@ histogram_output_calculation <- function(survival_data, event,cohort,subgroup,st
 }
 
 # Run function using specified commandArgs
-histogram_events("pre_vaccination")
+histogram_events("pre_vaccination",follow_up)
