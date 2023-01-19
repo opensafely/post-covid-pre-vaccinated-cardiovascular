@@ -257,23 +257,46 @@ actions_list <- splice(
   
   #comment("Table 2)
   action(
-    name = "table_2_original_follow_up",
+    name = "table_2_original_follow_up_any_position_events",
     run = "r:latest analysis/descriptives/table_2.R",
-    arguments = "FALSE",
+    arguments = list("original_follow_up","any_position"),
     needs = list("stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
-      table_2 = "output/review/descriptives/table2_pre_vaccination_cvd.csv"
+      table_2 = "output/review/descriptives/table2_pre_vaccination_original_follow_up_any_position_events.csv"
       
     )
   ),
   
   action(
-    name = "table_2_extended_follow_up",
+    name = "table_2_extended_follow_up_any_position_events",
     run = "r:latest analysis/descriptives/table_2.R",
-    arguments = "TRUE",
+    arguments = list("extended_follow_up","any_position"),
     needs = list("stage1_data_cleaning","stage1_end_date_table"),
     moderately_sensitive = list(
-      table_2 = "output/review/descriptives/table2_pre_vaccination_extended_follow_up_outcomes_cvd.csv"
+      table_2 = "output/review/descriptives/table2_pre_vaccination_extended_follow_up_any_position_events.csv"
+      
+    )
+  ),
+  
+  #comment("Table 2)
+  action(
+    name = "table_2_original_follow_up_primary_position_events",
+    run = "r:latest analysis/descriptives/table_2.R",
+    arguments = list("original_follow_up","primary_position"),
+    needs = list("stage1_data_cleaning","stage1_end_date_table"),
+    moderately_sensitive = list(
+      table_2 = "output/review/descriptives/table2_pre_vaccination_original_follow_up_primary_position_events.csv"
+      
+    )
+  ),
+  
+  action(
+    name = "table_2_extended_follow_up_primary_position_events",
+    run = "r:latest analysis/descriptives/table_2.R",
+    arguments = list("extended_follow_up","primary_position"),
+    needs = list("stage1_data_cleaning","stage1_end_date_table"),
+    moderately_sensitive = list(
+      table_2 = "output/review/descriptives/table2_pre_vaccination_extended_follow_up_primary_position_events.csv"
       
     )
   ),
