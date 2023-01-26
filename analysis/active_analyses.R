@@ -28,14 +28,6 @@ df <- data.frame(active = logical(),
                  ethnicity_Missing = character(),
                  prior_history_TRUE = character(),
                  prior_history_FALSE = character(),
-                 aer_Female_18_39 = character(),
-                 aer_Female_40_59 = character(),
-                 aer_Female_60_79 = character(),
-                 aer_Female_80_110 = character(),
-                 aer_Male_18_39 = character(),
-                 aer_Male_40_59 = character(),
-                 aer_Male_60_79 = character(),
-                 aer_Male_80_110 = character(),
                  prior_history_var = character(),
                  stringsAsFactors = FALSE)
 
@@ -68,7 +60,7 @@ for (i in 1:length(outcomes)) {
                        "cov_num_consulation_rate;cov_bin_healthcare_worker;cov_num_age;cov_cat_ethnicity;cov_cat_deprivation;cov_cat_region;cov_cat_smoking_status;cov_bin_carehome_status;cov_bin_lipid_medications;cov_bin_antiplatelet_medications;cov_bin_anticoagulation_medications;cov_bin_combined_oral_contraceptive_pill;cov_bin_hormone_replacement_therapy;cov_bin_ami;cov_bin_all_stroke;cov_bin_other_arterial_embolism;cov_bin_vte;cov_bin_hf;cov_bin_angina;cov_bin_dementia;cov_bin_liver_disease;cov_bin_chronic_kidney_disease;cov_bin_cancer;cov_bin_hypertension;cov_bin_diabetes;cov_bin_obesity;cov_bin_depression;cov_bin_chronic_obstructive_pulmonary_disease;cov_cat_sex",
                        rep("all",1),
                        rep(TRUE,3),
-                       rep(FALSE,22),
+                       rep(FALSE,14),
                        "")
 }
 
@@ -83,12 +75,9 @@ for (i in 1:length(outcomes)) {
                        paste0("out_date_",outcomes_short[i]),
                        "cov_num_consulation_rate;cov_bin_healthcare_worker;cov_num_age;cov_cat_ethnicity;cov_cat_deprivation;cov_cat_region;cov_cat_smoking_status;cov_bin_carehome_status;cov_bin_lipid_medications;cov_bin_antiplatelet_medications;cov_bin_anticoagulation_medications;cov_bin_combined_oral_contraceptive_pill;cov_bin_hormone_replacement_therapy;cov_bin_ami;cov_bin_all_stroke;cov_bin_other_arterial_embolism;cov_bin_vte;cov_bin_hf;cov_bin_angina;cov_bin_dementia;cov_bin_liver_disease;cov_bin_chronic_kidney_disease;cov_bin_cancer;cov_bin_hypertension;cov_bin_diabetes;cov_bin_obesity;cov_bin_depression;cov_bin_chronic_obstructive_pulmonary_disease;cov_cat_sex",
                        rep("all",1),
-                       rep(TRUE,25),
+                       rep(TRUE,17),
                        "")
 }
-
-df$prior_history_var <- ifelse(df$outcome=="Arterial thrombosis event" ,"sub_bin_ate",df$prior_history_var)
-df$prior_history_var <- ifelse(df$outcome=="Venous thrombosis event","cov_bin_vte",df$prior_history_var)
 
 outcomes <- c("Arterial thrombosis event - Extended follow up",
               "Venous thrombosis event - Extended follow up")
@@ -101,10 +90,12 @@ for (i in 1:length(outcomes)) {
                        paste0("out_date_",outcomes_short[i]),
                        "cov_num_consulation_rate;cov_bin_healthcare_worker;cov_num_age;cov_cat_ethnicity;cov_cat_deprivation;cov_cat_region;cov_cat_smoking_status;cov_bin_carehome_status;cov_bin_lipid_medications;cov_bin_antiplatelet_medications;cov_bin_anticoagulation_medications;cov_bin_combined_oral_contraceptive_pill;cov_bin_hormone_replacement_therapy;cov_bin_ami;cov_bin_all_stroke;cov_bin_other_arterial_embolism;cov_bin_vte;cov_bin_hf;cov_bin_angina;cov_bin_dementia;cov_bin_liver_disease;cov_bin_chronic_kidney_disease;cov_bin_cancer;cov_bin_hypertension;cov_bin_diabetes;cov_bin_obesity;cov_bin_depression;cov_bin_chronic_obstructive_pulmonary_disease;cov_cat_sex",
                        rep("all",1),
-                       rep(TRUE,3),
-                       rep(FALSE,22),
+                       rep(TRUE,17),
                        "")
 }
+
+df$prior_history_var <- ifelse(df$outcome %in% c("Arterial thrombosis event","Arterial thrombosis event - Extended follow up"),"sub_bin_ate",df$prior_history_var)
+df$prior_history_var <- ifelse(df$outcome %in% c("Venous thrombosis event","Venous thrombosis event - Extended follow up"),"cov_bin_vte",df$prior_history_var)
 
 # Add cardiovascular outcomes (primary position) -----------------------------------
 
@@ -135,7 +126,7 @@ for (i in 1:length(outcomes)) {
                        "cov_num_consulation_rate;cov_bin_healthcare_worker;cov_num_age;cov_cat_ethnicity;cov_cat_deprivation;cov_cat_region;cov_cat_smoking_status;cov_bin_carehome_status;cov_bin_lipid_medications;cov_bin_antiplatelet_medications;cov_bin_anticoagulation_medications;cov_bin_combined_oral_contraceptive_pill;cov_bin_hormone_replacement_therapy;cov_bin_ami;cov_bin_all_stroke;cov_bin_other_arterial_embolism;cov_bin_vte;cov_bin_hf;cov_bin_angina;cov_bin_dementia;cov_bin_liver_disease;cov_bin_chronic_kidney_disease;cov_bin_cancer;cov_bin_hypertension;cov_bin_diabetes;cov_bin_obesity;cov_bin_depression;cov_bin_chronic_obstructive_pulmonary_disease;cov_cat_sex",
                        rep("all",1),
                        rep(TRUE,3),
-                       rep(FALSE,22),
+                       rep(FALSE,14),
                        "")
 }
 
@@ -150,12 +141,9 @@ for (i in 1:length(outcomes)) {
                        paste0("out_date_",outcomes_short[i]),
                        "cov_num_consulation_rate;cov_bin_healthcare_worker;cov_num_age;cov_cat_ethnicity;cov_cat_deprivation;cov_cat_region;cov_cat_smoking_status;cov_bin_carehome_status;cov_bin_lipid_medications;cov_bin_antiplatelet_medications;cov_bin_anticoagulation_medications;cov_bin_combined_oral_contraceptive_pill;cov_bin_hormone_replacement_therapy;cov_bin_ami;cov_bin_all_stroke;cov_bin_other_arterial_embolism;cov_bin_vte;cov_bin_hf;cov_bin_angina;cov_bin_dementia;cov_bin_liver_disease;cov_bin_chronic_kidney_disease;cov_bin_cancer;cov_bin_hypertension;cov_bin_diabetes;cov_bin_obesity;cov_bin_depression;cov_bin_chronic_obstructive_pulmonary_disease;cov_cat_sex",
                        rep("all",1),
-                       rep(TRUE,25),
+                       rep(TRUE,17),
                        "")
 }
-
-df$prior_history_var <- ifelse(df$outcome=="Arterial thrombosis event - Primary position events","sub_bin_ate",df$prior_history_var)
-df$prior_history_var <- ifelse(df$outcome=="Venous thrombosis event - Primary position events","cov_bin_vte",df$prior_history_var)
 
 outcomes <- c("Arterial thrombosis event - Primary position events, Extended follow up",
               "Venous thrombosis event - Primary position events, Extended follow up")
@@ -168,13 +156,14 @@ for (i in 1:length(outcomes)) {
                        paste0("out_date_",outcomes_short[i]),
                        "cov_num_consulation_rate;cov_bin_healthcare_worker;cov_num_age;cov_cat_ethnicity;cov_cat_deprivation;cov_cat_region;cov_cat_smoking_status;cov_bin_carehome_status;cov_bin_lipid_medications;cov_bin_antiplatelet_medications;cov_bin_anticoagulation_medications;cov_bin_combined_oral_contraceptive_pill;cov_bin_hormone_replacement_therapy;cov_bin_ami;cov_bin_all_stroke;cov_bin_other_arterial_embolism;cov_bin_vte;cov_bin_hf;cov_bin_angina;cov_bin_dementia;cov_bin_liver_disease;cov_bin_chronic_kidney_disease;cov_bin_cancer;cov_bin_hypertension;cov_bin_diabetes;cov_bin_obesity;cov_bin_depression;cov_bin_chronic_obstructive_pulmonary_disease;cov_cat_sex",
                        rep("all",1),
-                       rep(TRUE,3),
-                       rep(FALSE,22),
+                       rep(TRUE,17),
                        "")
 }
 
-df$prior_history_var <- ifelse(df$outcome=="Arterial thrombosis event - Primary position events","sub_bin_ate",df$prior_history_var)
-df$prior_history_var <- ifelse(df$outcome=="Venous thrombosis event - Primary position events","cov_bin_vte",df$prior_history_var)
+df$prior_history_var <- ifelse(df$outcome %in% c("Arterial thrombosis event - Primary position events","Arterial thrombosis event - Primary position events, Extended follow up")
+                               ,"sub_bin_ate",df$prior_history_var)
+df$prior_history_var <- ifelse(df$outcome %in% c("Venous thrombosis event - Primary position events","Venous thrombosis event - Primary position events, Extended follow up"),
+                               "cov_bin_vte",df$prior_history_var)
 
 
 # Save active analyses list ----------------------------------------------------
