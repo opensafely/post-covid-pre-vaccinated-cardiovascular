@@ -27,7 +27,6 @@ analyses_to_run_stata <- analyses_to_run_stata %>% filter(cohort %in% cohort_to_
                                                           & time_periods == "reduced")
 
 
-
 # create action functions ----
 
 ############################
