@@ -74,9 +74,10 @@ analyses_to_run$cohort <- cohort
 rm(analyses_to_run_normal_timepoint)
 
 #Remove hospitalised analysis with normal timepoints as this will be run in stata and we don't need the saved data sets
-#from this.
+#from this. Also remove AER analysis as this is only needed in table two for event counts but we don't need HRs
 
-analyses_to_run <- analyses_to_run %>% filter(subgroup != "covid_pheno_hospitalised" | reduced_timepoint != "normal")
+analyses_to_run <- analyses_to_run %>% filter((subgroup != "covid_pheno_hospitalised" | reduced_timepoint != "normal")
+                                              & subgroup_cat != "aer")
 
 # Add day zero analyses
 day_zero_analyses <- analyses_to_run %>% filter(subgroup %in% c("main","covid_pheno_non_hospitalised"))
