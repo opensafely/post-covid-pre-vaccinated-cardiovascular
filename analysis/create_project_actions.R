@@ -321,7 +321,7 @@ actions_list <- splice(
     moderately_sensitive = list(
       R_output = "output/review/model/R_HR_output.csv",
       R_event_counts = "output/review/model/R_event_count_output.csv",
-      R_event_counts = "output/review/model/R_event_count_day_zero_output.csv")
+      R_event_counts_day_zero = "output/review/model/R_event_count_day_zero_output.csv")
   )
   
 )
