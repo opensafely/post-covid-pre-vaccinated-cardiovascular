@@ -20,6 +20,7 @@ library(dplyr)
 library(data.table)
 library(tidyverse)
 library(lubridate)
+library(stringr)
 
 fs::dir_create(here::here("output", "not-for-review"))
 fs::dir_create(here::here("output", "review", "descriptives"))
@@ -142,7 +143,7 @@ categorical_cov <- append(categorical_cov, c("cov_cat_age_group","cov_cat_consul
 
 #numerical_cov <- colnames(input)[grep("cov_num", colnames(input))]
 numerical_cov <- covar_names[grep("cov_num", covar_names)]
-numerical_cov <- numerical_cov[!numerical_cov=="cov_num_age"]
+#numerical_cov <- numerical_cov[!numerical_cov=="cov_num_age"]
 
 #binary_cov <- colnames(input)[grep("cov_bin", colnames(input))]
 binary_cov <- covar_names[grep("cov_bin", covar_names)]
@@ -174,8 +175,12 @@ table1$Covariate <- gsub("\\s","",table1$Covariate) # Remove spaces
 
 table1$Covariate_level <-  sub('\\:.*', '', table1$Covariate_level) # Remove everything after :
 
+table1$Covariate_level <- str_trim(table1$Covariate_level, "right") #Remove spaces at the end of the string
+
 table1 <- table1 %>%
-  filter(!(Covariate == "cov_num_consulation_rate" & !startsWith(Covariate_level,"Mean")))
+  filter(!(Covariate == "cov_num_consulation_rate" & Covariate_level !="Mean")
+         & !(Covariate == "cov_num_age" & !Covariate_level %in% c("1st Qu.","Median","Mean","3rd Qu."))
+         & !is.na(Covariate_level))
 
 table1_count_all <- as.data.frame(matrix(nrow = 1, ncol = 2))
 colnames(table1_count_all) <- c("Covariate","Covariate_level")
@@ -213,7 +218,7 @@ for (j in 1:nrow(pop)) {
   num_summary[,population] <- num_summary$Freq
   num_summary <- rename(num_summary, Covariate_level = Freq, Covariate = Var2)
   num_summary <- num_summary %>% dplyr::select("Covariate","Covariate_level",population)
-  num_summary <- num_summary %>% filter(startsWith(num_summary$Covariate_level, "Mean")==T)
+  num_summary <- num_summary %>% filter(grepl("Mean|1st Qu|Median |3rd Qu",Covariate_level))
   
   # Binary covariates
   
@@ -237,7 +242,8 @@ for (j in 1:nrow(pop)) {
   
   pop_summary[,population] <- gsub(".*:", "",pop_summary[,population])#Remove everything before:
   pop_summary <- pop_summary %>% drop_na(Covariate_level)#Remove rows with NA
-  unique(pop_summary$Covariate_level)
+  
+  pop_summary$Covariate_level <- str_trim(pop_summary$Covariate_level, "right") #Remove spaces at the end of the string
   
   # Left join onto base table
   
@@ -254,7 +260,7 @@ table1$Covariate <- gsub("_", " ",table1$Covariate)
 # Add in suppression controls for counts <=5 and then alter totals accordingly
 table1_suppressed <- table1[0,]
 
-for(i in unique(table1$Covariate[which(!startsWith(table1$Covariate_level, "Mean"))])){
+for(i in unique(table1$Covariate[which(!table1$Covariate_level %in% c("1st Qu.","Median","Mean","3rd Qu."))])){
   df<- table1 %>% filter(Covariate == i)
   df <- df %>% mutate(across(!c("Covariate","Covariate_level"),as.numeric))
   df$No_infection <- df$Whole_population - df$COVID_exposed
@@ -276,7 +282,12 @@ for(i in unique(table1$Covariate[which(!startsWith(table1$Covariate_level, "Mean
   df$No_infection <- NULL
   
   if(i == "consulation rate group"){
-    df <- rbind(df, table1 %>% filter(startsWith(Covariate_level, "Mean")))
+    df <- rbind(df, table1 %>% filter(Covariate == "consulation rate"
+                                      & Covariate_level == "Mean"))
+  }
+  
+  if(i == "age group"){
+    df <- rbind(df, table1 %>% filter(Covariate == "age"))
   }
   
   table1_suppressed <- rbind(table1_suppressed,df)
