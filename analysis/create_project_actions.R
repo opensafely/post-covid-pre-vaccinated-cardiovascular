@@ -311,7 +311,7 @@ actions_list <- splice(
     run = "r:latest analysis/format_stata_output.R",
     needs = as.list(paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods,"_day0_",analyses_to_run_stata$day0,"_extf_",analyses_to_run_stata$extf)),
     moderately_sensitive = list(
-      stata_output = "output/stata_output.csv")
+      stata_output = "output/stata_output_pre_vax.csv")
   ),
   
   action(
@@ -319,9 +319,9 @@ actions_list <- splice(
     run = "r:latest analysis/model/07_combine_HRs_to_one_file.R",
     needs = paste0("Analysis_cox_",outcomes_model),
     moderately_sensitive = list(
-      R_output = "output/review/model/R_HR_output.csv",
-      R_event_counts = "output/review/model/R_event_count_output.csv",
-      R_event_counts_day_zero = "output/review/model/R_event_count_day_zero_output.csv")
+      R_output = "output/review/model/R_HR_output_pre_vax.csv",
+      R_event_counts = "output/review/model/R_event_count_output_pre_vax.csv",
+      R_event_counts_day_zero = "output/review/model/R_event_count_day_zero_output_pre_vax.csv")
   )
   
 )

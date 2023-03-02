@@ -2354,6 +2354,16 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE.csv
         stata_output: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE.txt
 
+  stata_cox_model_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_day0_FALSE_extf_TRUE:
+    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_time_periods
+      FALSE TRUE
+    needs:
+    - Analysis_cox_vte_extended_follow_up
+    outputs:
+      moderately_sensitive:
+        medianfup: output/input_sampled_data_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE.csv
+        stata_output: output/input_sampled_data_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE.txt
+
   format_stata_output:
     run: r:latest analysis/format_stata_output.R
     needs:
@@ -2503,9 +2513,10 @@ actions:
     - stata_cox_model_angina_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE
     - stata_cox_model_ate_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE
     - stata_cox_model_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE
+    - stata_cox_model_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_day0_FALSE_extf_TRUE
     outputs:
       moderately_sensitive:
-        stata_output: output/stata_output.csv
+        stata_output: output/stata_output_pre_vax.csv
 
   format_R_output:
     run: r:latest analysis/model/07_combine_HRs_to_one_file.R
@@ -2552,7 +2563,7 @@ actions:
     - Analysis_cox_vte_primary_position_extended_follow_up
     outputs:
       moderately_sensitive:
-        R_output: output/review/model/R_HR_output.csv
-        R_event_counts: output/review/model/R_event_count_output.csv
-        R_event_counts_day_zero: output/review/model/R_event_count_day_zero_output.csv
+        R_output: output/review/model/R_HR_output_pre_vax.csv
+        R_event_counts: output/review/model/R_event_count_output_pre_vax.csv
+        R_event_counts_day_zero: output/review/model/R_event_count_day_zero_output_pre_vax.csv
 

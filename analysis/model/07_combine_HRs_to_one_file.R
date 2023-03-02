@@ -24,7 +24,7 @@ estimates$redacted_results <- factor(estimates$redacted_results, levels = c("Red
                                                                                         "No redacted results"))
 estimates <- estimates[order(estimates$redacted_results),]
 
-write.csv(estimates,paste0(output_dir,"/R_HR_output.csv") , row.names=F)
+write.csv(estimates,paste0(output_dir,"/R_HR_output_pre_vax.csv") , row.names=F)
 
 #Read in R event counts
 print("Combining event count files")
@@ -43,7 +43,7 @@ event_counts_df$redacted_results <- factor(event_counts_df$redacted_results, lev
                                                                             "No redacted results"))
 event_counts_df <- event_counts_df[order(event_counts_df$redacted_results),]
 
-write.csv(event_counts_df,paste0(output_dir,"/R_event_count_output.csv") , row.names=F)
+write.csv(event_counts_df,paste0(output_dir,"/R_event_count_output_pre_vax.csv") , row.names=F)
 
 #Get event counts by time period for day zero analyses
 event_counts_df$events_total <- as.numeric(event_counts_df$events_total)
@@ -67,5 +67,5 @@ tmp_hosp <- rename(tmp_hosp, events_total=events_total_hosp)
 
 event_counts_day_zero <- rbind(event_counts_day_zero, tmp_hosp)
 
-write.csv(event_counts_day_zero,paste0(output_dir,"/R_event_count_day_zero_output.csv") , row.names=F)
+write.csv(event_counts_day_zero,paste0(output_dir,"/R_event_count_day_zero_output_pre_vax.csv") , row.names=F)
 
