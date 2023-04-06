@@ -33,7 +33,10 @@ for (f in files) {
   tmp <- readr::read_tsv(file = paste0("output/",f), skip = 2,
                          col_names = c("term",
                                        "b_min","se_min","t_min","lci_min","uci_min","p_min",
+                                       "b_age_sex_obesity","se_age_sex_obesity","t_age_sex_obesity","lci_age_sex_obesity","uci_age_sex_obesity","p_age_sex_obesity",
                                        "b_max","se_max","t_max","lci_max","uci_max","p_max"))
+  
+  colnames(tmp) <- gsub("age_sex_obesity","AgeSexObesity",colnames(tmp))
   
   ## Make variables numeric
   
@@ -44,6 +47,14 @@ for (f in files) {
   tmp$uci_min <- as.numeric(tmp$uci_min)
   tmp$p_min <- as.numeric(tmp$p_min)
   tmp$b_max <- as.numeric(tmp$b_max)
+  
+  tmp$b_AgeSexObesity <- as.numeric(tmp$b_AgeSexObesity)
+  tmp$se_AgeSexObesity <- as.numeric(tmp$se_AgeSexObesity)
+  tmp$t_AgeSexObesity <- as.numeric(tmp$t_AgeSexObesity)
+  tmp$lci_AgeSexObesity <- as.numeric(tmp$lci_AgeSexObesity)
+  tmp$uci_AgeSexObesity <- as.numeric(tmp$uci_AgeSexObesity)
+  tmp$p_AgeSexObesity <- as.numeric(tmp$p_AgeSexObesity)
+  
   tmp$se_max <- as.numeric(tmp$se_max)
   tmp$t_max <- as.numeric(tmp$t_max)
   tmp$lci_max <- as.numeric(tmp$lci_max)
@@ -57,8 +68,8 @@ for (f in files) {
   ## Separate info from estimates
   
   info_terms <- c("risk","N_fail","N_sub","N","N_clust")
-  info <- tmp[tmp$term %in% info_terms,c("source","term","b_min","b_max")]
-  info <- dplyr::rename(info, "min" = "b_min", "max" = "b_max")
+  info <- tmp[tmp$term %in% info_terms,c("source","term","b_min","b_AgeSexObesity","b_max")]
+  info <- dplyr::rename(info, "min" = "b_min","AgeSexObesity"="b_AgeSexObesity", "max" = "b_max")
   tmp <- tmp[!(tmp$term %in% info_terms),]
   
   ## Rename info
@@ -74,9 +85,9 @@ for (f in files) {
   info <- tidyr::pivot_wider(info, 
                              id_cols = "source", 
                              names_from = "term", 
-                             values_from = c("min","max"),
+                             values_from = c("min","AgeSexObesity", "max"),
                              names_glue = "{term}_{.value}")
-    
+  
   ## Merge info and estinates
   
   tmp <- merge(tmp, info, by = "source")
@@ -99,15 +110,18 @@ for (f in files) {
 
 df <- df[,c("source","term","medianfup",
             paste0(c("b","se","t","lci","uci","p","persondays","outcomes","subjects","observations","clusters"),"_min"),
+            paste0(c("b","se","t","lci","uci","p","persondays","outcomes","subjects","observations","clusters"),"_AgeSexObesity"),
             paste0(c("b","se","t","lci","uci","p","persondays","outcomes","subjects","observations","clusters"),"_max"))]
 
 df <- tidyr::pivot_longer(df, 
                           cols = c(paste0(c("b","se","t","lci","uci","p","persondays","outcomes","subjects","observations","clusters"),"_min"),
+                                   paste0(c("b","se","t","lci","uci","p","persondays","outcomes","subjects","observations","clusters"),"_AgeSexObesity"),
                                    paste0(c("b","se","t","lci","uci","p","persondays","outcomes","subjects","observations","clusters"),"_max")),
                           names_to = c("stat","model"),
                           names_sep = "_",
                           names_prefix = "name",
                           values_to = "value")
+
 
 df <- tidyr::pivot_wider(df, 
                          id_cols = c("source","term", "model","medianfup"),
@@ -116,8 +130,9 @@ df <- tidyr::pivot_wider(df,
 
 # Make names match R output ----------------------------------------------------
 
-df <- df[df$model=="max" | (df$model=="min" & df$term %in% c(unique(df$term)[grepl("days",unique(df$term))],
-                                                             "1.sex","2.sex","age_spline1","age_spline2")),]
+df <- df[df$model=="max" | (df$model=="min" & df$term %in% c(unique(df$term[grepl("days",df$term)]),"1.sex","2.sex","age_spline1","age_spline2")) |
+           (df$model == "AgeSexObesity" & df$term %in% c(unique(df$term[grepl("days",df$term)]),"1.sex","2.sex","age_spline1","age_spline2","cov_bin_obesity")),]
+
 df <- df[order(df$source, df$model),
          c("source","term","model","b","lci","uci","se","medianfup","subjects","outcomes")]
 
