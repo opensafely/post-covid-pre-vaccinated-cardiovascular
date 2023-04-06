@@ -270,6 +270,8 @@ bysort time: summarize(follow_up), detail
 
 stcox days* i.sex age_spline1 age_spline2, strata(region) vce(r)
 est store min, title(Age_Sex)
+stcox days* i.sex age_spline1 age_spline2 i.cov_bin_obesity, vce(r)
+est store age_sex_obesity, title(Age_Sex_Obesity)
 stcox days* i.sex age_spline1 age_spline2 i.cov_cat_ethnicity i.cov_cat_deprivation i.cov_cat_smoking_status cov_num_consulation_rate cov_bin_*, strata(region) vce(r)
 est store max, title(Maximal)
 
