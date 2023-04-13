@@ -97,7 +97,6 @@ vte,electively_unvaccinated,ethnicity_White,normal,FALSE,FALSE
 vte,electively_unvaccinated,ethnicity_Black,reduced,FALSE,FALSE
 vte,electively_unvaccinated,prior_history_FALSE,normal,FALSE,FALSE
 hf_primary_position,electively_unvaccinated,non_hospitalised,reduced,FALSE,FALSE
-vte,pre_vaccination,aer_Male_60_79,reduced,FALSE,FALSE
 vte,electively_unvaccinated,aer_Female_60_79,reduced,FALSE,FALSE
 vte,electively_unvaccinated,aer_Male_60_79,reduced,FALSE,FALSE
 ami,pre_vaccination,hospitalised,reduced,TRUE,FALSE

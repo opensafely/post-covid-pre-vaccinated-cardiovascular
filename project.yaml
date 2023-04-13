@@ -1108,16 +1108,6 @@ actions:
         medianfup: output/input_sampled_data_vte_ethnicity_Other_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE.csv
         stata_output: output/input_sampled_data_vte_ethnicity_Other_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE.txt
 
-  stata_cox_model_vte_aer_Male_60_79_pre_vaccination_reduced_day0_FALSE_extf_FALSE:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_aer_Male_60_79_pre_vaccination_reduced_time_periods
-      FALSE FALSE
-    needs:
-    - Analysis_cox_vte
-    outputs:
-      moderately_sensitive:
-        medianfup: output/input_sampled_data_vte_aer_Male_60_79_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE.csv
-        stata_output: output/input_sampled_data_vte_aer_Male_60_79_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE.txt
-
   stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE
@@ -2398,7 +2388,6 @@ actions:
     - stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE
     - stata_cox_model_vte_agegp_60_79_pre_vaccination_reduced_day0_FALSE_extf_FALSE
     - stata_cox_model_vte_ethnicity_Other_pre_vaccination_reduced_day0_FALSE_extf_FALSE
-    - stata_cox_model_vte_aer_Male_60_79_pre_vaccination_reduced_day0_FALSE_extf_FALSE
     - stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE
     - stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE
     - stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE
