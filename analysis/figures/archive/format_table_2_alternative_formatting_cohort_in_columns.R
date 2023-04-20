@@ -15,11 +15,7 @@ dir.create(file.path(output_dir), recursive =TRUE, showWarnings = FALSE)
 active_analyses <- readr::read_rds("lib/active_analyses.RDS")
 
 # Get data from each cohort ----------------------------------------------------
-#table2_pre_vax <- read.csv(paste0(results_dir,"table2_pre_vaccination_cvd.csv"))
-table2_pre_vax_extFU <- read.csv(paste0(results_dir,"table2_pre_vaccination_extended_follow_up_outcomes_cvd.csv"))
-table2_pre_vax_extFU <- table2_pre_vax_extFU %>% dplyr::rename(cohort_to_run = cohort_name)
-table2_pre_vax_extFU$event <- gsub('_extended_follow_up', '', table2_pre_vax_extFU$event)
-
+table2_pre_vax <- read.csv(paste0(results_dir,"table2_pre_vaccination_cvd.csv"))
 table2_vax <- read.csv(paste0(results_dir,"table2_vaccinated.csv"))
 table2_unvax <- read.csv(paste0(results_dir,"table2_electively_unvaccinated.csv"))
 
@@ -82,7 +78,7 @@ format_table_2_short<- function(df, cohort){
   return(table2)
 }
 
-table2_pre_vax_formatted <- format_table_2_short(table2_pre_vax_extFU,"Pre-vaccination")
+table2_pre_vax_formatted <- format_table_2_short(table2_pre_vax,"Pre-vaccination")
 table2_vax_formatted <- format_table_2_short(table2_vax,"Vaccinated")
 table2_unvax_formatted <- format_table_2_short(table2_unvax,"Unvaccinated")
 
@@ -129,4 +125,4 @@ table2_transposed$period <- factor(table2_transposed$period, levels = c("No COVI
 
 table2_transposed <- table2_transposed[order(table2_transposed$Outcome, table2_transposed$period),]
 
-write.csv(table2_transposed, paste0(output_dir,"formatted_table_2_cohorts_in_columns_extended_FU.csv"),row.names = F)
+write.csv(table2_transposed, paste0(output_dir,"formatted_table_2_cohorts_in_columns_updated.csv"),row.names = F)
