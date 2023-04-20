@@ -7,7 +7,7 @@ This project compares three cohorts: pre-vaccination, unvaccinated and vaccinate
 You can run this project via [Gitpod](https://gitpod.io) in a web browser by clicking on this badge: [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/opensafely/post-covid-vaccinated)
 
 -   The preprint can be found
--   The project protocol whih contains in depth deatils of the anlaysis plan can be found [`here`](./protocol)
+-   The project protocol which contains in depth deatils of the anlaysis plan can be found [`here`](./protocol)
 -   Analysis scripts are in the [`analysis`](./analysis) directory
 -   If you are interested in how we defined our code lists, look in the [codelists](https://github.com/opensafely/post-covid-vaccinated/tree/main/codelists) directory
 -   Developers and epidemiologists interested in the framework should review the [`OpenSAFELY documentation`](https://docs.opensafely.org/)
