@@ -5,7 +5,7 @@
 ## =============================================================================
 source(file.path(scripts_dir,"04_01_(a)_cox_fit_model.R"))
 
-get_vacc_res <- function(event,subgroup,stratify_by_subgroup,stratify_by,time_point,input,covar_names,cuts_days_since_expo,cuts_days_since_expo_reduced,cuts_days_since_expo_day_zero,cuts_days_since_expo_reduced_day_zero,uts_days_since_expo_month1_split,cuts_days_since_expo_reduced_month1_split,mdl){
+get_vacc_res <- function(event,subgroup,stratify_by_subgroup,stratify_by,time_point,input,covar_names,cuts_days_since_expo,cuts_days_since_expo_reduced,cuts_days_since_expo_day_zero,cuts_days_since_expo_reduced_day_zero,cuts_days_since_expo_month1_split,cuts_days_since_expo_reduced_month1_split,mdl){
   print(paste0("Working on subgroup: ", subgroup))
   print(paste0("Using ",time_point," time point"))
   
