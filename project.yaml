@@ -138,6 +138,14 @@ actions:
       moderately_sensitive:
         histogram_data: output/review/descriptives/histogram_data_pre_vaccination_extended_follow_up.csv
 
+  days_covid19_to_hospitalisation:
+    run: r:latest analysis/descriptives/days_covid19_to_hospitalisation.R
+    needs:
+    - stage1_data_cleaning
+    outputs:
+      moderately_sensitive:
+        distribution: output/review/descriptives/days_COVID19_to_hospitalisation_pre_vaccination.csv
+
   ## Apply cox model for ami 
 
   Analysis_cox_ami:
