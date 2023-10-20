@@ -110,15 +110,15 @@ apply_model_function <- function(outcome,cohort){
   )
 }
 
-stata_actions <- function(outcome, cohort, subgroup, time_periods, day0, extf){
+stata_actions <- function(outcome, cohort, subgroup, time_periods, day0, extf,m1split){
   splice(
     action(
-      name = glue("stata_cox_model_{outcome}_{subgroup}_{cohort}_{time_periods}_day0_{day0}_extf_{extf}"),
-      run = glue("stata-mp:latest analysis/cox_model.do input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods {day0} {extf}"),
+      name = glue("stata_cox_model_{outcome}_{subgroup}_{cohort}_{time_periods}_day0_{day0}_extf_{extf}_m1split{m1split}"),
+      run = glue("stata-mp:latest analysis/cox_model.do input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods {day0} {extf} {m1split}"),
       needs = list(glue("Analysis_cox_{outcome}")),
       moderately_sensitive = list(
-        medianfup = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_stata_median_fup_day0{day0}_extf{extf}.csv"),
-        stata_output = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_cox_model_day0{day0}_extf{extf}.txt")
+        medianfup = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_stata_median_fup_day0{day0}_extf{extf}_m1split{m1split}.csv"),
+        stata_output = glue("output/input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods_cox_model_day0{day0}_extf{extf}_m1split{m1split}.txt")
       )
     )
   )
@@ -302,14 +302,15 @@ actions_list <- splice(
                                                  cohort = analyses_to_run_stata[i, "cohort"],
                                                  time_periods = analyses_to_run_stata[i, "time_periods"],
                                                  day0 = analyses_to_run_stata[i, "day0"],
-                                                 extf = analyses_to_run_stata[i, "extf"])),
+                                                 extf = analyses_to_run_stata[i, "extf"],
+                                                 m1split = analyses_to_run_stata[i, "m1split"])),
                 recursive = FALSE)),
 
   #comment("Format Stata output"),
   action(
     name = "format_stata_output",
     run = "r:latest analysis/format_stata_output.R",
-    needs = as.list(paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods,"_day0_",analyses_to_run_stata$day0,"_extf_",analyses_to_run_stata$extf)),
+    needs = as.list(paste0("stata_cox_model_",analyses_to_run_stata$outcome,"_",analyses_to_run_stata$subgroup,"_",analyses_to_run_stata$cohort,"_",analyses_to_run_stata$time_periods,"_day0_",analyses_to_run_stata$day0,"_extf_",analyses_to_run_stata$extf,"_m1split_",analyses_to_run_stata$m1split)),
     moderately_sensitive = list(
       stata_output = "output/stata_output_pre_vax.csv")
   ),
