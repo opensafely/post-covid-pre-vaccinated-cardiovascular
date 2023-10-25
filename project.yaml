@@ -144,7 +144,7 @@ actions:
     - stage1_data_cleaning
     outputs:
       moderately_sensitive:
-        histogram_data: output/review/descriptives/days_COVID19_to_hospitalisation_pre_vaccination.csv
+        distribution: output/review/descriptives/days_COVID19_to_hospitalisation_pre_vaccination.csv
 
   ## Apply cox model for ami 
 

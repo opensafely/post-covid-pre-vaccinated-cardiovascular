@@ -286,7 +286,7 @@ actions_list <- splice(
     run = "r:latest analysis/descriptives/days_covid19_to_hospitalisation.R",
     needs =  list("stage1_data_cleaning"),
     moderately_sensitive = list(
-      histogram_data = "output/review/descriptives/days_COVID19_to_hospitalisation_pre_vaccination.csv")
+      distribution = "output/review/descriptives/days_COVID19_to_hospitalisation_pre_vaccination.csv")
   ),
   
   # action(
