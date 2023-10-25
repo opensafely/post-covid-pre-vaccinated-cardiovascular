@@ -3,47 +3,47 @@ library(yaml)
 library(here)
 library(glue)
 library(readr)
-#library(dplyr)
 
-###########################
-# Load information to use #
-###########################
-
-## defaults ----
+# Set defaults -----------------------------------------------------------------
 defaults_list <- list(version = "3.0",
                       expectations = list(population_size = 100000L))
 
 active_analyses <- read_rds("lib/active_analyses.rds")
+
 active_analyses_table <-
   subset(active_analyses, active_analyses$active == "TRUE")
+
 outcomes_model <-
   active_analyses_table$outcome_variable %>% str_replace("out_date_", "")
+
 cohort_to_run <- c("pre_vaccination")
+
 analyses <- c("main", "subgroups")
+
 analyses_to_run_stata <-
   read.csv("lib/analyses_to_run_in_stata.csv")
+
 analyses_to_run_stata$subgroup <-
   ifelse(
     analyses_to_run_stata$subgroup == "hospitalised",
     "covid_pheno_hospitalised",
     analyses_to_run_stata$subgroup
   )
+
 analyses_to_run_stata$subgroup <-
   ifelse(
     analyses_to_run_stata$subgroup == "non_hospitalised",
     "covid_pheno_non_hospitalised",
     analyses_to_run_stata$subgroup
   )
+
 analyses_to_run_stata <-
   analyses_to_run_stata %>% filter(cohort %in% cohort_to_run
                                    &
                                      time_periods == "reduced")
 
-# create action functions ----
+# Create action function -------------------------------------------------------
 
-############################
-## generic action function #
-############################
 action <- function(name,
                    run,
                    dummy_data_file = NULL,
@@ -51,8 +51,10 @@ action <- function(name,
                    needs = NULL,
                    highly_sensitive = NULL,
                    moderately_sensitive = NULL) {
+  
   outputs <- list(moderately_sensitive = moderately_sensitive,
                   highly_sensitive = highly_sensitive)
+  
   outputs[sapply(outputs, is.null)] <- NULL
   
   action <- list(
@@ -67,18 +69,19 @@ action <- function(name,
   names(action_list) <- name
   
   action_list
+  
 }
 
+# Create comment function ------------------------------------------------------
 
-## create comment function ----
 comment <- function(...) {
   list_comments <- list(...)
   comments <- map(list_comments, ~ paste0("## ", ., " ##"))
   comments
 }
 
+# Create function to convert comment "actions" in a yaml string into proper comments
 
-## create function to convert comment "actions" in a yaml string into proper comments
 convert_comment_actions <- function(yaml.txt) {
   yaml.txt %>%
     str_replace_all("\\\n(\\s*)\\'\\'\\:(\\s*)\\'", "\n\\1")  %>%
@@ -87,11 +90,7 @@ convert_comment_actions <- function(yaml.txt) {
     str_replace_all("\\#\\#\\'\\\n", "\n")
 }
 
-
-#################################################
-## Function for typical actions to analyse data #
-#################################################
-# Updated to a typical action running Cox models for one outcome
+# Create typical action for running Cox models for one outcome in R ------------
 
 apply_model_function <- function(outcome, cohort) {
   splice(
@@ -131,6 +130,8 @@ apply_model_function <- function(outcome, cohort) {
   )
 }
 
+# Create typical action for running Cox models for one outcome in Stata --------
+
 stata_actions <-
   function(outcome,
            cohort,
@@ -141,26 +142,44 @@ stata_actions <-
            m1split) {
     splice(action(
       name = glue(
-        "s_{outcome}_{subgroup}_{cohort}_day0_{day0}_extf_{extf}_m1split_{m1split}"
+        "d_{outcome}_{subgroup}_{cohort}_day0{day0}_extf{extf}_m1split{m1split}"
       ),
       run = glue(
-        "stata-mp:latest analysis/cox_model.do input_sampled_data_{outcome}_{subgroup}_{cohort} {day0} {extf} {m1split}"
+        "r:latest analysis/stata_data.R {outcome} {subgroup} {cohort} {day0} {extf} {m1split}"
       ),
-      needs = c(as.list(glue("Analysis_cox_{outcome}"))),
+      needs = c(as.list(glue(
+        "Analysis_cox_{outcome}"
+      ))),
+      highly_sensitive = list(
+        stata_input = glue(
+          "output/input_stata_{outcome}_{subgroup}_{cohort}_day0{day0}_extf{extf}_m1split{m1split}.csv.gz"
+        )
+      )
+    ),
+    action(
+      name = glue(
+        "s_{outcome}_{subgroup}_{cohort}_day0{day0}_extf{extf}_m1split{m1split}"
+      ),
+      run = glue(
+        "stata-mp:latest analysis/cox_model.do {outcome} {subgroup} {cohort} {day0} {extf} {m1split}"
+      ),
+      needs = c(as.list(glue(
+        "d_{outcome}_{subgroup}_{cohort}_day0{day0}_extf{extf}_m1split{m1split}"
+        ))),
       moderately_sensitive = list(
         medianfup = glue(
-          "output/input_sampled_data_{outcome}_{subgroup}_{cohort}_stata_median_fup_day0{day0}_extf{extf}_m1split{m1split}.csv"
+          "output/stata_median_fup_{outcome}_{subgroup}_{cohort}_day0{day0}_extf{extf}_m1split{m1split}.csv"
         ),
         stata_output = glue(
-          "output/input_sampled_data_{outcome}_{subgroup}_{cohort}_cox_model_day0{day0}_extf{extf}_m1split{m1split}.txt"
+          "output/stata_cox_model_{outcome}_{subgroup}_{cohort}_day0{day0}_extf{extf}_m1split{m1split}.txt"
         )
       )
     ))
+    
   }
 
-##########################################################
-## Define and combine all actions into a list of actions #
-##########################################################
+# Define and combine all actions into a list of actions ------------------------
+
 actions_list <- splice(
   comment(
     "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #",
@@ -358,11 +377,11 @@ actions_list <- splice(
         analyses_to_run_stata$subgroup,
         "_",
         analyses_to_run_stata$cohort,
-        "_day0_",
+        "_day0",
         analyses_to_run_stata$day0,
-        "_extf_",
+        "_extf",
         analyses_to_run_stata$extf,
-        "_m1split_",
+        "_m1split",
         analyses_to_run_stata$m1split
       )
     ),
@@ -383,13 +402,13 @@ actions_list <- splice(
 )
 
 
-## combine everything ----
+# Combine everything -----------------------------------------------------------
+
 project_list <- splice(defaults_list,
                        list(actions = actions_list))
 
-#####################################################################################
-## convert list to yaml, reformat comments and white space, and output a .yaml file #
-#####################################################################################
+# Output a .yaml file ----------------------------------------------------------
+
 as.yaml(project_list, indent = 2) %>%
   # convert comment actions to comments
   convert_comment_actions() %>%

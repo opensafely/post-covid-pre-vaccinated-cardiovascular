@@ -9,11 +9,13 @@
 	   Other output:			logfiles
    -----------------------------------------------------------------------------*/
 
-local cpf "`1'"
-local day0 "`2'"
-local extf "`3'"
-local m1split "`4'"
-
+local outcome "`1'"
+local subgroup "`2'"
+local cohort "`3'"
+local day0 "`4'"
+local extf "`5'"
+local m1split "`6'"
+  
 * Set file paths
 
 global projectdir `c(pwd)'
@@ -23,9 +25,13 @@ di "$projectdir"
 
 adopath + "$projectdir/analysis/extra_ados"
 
+* Unzip the input data 
+
+shell gunzip "./output/input_stata_`outcome'_`subgroup'_`cohort'_day0`day0'_extf`extf'_m1split`m1split'.csv"
+
 * Import and describe data
 
-import delim using "./output/`cpf'.csv", clear
+import delim using "./output/input_stata_`outcome'_`subgroup'_`cohort'_day0`day0'_extf`extf'_m1split`m1split'.csv", clear
 
 des
 
@@ -40,7 +46,7 @@ rename region_name region
 rename event_date outcome_date
 
 * Generate pre vaccination cohort dummy variable
-local prevax_cohort = regexm("`cpf'", "pre_vaccination")
+local prevax_cohort = regexm("`cohort'", "pre_vaccination")
 
 * Replace NA with missing value that Stata recognises
 
@@ -302,7 +308,7 @@ est store age_sex_obesity, title(Age_Sex_Obesity)
 stcox days* i.sex age_spline1 age_spline2 i.cov_cat_ethnicity i.cov_cat_deprivation i.cov_cat_smoking_status cov_num_consulation_rate cov_bin_*, strata(region) vce(r)
 est store max, title(Maximal)
 
-estout * using "output/`cpf'_cox_model_day0`day0'_extf`extf'_m1split`m1split'.txt", cells("b se t ci_l ci_u p") stats(risk N_fail N_sub N N_clust) replace 
+estout * using "output/stata_cox_model_`outcome'_`subgroup'_`cohort'_day0`day0'_extf`extf'_m1split`m1split'.txt", cells("b se t ci_l ci_u p") stats(risk N_fail N_sub N N_clust) replace 
 
 * Calculate median follow-up among individuals with the outcome
 
@@ -386,4 +392,4 @@ bysort term: egen medianfup = median(follow_up)
 keep term medianfup
 duplicates drop
 
-export delimited using "output/`cpf'_stata_median_fup_day0`day0'_extf`extf'_m1split`m1split'", replace
+export delimited using "output/stata_median_fup_`outcome'_`subgroup'_`cohort'_day0`day0'_extf`extf'_m1split`m1split'", replace
