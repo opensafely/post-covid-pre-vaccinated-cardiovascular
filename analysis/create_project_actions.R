@@ -113,7 +113,7 @@ apply_model_function <- function(outcome,cohort){
 stata_actions <- function(outcome, cohort, subgroup, time_periods, day0, extf,m1split){
   splice(
     action(
-      name = glue("stata_cox_model_{outcome}_{subgroup}_{cohort}_{time_periods}_day0_{day0}_extf_{extf}_m1split{m1split}"),
+      name = glue("stata_cox_model_{outcome}_{subgroup}_{cohort}_{time_periods}_day0_{day0}_extf_{extf}_m1split_{m1split}"),
       run = glue("stata-mp:latest analysis/cox_model.do input_sampled_data_{outcome}_{subgroup}_{cohort}_{time_periods}_time_periods {day0} {extf} {m1split}"),
       needs = list(glue("Analysis_cox_{outcome}")),
       moderately_sensitive = list(
@@ -280,7 +280,15 @@ actions_list <- splice(
     moderately_sensitive = list(
       histogram_data = "output/review/descriptives/histogram_data_pre_vaccination_extended_follow_up.csv")
   ),
-    
+
+  action(
+    name = "days_covid19_to_hospitalisation",
+    run = "r:latest analysis/descriptives/days_covid19_to_hospitalisation.R",
+    needs =  list("stage1_data_cleaning"),
+    moderately_sensitive = list(
+      histogram_data = "output/review/descriptives/days_COVID19_to_hospitalisation_pre_vaccination.csv")
+  ),
+  
   # action(
   #   name = "event_counts_by_time_period",
   #   run = "r:latest analysis/descriptives/event_counts_by_time_period.R",

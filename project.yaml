@@ -138,6 +138,14 @@ actions:
       moderately_sensitive:
         histogram_data: output/review/descriptives/histogram_data_pre_vaccination_extended_follow_up.csv
 
+  days_covid19_to_hospitalisation:
+    run: r:latest analysis/descriptives/days_covid19_to_hospitalisation.R
+    needs:
+    - stage1_data_cleaning
+    outputs:
+      moderately_sensitive:
+        histogram_data: output/review/descriptives/days_COVID19_to_hospitalisation_pre_vaccination.csv
+
   ## Apply cox model for ami 
 
   Analysis_cox_ami:
@@ -898,7 +906,7 @@ actions:
         sampled_data: output/input_sampled_data_vte_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
         cox_input_data: output/input_vte_primary_position_extended_follow_up_*_pre_vaccination_*_time_periods.csv
 
-  stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -908,7 +916,7 @@ actions:
         medianfup: output/input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -918,7 +926,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -928,7 +936,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -938,7 +946,7 @@ actions:
         medianfup: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_tia_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_tia_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -948,7 +956,7 @@ actions:
         medianfup: output/input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -958,7 +966,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -968,7 +976,7 @@ actions:
         medianfup: output/input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -978,7 +986,7 @@ actions:
         medianfup: output/input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -988,7 +996,7 @@ actions:
         medianfup: output/input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -998,7 +1006,7 @@ actions:
         medianfup: output/input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1007,9 +1015,8 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
-
-  stata_cox_model_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+  ? stata_cox_model_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE
+  : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
     - Analysis_cox_stroke_isch_primary_position
@@ -1018,7 +1025,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1028,7 +1035,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1038,7 +1045,7 @@ actions:
         medianfup: output/input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1048,7 +1055,7 @@ actions:
         medianfup: output/input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1058,7 +1065,7 @@ actions:
         medianfup: output/input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1068,7 +1075,7 @@ actions:
         medianfup: output/input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1078,7 +1085,7 @@ actions:
         medianfup: output/input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1088,7 +1095,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_agegp_60_79_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_agegp_60_79_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1098,7 +1105,7 @@ actions:
         medianfup: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_agegp_60_79_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_ethnicity_Other_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_ethnicity_Other_pre_vaccination_reduced_day0_FALSE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_ethnicity_Other_pre_vaccination_reduced_time_periods
       FALSE FALSE FALSE
     needs:
@@ -1108,7 +1115,7 @@ actions:
         medianfup: output/input_sampled_data_vte_ethnicity_Other_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_ethnicity_Other_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1118,7 +1125,7 @@ actions:
         medianfup: output/input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1128,7 +1135,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1138,7 +1145,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1148,7 +1155,7 @@ actions:
         medianfup: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_tia_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_tia_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1158,7 +1165,7 @@ actions:
         medianfup: output/input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1168,7 +1175,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1178,7 +1185,7 @@ actions:
         medianfup: output/input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_angina_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1188,7 +1195,7 @@ actions:
         medianfup: output/input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1198,7 +1205,7 @@ actions:
         medianfup: output/input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1208,7 +1215,7 @@ actions:
         medianfup: output/input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1218,7 +1225,7 @@ actions:
         medianfup: output/input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1228,7 +1235,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1238,7 +1245,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1248,7 +1255,7 @@ actions:
         medianfup: output/input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1258,7 +1265,7 @@ actions:
         medianfup: output/input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1268,7 +1275,7 @@ actions:
         medianfup: output/input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1278,7 +1285,7 @@ actions:
         medianfup: output/input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1288,7 +1295,7 @@ actions:
         medianfup: output/input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1298,7 +1305,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1308,7 +1315,7 @@ actions:
         medianfup: output/input_sampled_data_ami_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_isch_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1318,7 +1325,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_dvt_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1328,7 +1335,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1338,7 +1345,7 @@ actions:
         medianfup: output/input_sampled_data_pe_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_tia_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_tia_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1348,7 +1355,7 @@ actions:
         medianfup: output/input_sampled_data_tia_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_sah_hs_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_sah_hs_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1358,7 +1365,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1368,7 +1375,7 @@ actions:
         medianfup: output/input_sampled_data_hf_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_angina_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_angina_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1378,7 +1385,7 @@ actions:
         medianfup: output/input_sampled_data_angina_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1388,7 +1395,7 @@ actions:
         medianfup: output/input_sampled_data_ate_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1398,7 +1405,7 @@ actions:
         medianfup: output/input_sampled_data_vte_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1408,7 +1415,7 @@ actions:
         medianfup: output/input_sampled_data_ami_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_isch_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1418,7 +1425,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1428,7 +1435,7 @@ actions:
         medianfup: output/input_sampled_data_pe_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1438,7 +1445,7 @@ actions:
         medianfup: output/input_sampled_data_hf_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1448,7 +1455,7 @@ actions:
         medianfup: output/input_sampled_data_ate_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_primary_position_main_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1458,7 +1465,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1468,7 +1475,7 @@ actions:
         medianfup: output/input_sampled_data_ami_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_isch_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1478,7 +1485,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_dvt_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1488,7 +1495,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1498,7 +1505,7 @@ actions:
         medianfup: output/input_sampled_data_pe_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1508,7 +1515,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1518,7 +1525,7 @@ actions:
         medianfup: output/input_sampled_data_hf_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_angina_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_angina_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1528,7 +1535,7 @@ actions:
         medianfup: output/input_sampled_data_angina_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1538,7 +1545,7 @@ actions:
         medianfup: output/input_sampled_data_ate_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1548,7 +1555,7 @@ actions:
         medianfup: output/input_sampled_data_vte_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ami_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1557,7 +1564,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_isch_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE
+  ? stata_cox_model_stroke_isch_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1567,7 +1574,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_pe_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_pe_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1576,7 +1583,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_sah_hs_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE
+  ? stata_cox_model_stroke_sah_hs_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1586,7 +1593,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_hf_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_hf_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1596,7 +1603,7 @@ actions:
         medianfup: output/input_sampled_data_hf_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ate_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_ate_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1606,7 +1613,7 @@ actions:
         medianfup: output/input_sampled_data_ate_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_vte_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1splitFALSE:
+  stata_cox_model_vte_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_FALSE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE FALSE FALSE
     needs:
@@ -1616,7 +1623,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfFALSE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfFALSE_m1splitFALSE.txt
 
-  stata_cox_model_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1625,7 +1632,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1635,7 +1642,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1645,7 +1652,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1655,7 +1662,7 @@ actions:
         medianfup: output/input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1664,7 +1671,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1674,7 +1681,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1684,7 +1691,7 @@ actions:
         medianfup: output/input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1694,7 +1701,7 @@ actions:
         medianfup: output/input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1704,7 +1711,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1713,7 +1720,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1722,7 +1729,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1731,7 +1738,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1740,7 +1747,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1749,7 +1756,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1758,7 +1765,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1767,7 +1774,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1776,7 +1783,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1785,7 +1792,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -1795,7 +1802,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1804,9 +1811,8 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-
-  stata_cox_model_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
-    run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
+  ? stata_cox_model_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
+  : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
     - Analysis_cox_stroke_isch_extended_follow_up
@@ -1815,7 +1821,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1825,7 +1831,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1835,7 +1841,7 @@ actions:
         medianfup: output/input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1844,7 +1850,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1854,7 +1860,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1864,7 +1870,7 @@ actions:
         medianfup: output/input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1874,7 +1880,7 @@ actions:
         medianfup: output/input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1884,7 +1890,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1893,7 +1899,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1902,7 +1908,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1911,7 +1917,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1920,7 +1926,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1929,7 +1935,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1938,7 +1944,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1947,7 +1953,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1956,7 +1962,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1965,7 +1971,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1975,7 +1981,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ami_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ami_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1985,7 +1991,7 @@ actions:
         medianfup: output/input_sampled_data_ami_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_stroke_isch_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -1995,7 +2001,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_dvt_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2005,7 +2011,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_pe_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_pe_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2015,7 +2021,7 @@ actions:
         medianfup: output/input_sampled_data_pe_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_sah_hs_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_stroke_sah_hs_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2025,7 +2031,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_hf_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_hf_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2035,7 +2041,7 @@ actions:
         medianfup: output/input_sampled_data_hf_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_angina_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_angina_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2045,7 +2051,7 @@ actions:
         medianfup: output/input_sampled_data_angina_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ate_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ate_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2055,7 +2061,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_vte_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_vte_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2065,7 +2071,7 @@ actions:
         medianfup: output/input_sampled_data_vte_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ami_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ami_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2075,7 +2081,7 @@ actions:
         medianfup: output/input_sampled_data_ami_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_isch_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_stroke_isch_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2085,7 +2091,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_pe_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_pe_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2095,7 +2101,7 @@ actions:
         medianfup: output/input_sampled_data_pe_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_stroke_sah_hs_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_stroke_sah_hs_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2105,7 +2111,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_hf_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_hf_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2115,7 +2121,7 @@ actions:
         medianfup: output/input_sampled_data_hf_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ate_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ate_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2125,7 +2131,7 @@ actions:
         medianfup: output/input_sampled_data_ate_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_vte_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_vte_primary_position_extended_follow_up_main_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2135,7 +2141,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ami_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ami_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2144,7 +2150,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_isch_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_isch_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2154,7 +2160,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_dvt_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_dvt_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2164,7 +2170,7 @@ actions:
         medianfup: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_pe_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_pe_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2174,7 +2180,7 @@ actions:
         medianfup: output/input_sampled_data_pe_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_tia_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_tia_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2183,7 +2189,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_tia_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_sah_hs_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_sah_hs_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2193,7 +2199,7 @@ actions:
         medianfup: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_sah_hs_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_hf_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_hf_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2203,7 +2209,7 @@ actions:
         medianfup: output/input_sampled_data_hf_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_angina_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_angina_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2213,7 +2219,7 @@ actions:
         medianfup: output/input_sampled_data_angina_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2223,7 +2229,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2232,7 +2238,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_ami_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_ami_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2241,7 +2247,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ami_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_stroke_isch_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_stroke_isch_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2250,7 +2256,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_stroke_isch_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_dvt_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_dvt_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2259,7 +2265,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_dvt_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_pe_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_pe_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2268,7 +2274,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_pe_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_tia_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_tia_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2277,7 +2283,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_tia_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_hf_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_hf_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2286,7 +2292,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_hf_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_angina_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_angina_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2295,7 +2301,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_angina_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_ate_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_ate_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2304,7 +2310,7 @@ actions:
       moderately_sensitive:
         medianfup: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
-  ? stata_cox_model_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1splitFALSE
+  ? stata_cox_model_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_TRUE_extf_TRUE_m1split_FALSE
   : run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       TRUE TRUE FALSE
     needs:
@@ -2314,7 +2320,7 @@ actions:
         medianfup: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0TRUE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_primary_position_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0TRUE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -2324,7 +2330,7 @@ actions:
         medianfup: output/input_sampled_data_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_vte_extended_follow_up_ethnicity_Other_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ate_extended_follow_up_sex_Female_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitFALSE:
+  stata_cox_model_ate_extended_follow_up_sex_Female_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_FALSE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_sex_Female_pre_vaccination_reduced_time_periods
       FALSE TRUE FALSE
     needs:
@@ -2334,7 +2340,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_sex_Female_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitFALSE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_sex_Female_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitFALSE.txt
 
-  stata_cox_model_ate_extended_follow_up_main_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitTRUE:
+  stata_cox_model_ate_extended_follow_up_main_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_TRUE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_main_pre_vaccination_reduced_time_periods
       FALSE TRUE TRUE
     needs:
@@ -2344,7 +2350,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitTRUE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitTRUE.txt
 
-  stata_cox_model_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitTRUE:
+  stata_cox_model_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_TRUE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE TRUE
     needs:
@@ -2354,7 +2360,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitTRUE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitTRUE.txt
 
-  stata_cox_model_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitTRUE:
+  stata_cox_model_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_TRUE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE TRUE
     needs:
@@ -2364,7 +2370,7 @@ actions:
         medianfup: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitTRUE.csv
         stata_output: output/input_sampled_data_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitTRUE.txt
 
-  stata_cox_model_vte_extended_follow_up_main_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitTRUE:
+  stata_cox_model_vte_extended_follow_up_main_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_TRUE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_main_pre_vaccination_reduced_time_periods
       FALSE TRUE TRUE
     needs:
@@ -2374,7 +2380,7 @@ actions:
         medianfup: output/input_sampled_data_vte_extended_follow_up_main_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitTRUE.csv
         stata_output: output/input_sampled_data_vte_extended_follow_up_main_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitTRUE.txt
 
-  stata_cox_model_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitTRUE:
+  stata_cox_model_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_TRUE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE TRUE
     needs:
@@ -2384,7 +2390,7 @@ actions:
         medianfup: output/input_sampled_data_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_stata_median_fup_day0FALSE_extfTRUE_m1splitTRUE.csv
         stata_output: output/input_sampled_data_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_reduced_time_periods_cox_model_day0FALSE_extfTRUE_m1splitTRUE.txt
 
-  stata_cox_model_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1splitTRUE:
+  stata_cox_model_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_day0_FALSE_extf_TRUE_m1split_TRUE:
     run: stata-mp:latest analysis/cox_model.do input_sampled_data_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_reduced_time_periods
       FALSE TRUE TRUE
     needs:
