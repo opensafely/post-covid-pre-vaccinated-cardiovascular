@@ -3,8 +3,8 @@
 files <- list.files(path = "output/", pattern = "_cox_model_")
 
 analyses_to_run_stata <- read.csv("lib/analyses_to_run_in_stata.csv", header=TRUE,
-                                  col.names = c("outcome","cohort","subgroup","time_periods","day0","extf"),
-                                  colClasses = c("character","character","character","character","character","character"))
+                                  col.names = c("outcome","cohort","subgroup","time_periods","day0","extf","m1split"),
+                                  colClasses = c("character","character","character","character","character","character","character"))
 
 analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="hospitalised","covid_pheno_hospitalised",analyses_to_run_stata$subgroup)
 analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="non_hospitalised","covid_pheno_non_hospitalised",analyses_to_run_stata$subgroup)
@@ -14,9 +14,9 @@ tmp_files <- paste0("input_sampled_data_",
                     analyses_to_run_stata$subgroup,"_",
                     analyses_to_run_stata$cohort,"_",
                     analyses_to_run_stata$time_periods,
-                    "_time_periods_cox_model_day0",
-                    analyses_to_run_stata$day0,
-                    "_extf",analyses_to_run_stata$extf,".txt")
+                    "_time_periods_cox_model_day0",analyses_to_run_stata$day0,
+                    "_extf",analyses_to_run_stata$extf,
+                    "_m1split",analyses_to_run_stata$m1split,".txt")
 
 files <- intersect(files, tmp_files)
 
