@@ -12,6 +12,7 @@
 local cpf "`1'"
 local day0 "`2'"
 local extf "`3'"
+local m1split "`4'"
 
 * Set file paths
 
@@ -248,16 +249,16 @@ else {
 		replace days0_1 = 1 if time==0
 		tab days0_1
 		gen days1_7 = 0
-		replace days1_7 = 1 if days==1
+		replace days1_7 = 1 if time==1
 		tab days1_7
 		gen days7_14 = 0
-		replace days7_14 = 1 if days==7
+		replace days7_14 = 1 if time==7
 		tab days7_14
 		gen days14_21 = 0
-		replace days14_21 = 1 if days==14
+		replace days14_21 = 1 if time==14
 		tab days14_21
 		gen days21_28 = 0
-		replace days21_28 = 1 if days==21
+		replace days21_28 = 1 if time==21
 		tab days21_28
 	}
 	else{
@@ -322,14 +323,14 @@ if `prevax_cohort'==1 {
 		else {
 			if "`m1split'"=="TRUE" {
 				drop if days0_1==0 & days1_7==1 & days7_14==0 & days14_21==0 & days21_28==0 & days28_197==0 & days197_365==0 & days365_714==0
-				replace term = "days0_1" if days0_1==1 & days1_28==0 & days28_197==0 & days197_365==0 & days365_714==0
-				replace term = "days1_7" if days0_1==0 & days1_7==1 & days7_14==0 & days14_21==0 & days21_28==0 & days28_197==0 & days197_535==0
-				replace term = "days7_14" if days0_1==0 & days1_7==0 & days7_14==1 & days14_21==0 & days21_28==0 & days28_197==0 & days197_535==0
-				replace term = "days14_21" if days0_1==0 & days1_7==0 & days7_14==0 & days14_21==1 & days21_28==0 & days28_197==0 & days197_535==0
-				replace term = "days21_28" if days0_1==0 & days1_7==0 & days7_14==0 & days14_21==0 & days21_28==1 & days28_197==0 & days197_535==0
-				replace term = "days28_197" if days0_1==0 & days1_28==0 & days28_197==1 & days197_365==0 & days365_714==0
-				replace term = "days197_365" if days0_1==0 & days1_28==0 & days28_197==0 & days197_365==1 & days365_714==0
-				replace term = "days365_714" if days0_1==0 & days1_28==0 & days28_197==0 & days197_365==0 & days365_714==1
+				replace term = "days0_1" if days0_1==1 & days1_7==0 & days7_14==0 & days14_21==0 & days21_28==0 & days28_197==0 & days197_365==0 & days365_714==0
+				replace term = "days1_7" if days0_1==0 & days1_7==1 & days7_14==0 & days14_21==0 & days21_28==0 & days28_197==0 & days197_365==0 & days365_714==0
+				replace term = "days7_14" if days0_1==0 & days1_7==0 & days7_14==1 & days14_21==0 & days21_28==0 & days28_197==0 & days197_365==0 & days365_714==0
+				replace term = "days14_21" if days0_1==0 & days1_7==0 & days7_14==0 & days14_21==1 & days21_28==0 & days28_197==0 & days197_365==0 & days365_714==0
+				replace term = "days21_28" if days0_1==0 & days1_7==0 & days7_14==0 & days14_21==0 & days21_28==1 & days28_197==0 & days197_365==0 & days365_714==0
+				replace term = "days28_197" if days0_1==0 & days1_7==0 & days7_14==0 & days14_21==0 & days21_28==0 & days28_197==1 & days197_365==0 & days365_714==0
+				replace term = "days197_365" if days0_1==0 & days1_7==0 & days7_14==0 & days14_21==0 & days21_28==0 & days28_197==0 & days197_365==1 & days365_714==0
+				replace term = "days365_714" if days0_1==0 & days1_7==0 & days7_14==0 & days14_21==0 & days21_28==0 & days28_197==0 & days197_365==0 & days365_714==1
 			}
 			else{
 				drop if days0_28==0 & days28_197==0 & days197_365==0 & days365_714==0
