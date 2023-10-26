@@ -3806,7 +3806,7 @@ actions:
         stata_output: output/stata_cox_model_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_day0FALSE_extfTRUE_m1splitTRUE.txt
 
   format_stata_output:
-    run: r:latest analysis/format_stata_output.R
+    run: r:latest analysis/format_stata_output.R all
     needs:
     - s_ami_covid_pheno_hospitalised_pre_vaccination_day0FALSE_extfFALSE_m1splitFALSE
     - s_stroke_isch_covid_pheno_hospitalised_pre_vaccination_day0FALSE_extfFALSE_m1splitFALSE
@@ -3964,6 +3964,19 @@ actions:
     outputs:
       moderately_sensitive:
         stata_output: output/stata_output_pre_vax.csv
+
+  format_stata_output_m1split:
+    run: r:latest analysis/format_stata_output.R m1split
+    needs:
+    - s_ate_extended_follow_up_main_pre_vaccination_day0FALSE_extfTRUE_m1splitTRUE
+    - s_ate_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_day0FALSE_extfTRUE_m1splitTRUE
+    - s_ate_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_day0FALSE_extfTRUE_m1splitTRUE
+    - s_vte_extended_follow_up_main_pre_vaccination_day0FALSE_extfTRUE_m1splitTRUE
+    - s_vte_extended_follow_up_covid_pheno_non_hospitalised_pre_vaccination_day0FALSE_extfTRUE_m1splitTRUE
+    - s_vte_extended_follow_up_covid_pheno_hospitalised_pre_vaccination_day0FALSE_extfTRUE_m1splitTRUE
+    outputs:
+      moderately_sensitive:
+        stata_output: output/stata_output_m1split_pre_vax.csv
 
   format_R_output:
     run: r:latest analysis/model/07_combine_HRs_to_one_file.R

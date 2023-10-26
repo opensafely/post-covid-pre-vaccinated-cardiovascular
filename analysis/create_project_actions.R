@@ -42,6 +42,8 @@ analyses_to_run_stata <-
                                    &
                                      time_periods == "reduced")
 
+analyses_to_run_stata_m1split <- analyses_to_run_stata[analyses_to_run_stata$m1split==TRUE,]
+
 # Create action function -------------------------------------------------------
 
 action <- function(name,
@@ -368,7 +370,7 @@ actions_list <- splice(
   #comment("Format Stata output"),
   action(
     name = "format_stata_output",
-    run = "r:latest analysis/format_stata_output.R",
+    run = "r:latest analysis/format_stata_output.R all",
     needs = as.list(
       paste0(
         "s_",
@@ -386,6 +388,29 @@ actions_list <- splice(
       )
     ),
     moderately_sensitive = list(stata_output = "output/stata_output_pre_vax.csv")
+  ),
+  
+  #comment("Format Stata output - m1split"),
+  action(
+    name = "format_stata_output_m1split",
+    run = "r:latest analysis/format_stata_output.R m1split",
+    needs = as.list(
+      paste0(
+        "s_",
+        analyses_to_run_stata_m1split$outcome,
+        "_",
+        analyses_to_run_stata_m1split$subgroup,
+        "_",
+        analyses_to_run_stata_m1split$cohort,
+        "_day0",
+        analyses_to_run_stata_m1split$day0,
+        "_extf",
+        analyses_to_run_stata_m1split$extf,
+        "_m1split",
+        analyses_to_run_stata_m1split$m1split
+      )
+    ),
+    moderately_sensitive = list(stata_output = "output/stata_output_m1split_pre_vax.csv")
   ),
   
   action(

@@ -1,3 +1,11 @@
+args = commandArgs(trailingOnly=TRUE)
+
+if(length(args)==0){
+  name="m1split"
+}else{
+  name  = args[[1]]
+}
+
 # List files to be combined
 
 files <- list.files(path = "output/", pattern = "_cox_model_")
@@ -147,4 +155,4 @@ df <- dplyr::rename(df,
 
 # Save output ------------------------------------------------------------------
 
-readr::write_csv(df, "output/stata_output_pre_vax.csv")
+readr::write_csv(df, paste0("output/stata_output_",name,"_pre_vax.csv"))
