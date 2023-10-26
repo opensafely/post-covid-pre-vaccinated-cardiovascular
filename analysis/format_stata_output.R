@@ -24,12 +24,10 @@ analyses_to_run_stata <- read.csv("lib/analyses_to_run_in_stata.csv", header=TRU
 analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="hospitalised","covid_pheno_hospitalised",analyses_to_run_stata$subgroup)
 analyses_to_run_stata$subgroup <- ifelse(analyses_to_run_stata$subgroup=="non_hospitalised","covid_pheno_non_hospitalised",analyses_to_run_stata$subgroup)
 
-tmp_files <- paste0("input_sampled_data_",
-                    analyses_to_run_stata$outcome,"_",
-                    analyses_to_run_stata$subgroup,"_",
-                    analyses_to_run_stata$cohort,"_",
-                    analyses_to_run_stata$time_periods,
-                    "_time_periods_cox_model_day0",analyses_to_run_stata$day0,
+tmp_files <- paste0("stata_cox_model_",analyses_to_run_stata$outcome,
+                    "_",analyses_to_run_stata$subgroup,
+                    "_",analyses_to_run_stata$cohort,
+                    "_day0",analyses_to_run_stata$day0,
                     "_extf",analyses_to_run_stata$extf,
                     "_m1split",analyses_to_run_stata$m1split,".txt")
 
@@ -109,7 +107,7 @@ for (f in files) {
   
   ## Add median follow up
 
-  f <- gsub("_cox_model","_stata_median_fup",f)
+  f <- gsub("cox_model_","median_fup_",f)
   f <- gsub(".txt",".csv",f)
   print(f)
   fup <- readr::read_csv(file = paste0("output/",f))
