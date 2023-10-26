@@ -1,8 +1,3 @@
-# Load packages
-
-library(tidyr)
-library(readr)
-
 # Define arguments
 
 args = commandArgs(trailingOnly=TRUE)
