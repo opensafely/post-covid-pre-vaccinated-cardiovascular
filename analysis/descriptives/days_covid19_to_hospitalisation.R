@@ -15,8 +15,18 @@ library(tidyverse)
 
 cohort_name <- "pre_vaccination"
 
+# Define general start date and end date
+cohort_start_date = as.Date("2020-01-01")
+cohort_end_date = as.Date("2021-06-18")
+
+
 # Load relevant data
 input <- read_rds(paste0("output/input_stage1.rds"))
+
+# Restrict to Covid exposure date within follow-up period
+input <- input %>% 
+  mutate(exp_date_covid19_confirmed = replace(exp_date_covid19_confirmed, which(exp_date_covid19_confirmed>cohort_end_date | exp_date_covid19_confirmed<cohort_start_date), NA))
+
 
 # Get number of days between Covid diagnosis and hospital admission for hospitalised Covid cases
 input <- input %>%
