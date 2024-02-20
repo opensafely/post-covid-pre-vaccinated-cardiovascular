@@ -116,7 +116,7 @@ actions:
     - stage1_end_date_table
     outputs:
       moderately_sensitive:
-        venn_diagram: output/review/venn-diagrams/venn_diagram_*
+        venn_diagram: output/review/venn-diagrams/venn_diagram_*.svg
 
   days_to_event_histogram_original_follow_up:
     run: r:latest analysis/descriptives/histogram_data_post_exposure_days_to_event.R
